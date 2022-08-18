@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
-import '../util/pageDefault/app_bar.dart';
+import '../util/compentes/custom_textField.dart';
 
 class SingInScreen extends StatelessWidget {
   const SingInScreen() : super();
@@ -47,24 +47,15 @@ class SingInScreen extends StatelessWidget {
   Form formLogin() => Form(
         child: Column(
           children: [
-            TextFormField(
-              style: const TextStyle(
-                color: Color.fromARGB(255, 4, 4, 4),
-              ),
-              decoration: InputDecoration(
-                isDense: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              ),
+            FormDefault(
+                iconTitipo: const Icon(Icons.email), inputMenssagem: 'e-mail', isSecret: false,),
+            const SizedBox(
+              height: 10,
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                isDense: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              ),
+            FormDefault(
+              iconTitipo: const Icon(Icons.key),
+              inputMenssagem: 'senha',
+              isObscureText: true, isSecret: true,
             ),
           ],
         ),
