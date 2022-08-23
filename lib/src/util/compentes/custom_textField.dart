@@ -52,6 +52,7 @@ class _FormDefaultState extends State<FormDefault> {
         prefixIcon: widget.iconTitipo,
         suffixIcon: widget.isSecret
             ? IconButton(
+
                 onPressed: () {
                   setState(
                     () {
@@ -63,6 +64,7 @@ class _FormDefaultState extends State<FormDefault> {
                     isObscureText ? Icons.visibility_off : Icons.visibility))
             : null,
         labelText: widget.inputMenssagem,
+        
         isDense: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
