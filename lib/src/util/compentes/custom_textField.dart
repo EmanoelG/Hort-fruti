@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
+// ignore: must_be_immutable
 class FormDefault extends StatefulWidget {
   int? tipo;
   Icon iconTitipo;
@@ -36,7 +36,6 @@ class _FormDefaultState extends State<FormDefault> {
   bool isObscureText = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     isObscureText = widget.isSecret;
   }
@@ -52,7 +51,6 @@ class _FormDefaultState extends State<FormDefault> {
         prefixIcon: widget.iconTitipo,
         suffixIcon: widget.isSecret
             ? IconButton(
-
                 onPressed: () {
                   setState(
                     () {
@@ -64,7 +62,6 @@ class _FormDefaultState extends State<FormDefault> {
                     isObscureText ? Icons.visibility_off : Icons.visibility))
             : null,
         labelText: widget.inputMenssagem,
-        
         isDense: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),

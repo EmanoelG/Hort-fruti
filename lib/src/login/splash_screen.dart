@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/login/sing_in_scren.dart';
 
+import '../config/custom_color.dart';
 import '../util/push_function.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen() : super();
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      color: CustomColors.colorAppMain,
       child: const Center(
         child: CircularProgressIndicator(
           color: Color.fromARGB(98, 2, 46, 4),

@@ -1,66 +1,89 @@
-import 'dart:convert';
-import 'dart:ffi';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
+import '../config/custom_color.dart';
 import '../util/compentes/custom_textField.dart';
 
 class SingInScreen extends StatelessWidget {
-  const SingInScreen() : super();
+  const SingInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(208, 168, 231, 95),
-      body: telalogin(),
+      backgroundColor: CustomColors.colorAppMain,
+      body: telalogin(context),
     );
   }
 
-  telalogin() {
-    return Column(
-      children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    'Green',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    ),
-                  ),
-                  Text(
-                    'grocer',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 246, 125, 33),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    ),
-                  ),
-                ],
+  telalogin(context) {
+    final size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: size.height,
+        width: size.width,
+        child: Column(
+          children: [
+            Expanded(
+              child: titleLogin(),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32,
+                vertical: 40,
               ),
-            ],
-          ),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 255, 255, 255),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(40.0),
+                ),
+              ),
+              child: formLogin(),
+            ),
+          ],
         ),
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 32,
-            vertical: 40,
-          ),
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(40.0),
+      ),
+    );
+  }
+
+  Column titleLogin() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        tltleLoginRich(),
+        SizedBox(
+          height: 30,
+          child: DefaultTextStyle(
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              pause: Duration(milliseconds: 500),
+              repeatForever: true,
+              animatedTexts: [
+                FadeAnimatedText('Frutas'),
+                FadeAnimatedText('Delivery'),
+                FadeAnimatedText('Promoção'),
+              ],
             ),
           ),
-          child: formLogin(),
         ),
       ],
+    );
+  }
+
+  Text tltleLoginRich() {
+    return const Text.rich(
+      TextSpan(
+        style: TextStyle(fontSize: 40),
+        children: [
+          TextSpan(
+            text: 'Super',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          TextSpan(
+            text: 'Sacolão',
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 
@@ -96,11 +119,9 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: Container(
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -120,11 +141,12 @@ class SingInScreen extends StatelessWidget {
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      side: const BorderSide(
-                        width: 2,
-                        color: Colors.green,
-                      )),
+                    borderRadius: BorderRadius.circular(18),
+                    side: BorderSide(
+                      width: 2,
+                      color: CustomColors.colorButtonMain,
+                    ),
+                  ),
                 ),
                 onPressed: () {},
                 child: const Text(
