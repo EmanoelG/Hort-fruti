@@ -1,8 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:sacolao_de_frutas/src/auth/cadastro/sing_up_screen.dart';
+import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
-import '../config/custom_color.dart';
-import '../util/compentes/custom_textField.dart';
+import '../../config/custom_color.dart';
+import '../../util/compentes/custom_textField.dart';
 
 class SingInScreen extends StatelessWidget {
   const SingInScreen({Key? key}) : super(key: key);
@@ -11,11 +13,11 @@ class SingInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.colorAppMain,
-      body: telalogin(context),
+      body: _telalogin(context),
     );
   }
 
-  telalogin(context) {
+  _telalogin(context) {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: SizedBox(
@@ -24,7 +26,7 @@ class SingInScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: titleLogin(),
+              child: _titleLogin(),
             ),
             Container(
               padding: const EdgeInsets.symmetric(
@@ -37,7 +39,7 @@ class SingInScreen extends StatelessWidget {
                   top: Radius.circular(40.0),
                 ),
               ),
-              child: formLogin(),
+              child: _formLogin(context),
             ),
           ],
         ),
@@ -45,11 +47,11 @@ class SingInScreen extends StatelessWidget {
     );
   }
 
-  Column titleLogin() {
+  Column _titleLogin() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        tltleLoginRich(),
+        _tltleLoginRich(),
         SizedBox(
           height: 30,
           child: DefaultTextStyle(
@@ -58,7 +60,7 @@ class SingInScreen extends StatelessWidget {
               pause: Duration(milliseconds: 500),
               repeatForever: true,
               animatedTexts: [
-                FadeAnimatedText('Frutas'),
+                FadeAnimatedText('HortFruti'),
                 FadeAnimatedText('Delivery'),
                 FadeAnimatedText('Promoção'),
               ],
@@ -69,7 +71,7 @@ class SingInScreen extends StatelessWidget {
     );
   }
 
-  Text tltleLoginRich() {
+  Text _tltleLoginRich() {
     return const Text.rich(
       TextSpan(
         style: TextStyle(fontSize: 40),
@@ -87,7 +89,7 @@ class SingInScreen extends StatelessWidget {
     );
   }
 
-  Form formLogin() => Form(
+  Form _formLogin(context) => Form(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -135,7 +137,7 @@ class SingInScreen extends StatelessWidget {
                 ),
               ),
             ),
-            ouDivider(),
+            _ouDivider(),
             SizedBox(
               height: 50,
               child: OutlinedButton(
@@ -148,7 +150,12 @@ class SingInScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  pushReplace(
+                    context,
+                    const SingUpScreen(),
+                  );
+                },
                 child: const Text(
                   'Criar Conta',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -159,7 +166,7 @@ class SingInScreen extends StatelessWidget {
         ),
       );
 
-  ouDivider() {
+  _ouDivider() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(

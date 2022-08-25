@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sacolao_de_frutas/src/login/splash_screen.dart';
+import 'src/auth/splash_screen.dart';
+
 
 void main() {
   runApp(const MyApp());

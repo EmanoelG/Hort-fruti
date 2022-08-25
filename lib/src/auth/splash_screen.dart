@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/login/sing_in_scren.dart';
+import 'package:sacolao_de_frutas/src/auth/login/sing_in_scren.dart';
 
 import '../config/custom_color.dart';
+
 import '../util/push_function.dart';
 
 class SplashScreen extends StatefulWidget {
