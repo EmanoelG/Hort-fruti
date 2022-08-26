@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/auth/cadastro/sing_up_screen.dart';
+import 'package:sacolao_de_frutas/src/util/compentes/app_bar.dart';
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
 import '../../config/custom_color.dart';
@@ -151,10 +152,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  pushReplace(
-                    context,
-                    const SingUpScreen(),
-                  );
+                  pushReplace(context, const SingUpScreen());
                 },
                 child: const Text(
                   'Criar Conta',

@@ -31,3 +31,7 @@ Future pushReplace(BuildContext context, Widget page, {bool replace = false}) {
 void pop(BuildContext context) {
   Navigator.pop(context);
 }
+
+void popAndPsuhNamed(BuildContext context) {
+  Navigator.pop(context);
+}

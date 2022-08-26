@@ -25,6 +25,7 @@ class _AppBarDefState extends State<AppBarDef> {
       preferredSize: const Size.fromWidth(100), // here the desired height
       child: AppBar(
         backgroundColor: widget.corPage,
+        
         centerTitle: true,
         title: Text(widget.namePage.toString()),
       ),
