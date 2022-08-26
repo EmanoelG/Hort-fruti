@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
 class FormDefault extends StatefulWidget {
@@ -7,6 +8,7 @@ class FormDefault extends StatefulWidget {
   String? inputMenssagem;
   bool? isObscureText;
   bool isSecret;
+  List<TextInputFormatter>? TextInputFormatt;
   TextEditingController? controller;
   FormFieldValidator<String>? validator;
   TextInputType? type;
@@ -20,6 +22,7 @@ class FormDefault extends StatefulWidget {
     this.inputMenssagem,
     this.isObscureText,
     required this.isSecret,
+    this.TextInputFormatt,
     this.controller,
     this.validator,
     this.type,
@@ -43,6 +46,7 @@ class _FormDefaultState extends State<FormDefault> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: widget.TextInputFormatt,
       obscureText: isObscureText,
       style: const TextStyle(
         color: Color.fromARGB(255, 4, 4, 4),

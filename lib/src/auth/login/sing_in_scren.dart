@@ -4,6 +4,7 @@ import 'package:sacolao_de_frutas/src/auth/cadastro/sing_up_screen.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/app_bar.dart';
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
+import '../../base/base_screen.dart';
 import '../../config/custom_color.dart';
 import '../../util/compentes/custom_textField.dart';
 
@@ -121,7 +122,9 @@ class SingInScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  pushReplace(context, BaseScreen(), replace: true);
+                },
                 child: const Text(
                   'Entrar',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -152,7 +155,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  pushReplace(context, const SingUpScreen());
+                  pushReplace(context, SingUpScreen());
                 },
                 child: const Text(
                   'Criar Conta',

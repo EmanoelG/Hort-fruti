@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
-import '../../util/compentes/app_bar.dart';
-import '../login/sing_in_scren.dart';
-
 class SingUpScreen extends StatelessWidget {
-  const SingUpScreen({Key? key}) : super(key: key);
+  SingUpScreen({Key? key}) : super(key: key);
+  var cpfFormat = MaskTextInputFormatter(
+      mask: '###.###.###-##',
+      filter: {
+        "#": RegExp(r'[0-9]'),
+      },
+      type: MaskAutoCompletionType.lazy);
+      
+  var phonFormat = MaskTextInputFormatter(
+      mask: '(##) #####-####',
+      filter: {
+        "#": RegExp(r'[0-9]'),
+      },
+      type: MaskAutoCompletionType.lazy);
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +102,7 @@ class SingUpScreen extends StatelessWidget {
         FormDefault(
             type: TextInputType.number,
             inputMenssagem: 'Cpf',
+            TextInputFormatt: [cpfFormat],
             iconTitipo: const Icon(Icons.file_copy),
             isSecret: false),
         const SizedBox(
