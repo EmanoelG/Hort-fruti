@@ -1,22 +1,63 @@
 import 'package:flutter/material.dart';
 
-class BaseScreen extends StatelessWidget {
+class BaseScreen extends StatefulWidget {
   BaseScreen({Key? key}) : super(key: key);
+
+  @override
+  State<BaseScreen> createState() => _BaseScreenState();
+}
+
+class _BaseScreenState extends State<BaseScreen> {
+  int _intCurrentIntegrado = 0;
+  final _pagaeController = PageController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _bottonNavBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[],
-      ),
+      body: _pageView(),
+    );
+  }
+
+  PageView _pageView() {
+    return PageView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: _pagaeController,
+      children: [
+        Container(
+          color: Colors.red,
+        ),
+        Container(
+          color: Colors.green,
+        ),
+        Container(
+          color: Colors.yellowAccent,
+        ),
+        Container(
+          color: Colors.cyanAccent,
+        )
+      ],
     );
   }
 
   Widget _bottonNavBar() {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      currentIndex: _intCurrentIntegrado,
+      onTap: (indexTap) {
+        setState(
+          () {
+            _intCurrentIntegrado = indexTap;
+            _pagaeController.jumpToPage(indexTap);
+          },
+        );
+      },
       items: const [
         BottomNavigationBarItem(
           label: 'Home',

@@ -10,7 +10,6 @@ class AppBarDef extends StatefulWidget implements PreferredSizeWidget {
   }) : super(key: key);
 
   // const AppBarDef({this.namePage = 'Quitanda',});
-
   @override
   State<AppBarDef> createState() => _AppBarDefState();
 
@@ -25,7 +24,6 @@ class _AppBarDefState extends State<AppBarDef> {
       preferredSize: const Size.fromWidth(100), // here the desired height
       child: AppBar(
         backgroundColor: widget.corPage,
-        
         centerTitle: true,
         title: Text(widget.namePage.toString()),
       ),
