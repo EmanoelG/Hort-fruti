@@ -24,7 +24,8 @@ class _HomeTabState extends State<HomeTab> {
             padding: const EdgeInsets.only(top: 15, right: 15),
             child: Badge(
               badgeColor: CustomColors.colorDestac,
-              badgeContent: const Text('0'),
+              badgeContent:
+                  const Text('0', style: TextStyle(color: Colors.white)),
               child: IconButton(
                 onPressed: () {},
                 icon: Icon(
