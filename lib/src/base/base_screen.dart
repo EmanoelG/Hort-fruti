@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../home/home_tab.dart';
 
 class BaseScreen extends StatefulWidget {
-  BaseScreen({Key? key}) : super(key: key);
+  const BaseScreen({Key? key}) : super(key: key);
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
@@ -15,7 +15,6 @@ class _BaseScreenState extends State<BaseScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

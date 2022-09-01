@@ -8,7 +8,7 @@ class FormDefault extends StatefulWidget {
   String? inputMenssagem;
   bool? isObscureText;
   bool isSecret;
-  List<TextInputFormatter>? TextInputFormatt;
+  List<TextInputFormatter>? textinputformatt;
   TextEditingController? controller;
   FormFieldValidator<String>? validator;
   TextInputType? type;
@@ -22,7 +22,7 @@ class FormDefault extends StatefulWidget {
     this.inputMenssagem,
     this.isObscureText,
     required this.isSecret,
-    this.TextInputFormatt,
+    this.textinputformatt,
     this.controller,
     this.validator,
     this.type,
@@ -46,7 +46,7 @@ class _FormDefaultState extends State<FormDefault> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      inputFormatters: widget.TextInputFormatt,
+      inputFormatters: widget.textinputformatt,
       obscureText: isObscureText,
       style: const TextStyle(
         color: Color.fromARGB(255, 4, 4, 4),

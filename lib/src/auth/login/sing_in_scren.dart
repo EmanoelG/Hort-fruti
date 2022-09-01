@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/auth/cadastro/sing_up_screen.dart';
-import 'package:sacolao_de_frutas/src/util/compentes/app_bar.dart';
+
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
 import '../../base/base_screen.dart';
@@ -59,7 +59,7 @@ class SingInScreen extends StatelessWidget {
           child: DefaultTextStyle(
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             child: AnimatedTextKit(
-              pause: Duration(milliseconds: 500),
+              pause: const Duration(milliseconds: 500),
               repeatForever: true,
               animatedTexts: [
                 FadeAnimatedText('HortFruti'),
@@ -123,7 +123,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  pushReplace(context, BaseScreen(), replace: true);
+                  pushReplace(context, const BaseScreen(), replace: true);
                 },
                 child: const Text(
                   'Entrar',

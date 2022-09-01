@@ -12,7 +12,7 @@ class SingUpScreen extends StatelessWidget {
         "#": RegExp(r'[0-9]'),
       },
       type: MaskAutoCompletionType.lazy);
-      
+
   var phonFormat = MaskTextInputFormatter(
       mask: '(##) #####-####',
       filter: {
@@ -42,7 +42,7 @@ class SingUpScreen extends StatelessWidget {
                 onPressed: () {
                   pop(context);
                 },
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
               ),
             ),
             Column(
@@ -102,7 +102,7 @@ class SingUpScreen extends StatelessWidget {
         FormDefault(
             type: TextInputType.number,
             inputMenssagem: 'Cpf',
-            TextInputFormatt: [cpfFormat],
+            textinputformatt: [cpfFormat],
             iconTitipo: const Icon(Icons.file_copy),
             isSecret: false),
         const SizedBox(
