@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../home/home_tab.dart';
+
 class BaseScreen extends StatefulWidget {
   BaseScreen({Key? key}) : super(key: key);
 
@@ -30,9 +32,7 @@ class _BaseScreenState extends State<BaseScreen> {
       physics: const NeverScrollableScrollPhysics(),
       controller: _pagaeController,
       children: [
-        Container(
-          color: Colors.red,
-        ),
+        const HomeTab(),
         Container(
           color: Colors.green,
         ),
