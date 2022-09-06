@@ -2,10 +2,17 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 import '../config/custom_color.dart';
+import 'components/category_title.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({Key? key}) : super(key: key);
-
+  HomeTab({Key? key}) : super(key: key);
+  List<String> categoriasApp = [
+    'Frutas',
+    'Legumes',
+    'Verduras',
+    'Bebidas',
+    'Carnes',
+  ];
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
@@ -63,31 +70,49 @@ class _HomeTabState extends State<HomeTab> {
   _body(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            isDense: true,
-            hintText: 'Pesquisar por produto',
-            hintStyle: TextStyle(
-              color: Colors.grey.shade400,
-              fontSize: 14,
-            ),
-            prefix: const Icon(
-              Icons.search,
-              color: Colors.black26,
-              size: 21,
-            ),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(60),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: TextFormField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              isDense: true,
+              hintText: 'Pesquisar por produto',
+              hintStyle: TextStyle(
+                color: Colors.grey.shade400,
+                fontSize: 14,
               ),
-              borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
+              prefix: const Icon(
+                Icons.search,
+                color: Colors.black26,
+                size: 21,
+              ),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(60),
+                ),
+                borderSide: BorderSide(
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
               ),
             ),
           ),
+        ),
+        SizedBox(
+          width: 40,
+          child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                return CategoryTitle(
+                  category: widget.categoriasApp[index],
+                  isSelect: false,
+                );
+              },
+              separatorBuilder: (_, index) => const SizedBox(
+                    width: 10,
+                  ),
+              itemCount: widget.categoriasApp.length),
         ),
       ],
     );
