@@ -60,5 +60,36 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  _body(BuildContext context) {}
+  _body(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            isDense: true,
+            hintText: 'Pesquisar por produto',
+            hintStyle: TextStyle(
+              color: Colors.grey.shade400,
+              fontSize: 14,
+            ),
+            prefix: const Icon(
+              Icons.search,
+              color: Colors.black26,
+              size: 21,
+            ),
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(60),
+              ),
+              borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
