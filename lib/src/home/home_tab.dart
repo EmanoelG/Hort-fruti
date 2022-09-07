@@ -107,7 +107,7 @@ class _HomeTabState extends State<HomeTab> {
               itemBuilder: (_, index) {
                 return CategoryTitle(
                   category: widget.categoriasApp[index],
-                  isSelect: false,
+                  isSelect: widget.categoriasApp[index]==widget.,
                 );
               },
               separatorBuilder: (_, index) => const SizedBox(
