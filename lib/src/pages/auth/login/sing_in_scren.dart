@@ -1,12 +1,14 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/auth/cadastro/sing_up_screen.dart';
+
 
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
+import '../../../config/custom_color.dart';
+import '../../../util/compentes/custom_textField.dart';
 import '../../base/base_screen.dart';
-import '../../config/custom_color.dart';
-import '../../util/compentes/custom_textField.dart';
+import '../cadastro/sing_up_screen.dart';
+
 
 class SingInScreen extends StatelessWidget {
   const SingInScreen({Key? key}) : super(key: key);

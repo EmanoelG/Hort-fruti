@@ -1,7 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-import '../config/custom_color.dart';
+
+import '../../config/custom_color.dart';
 import 'components/category_title.dart';
 
 class HomeTab extends StatefulWidget {
