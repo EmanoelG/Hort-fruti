@@ -99,8 +99,9 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
         ),
-        SizedBox(
-          width: 40,
+        Container(
+          padding: const EdgeInsets.only(left: 25),
+          height: 40,
           child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) {
