@@ -1,26 +1,19 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-
-
 import '../../config/custom_color.dart';
 import 'components/category_title.dart';
+import '../../config/app_data.dart' as app_data;
 
 class HomeTab extends StatefulWidget {
-  HomeTab({Key? key}) : super(key: key);
-  List<String> categoriasApp = [
-    'Frutas',
-    'Legumes',
-    'Verduras',
-    'Bebidas',
-    'Carnes',
-  ];
-  String selectCategory = 'Frutas';
+  const HomeTab({Key? key}) : super(key: key);
 
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
+  String selectCategory = 'Frutas';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,13 +102,12 @@ class _HomeTabState extends State<HomeTab> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) {
                 return CategoryTitle(
-                  category: widget.categoriasApp[index],
-                  isSelect:
-                      widget.categoriasApp[index] == widget.selectCategory,
+                  category: app_data.categorias[index],
+                  isSelect: app_data.categorias[index] == selectCategory,
                   onPresseds: () {
                     setState(
                       () {
-                        widget.selectCategory = widget.categoriasApp[index];
+                        selectCategory = app_data.categorias[index];
                       },
                     );
                   },
@@ -124,7 +116,7 @@ class _HomeTabState extends State<HomeTab> {
               separatorBuilder: (_, index) => const SizedBox(
                     width: 10,
                   ),
-              itemCount: widget.categoriasApp.length),
+              itemCount: app_data.categorias.length),
         ),
       ],
     );
