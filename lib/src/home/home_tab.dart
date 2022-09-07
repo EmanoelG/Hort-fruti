@@ -13,6 +13,8 @@ class HomeTab extends StatefulWidget {
     'Bebidas',
     'Carnes',
   ];
+  String selectCategory = 'Frutas';
+
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
@@ -107,7 +109,15 @@ class _HomeTabState extends State<HomeTab> {
               itemBuilder: (_, index) {
                 return CategoryTitle(
                   category: widget.categoriasApp[index],
-                  isSelect: widget.categoriasApp[index]==widget.,
+                  isSelect:
+                      widget.categoriasApp[index] == widget.selectCategory,
+                  onPresseds: () {
+                    setState(
+                      () {
+                        widget.selectCategory = widget.categoriasApp[index];
+                      },
+                    );
+                  },
                 );
               },
               separatorBuilder: (_, index) => const SizedBox(
