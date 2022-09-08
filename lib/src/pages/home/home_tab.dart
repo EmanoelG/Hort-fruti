@@ -83,7 +83,6 @@ class _HomeTabState extends State<HomeTab> {
           mainAxisSpacing: 5,
           crossAxisSpacing: 5,
           mainAxisExtent: 200,
-          //childAspectRatio: 3 / 2,
         ),
         itemCount: app_data.categorias.length,
         itemBuilder: (context, index) {
