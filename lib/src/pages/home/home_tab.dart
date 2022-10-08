@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../config/custom_color.dart';
 import 'components/category_title.dart';
 import '../../config/app_data.dart' as app_data;
+import 'components/item_title.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -50,13 +51,13 @@ class _HomeTabState extends State<HomeTab> {
       TextSpan(
         children: [
           TextSpan(
-            text: 'Super',
+            text: 'Barber',
             style: TextStyle(
                 color: Color.fromARGB(255, 3, 3, 3),
                 fontWeight: FontWeight.bold),
           ),
           TextSpan(
-            text: 'Sacolão',
+            text: 'Shop',
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
         ],
@@ -86,62 +87,8 @@ class _HomeTabState extends State<HomeTab> {
         ),
         itemCount: app_data.categorias.length,
         itemBuilder: (context, index) {
-          return _carditem(context, index);
+          return ItemTitle(index: index);
         },
-      ),
-    );
-  }
-
-  Card _carditem(BuildContext context, index) {
-    return Card(
-      color: Color.fromARGB(255, 255, 254, 254),
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Center(
-              child: CachedNetworkImage(
-                imageUrl: app_data.items[index].img,
-                width: 400,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  app_data.items[index].ItemName,
-                  maxLines: 1,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Text.rich(TextSpan(
-              children: [
-                TextSpan(
-                  text: 'RS' + app_data.items[index].precie,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: CustomColors.colorButtonMain,
-                  ),
-                ),
-                TextSpan(
-                  text: '/' + app_data.items[index].unit,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black54),
-                ),
-              ],
-            )),
-          ],
-        ),
       ),
     );
   }
