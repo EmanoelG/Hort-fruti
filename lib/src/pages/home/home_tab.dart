@@ -51,13 +51,13 @@ class _HomeTabState extends State<HomeTab> {
       TextSpan(
         children: [
           TextSpan(
-            text: 'Barber',
+            text: 'Super',
             style: TextStyle(
                 color: Color.fromARGB(255, 3, 3, 3),
                 fontWeight: FontWeight.bold),
           ),
           TextSpan(
-            text: 'Shop',
+            text: 'Sacolão',
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
         ],
@@ -87,7 +87,9 @@ class _HomeTabState extends State<HomeTab> {
         ),
         itemCount: app_data.categorias.length,
         itemBuilder: (context, index) {
-          return ItemTitle(index: index);
+          return ItemTitle(
+            Item: app_data.items[index],
+          );
         },
       ),
     );
@@ -120,7 +122,7 @@ class _HomeTabState extends State<HomeTab> {
 
   Padding _searchproduto() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: TextFormField(
         decoration: InputDecoration(
           filled: true,
@@ -129,7 +131,7 @@ class _HomeTabState extends State<HomeTab> {
           hintText: 'Pesquisar por produto',
           hintStyle: TextStyle(
             color: Colors.grey.shade400,
-            fontSize: 14,
+            fontSize: 12,
           ),
           prefix: const Icon(
             Icons.search,

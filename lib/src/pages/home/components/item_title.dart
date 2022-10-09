@@ -4,66 +4,100 @@ import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/config/app_data.dart' as app_data;
 
 import '../../../config/custom_color.dart';
+import '../../../models/item_model.dart';
+import '../../../service/forma_services.dart';
 
 class ItemTitle extends StatelessWidget {
-  int index;
+  final ItemModel Item;
   ItemTitle({
     Key? key,
-    required this.index,
+    required this.Item,
   }) : super(key: key);
-
+  final UtilsService utilsService = UtilsService();
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Color.fromARGB(255, 255, 254, 254),
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Center(
-              child: CachedNetworkImage(
-                imageUrl: app_data.items[index].img,
-                width: 400,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  app_data.items[index].ItemName,
-                  maxLines: 1,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Text.rich(TextSpan(
-              children: [
-                TextSpan(
-                  text: 'RS' + app_data.items[index].precie,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: CustomColors.colorButtonMain,
+    return Stack(
+      children: [
+        Card(
+          elevation: 1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          color: Color.fromARGB(255, 255, 254, 254),
+          child: Container(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Center(
+                  child: CachedNetworkImage(
+                    imageUrl: Item.img,
+                    width: 400,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                TextSpan(
-                  text: '/' + app_data.items[index].unit,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black54),
+                const SizedBox(
+                  height: 5,
                 ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Item.ItemName,
+                      maxLines: 1,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                Text.rich(TextSpan(
+                  children: [
+                    TextSpan(
+                      text: utilsService
+                          .priceToCurrency(double.parse(Item.precie)),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: CustomColors.colorButtonMain,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '/' + Item.unit,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: Colors.black54),
+                    ),
+                  ],
+                )),
               ],
-            )),
-          ],
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          top: 4,
+          right: 4,
+          child: GestureDetector(
+            onTap: (() {}),
+            child: Container(
+              height: 30,
+              width: 30,
+              decoration: const BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
+              child: const Icon(
+                Icons.add_shopping_cart_outlined,
+                size: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
