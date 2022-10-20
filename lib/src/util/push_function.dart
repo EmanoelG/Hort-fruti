@@ -4,10 +4,9 @@ Future push(
   BuildContext context,
   Widget page,
 ) {
-  return Navigator.pushReplacement(
-    context,
+  return Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (BuildContext context) {
+      builder: (c) {
         return page;
       },
     ),
