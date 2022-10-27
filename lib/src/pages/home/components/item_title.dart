@@ -22,7 +22,12 @@ class ItemTitle extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            push(context, ProdutctScreen());
+            push(
+              context,
+              ProdutctScreen(
+                itemMod: Item,
+              ),
+            );
           },
           child: Card(
             elevation: 1,
