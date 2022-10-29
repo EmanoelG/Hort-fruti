@@ -45,6 +45,7 @@ class ItemTitle extends StatelessWidget {
                       imageUrl: Item.img,
                       width: 400,
                       fit: BoxFit.cover,
+              
                     ),
                   ),
                   const SizedBox(

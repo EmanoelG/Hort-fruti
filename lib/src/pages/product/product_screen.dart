@@ -2,10 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import 'package:sacolao_de_frutas/src/service/forma_services.dart';
 
-class ProdutctScreen extends StatelessWidget {
+import '../common_widgets/quantity_widget.dart';
+
+class ProdutctScreen extends StatefulWidget {
   final ItemModel itemMod;
   ProdutctScreen({Key? key, required this.itemMod}) : super(key: key);
+
+  @override
+  State<ProdutctScreen> createState() => _ProdutctScreenState();
+}
+
+class _ProdutctScreenState extends State<ProdutctScreen> {
   final UtilsService utilsService = UtilsService();
+
+  int cartItemQuantity = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +25,9 @@ class ProdutctScreen extends StatelessWidget {
           Column(
             children: [
               Expanded(
-                child:
-                    Hero(tag: itemMod.img, child: Image.network(itemMod.img)),
+                child: Hero(
+                    tag: widget.itemMod.img,
+                    child: Image.network(widget.itemMod.img)),
               ),
               Expanded(
                 child: Container(
@@ -36,23 +48,31 @@ class ProdutctScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            itemMod.ItemName,
+                            widget.itemMod.ItemName,
                             style: const TextStyle(
                               fontSize: 27,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Container(
-                            color: Colors.red,
-                            width: 10,
-                          )
+                          QuantityWidget(
+                            suffxText: widget.itemMod.unit,
+                            value: cartItemQuantity,
+                            result: (quantity) {
+                              setState(
+                                () {
+                                  cartItemQuantity = quantity;
+                                },
+                              );
+                            },
+                          ),
                         ],
                       ),
                       Text(
                         utilsService.priceToCurrency(
-                          double.parse(itemMod.precie),
+                          double.parse(widget.itemMod.precie),
                         ),
                         style: const TextStyle(
                           fontSize: 23,
@@ -65,7 +85,7 @@ class ProdutctScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: SingleChildScrollView(
                             child: Text(
-                              itemMod.description,
+                              widget.itemMod.description,
                               style: const TextStyle(
                                 height: 1.5,
                               ),
