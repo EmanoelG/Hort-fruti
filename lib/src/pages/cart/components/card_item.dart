@@ -29,27 +29,13 @@ class CartTitle extends StatelessWidget {
             cartItems.item.img,
             height: 50,
           ),
-          title: Column(
-            children: <Widget>[
-              Text(
-                cartItems.item.ItemName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.left,
-              ),
-              Text(
-                utilsService.priceToCurrency(
-                    double.parse(cartItems.item.precie) * cartItems.quantity),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: CustomColors.colorButtonMain,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ],
+          title: Text(
+            cartItems.item.ItemName,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.left,
           ),
           trailing: QuantityWidget(
             result: (quantity) {},
