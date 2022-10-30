@@ -26,32 +26,35 @@ class QuantityWidget extends StatelessWidget {
               blurRadius: 2,
             ),
           ]),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        _QuantityButton(
-          color: Colors.green,
-          icon: Icons.add,
-          onPressed: () {
-            int resultCount = value + 1;
-            result(resultCount);
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: Text(
-            '$value$suffxText',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-        ),
-        _QuantityButton(
-          color: Colors.red,
-          icon: Icons.remove,
-          onPressed: () {
-            if (value == 1) return;
-            int resultCount = value - 1;
-            result(resultCount);
-          },
-        ),
-      ]),
+      child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _QuantityButton(
+              color: Colors.green,
+              icon: Icons.add,
+              onPressed: () {
+                int resultCount = value + 1;
+                result(resultCount);
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: Text(
+                '$value$suffxText',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+            ),
+            _QuantityButton(
+              color: Colors.red,
+              icon: Icons.remove,
+              onPressed: () {
+                if (value == 1) return;
+                int resultCount = value - 1;
+                result(resultCount);
+              },
+            ),
+          ]),
     );
   }
 }

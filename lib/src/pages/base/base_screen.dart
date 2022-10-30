@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../cart/cart_tab.dart';
 import '../home/home_tab.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -31,10 +32,8 @@ class _BaseScreenState extends State<BaseScreen> {
       physics: const NeverScrollableScrollPhysics(),
       controller: _pagaeController,
       children: [
-         HomeTab(),
-        Container(
-          color: Colors.green,
-        ),
+        HomeTab(),
+        CartTab(),
         Container(
           color: Colors.yellowAccent,
         ),
