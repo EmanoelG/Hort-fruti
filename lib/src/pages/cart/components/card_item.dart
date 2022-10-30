@@ -37,6 +37,16 @@ class CartTitle extends StatelessWidget {
             ),
             textAlign: TextAlign.left,
           ),
+          subtitle: Text(
+            utilsService.priceToCurrency(
+                double.parse(cartItems.item.precie) * cartItems.quantity),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: CustomColors.colorButtonMain,
+            ),
+            textAlign: TextAlign.left,
+          ),
           trailing: QuantityWidget(
             result: (quantity) {},
             suffxText: cartItems.item.unit,
