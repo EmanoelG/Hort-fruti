@@ -4,11 +4,32 @@ import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/forma_services.dart';
 
 import '../../config/app_data.dart';
+import '../../models/card_item_model.dart';
 import 'components/card_item.dart';
 
-class CartTab extends StatelessWidget {
+class CartTab extends StatefulWidget {
   CartTab({Key? key}) : super(key: key);
+
+  @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
   final UtilsService utilsService = UtilsService();
+  double total = 0;
+  void removeItemFromCart(CartItemModel cartitem) {
+    setState(() {
+      cartItems.remove(cartitem);
+    });
+  }
+
+  double cartTotalPrice() {
+    cartItems.forEach((element) {
+      total = total + double.parse(element.item.precie) * element.quantity;
+    });
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +44,16 @@ class CartTab extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CartTitle(
                   utilsService: utilsService,
-                  cartItems: cartItems[index],
+                  cartIte: cartItems[index],
+                  remove: removeItemFromCart,
+                  priceTotal: (total) {
+                    setState(
+                      () {
+                        this.total = 0;
+                        this.total = total;
+                      },
+                    );
+                  },
                 );
               },
             ),
@@ -56,7 +86,7 @@ class CartTab extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  utilsService.priceToCurrency(50.5),
+                  utilsService.priceToCurrency(cartTotalPrice()),
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -70,7 +100,9 @@ class CartTab extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      ShowOrderConfirmartion(context);
+                    },
                     child: const Text('Confirmar pedido'),
                   ),
                 ),
@@ -80,5 +112,16 @@ class CartTab extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<dynamic> ShowOrderConfirmartion(BuildContext context) {
+    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          child: Text('Confirma '),
+                        );
+                      },
+                    );
   }
 }

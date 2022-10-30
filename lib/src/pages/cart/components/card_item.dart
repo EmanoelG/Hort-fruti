@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import '../../../config/custom_color.dart';
@@ -5,16 +7,25 @@ import '../../../models/card_item_model.dart';
 import '../../../service/forma_services.dart';
 import '../../common_widgets/quantity_widget.dart';
 
-class CartTitle extends StatelessWidget {
-  CartItemModel cartItems;
-  CartTitle({
+class CartTitle extends StatefulWidget {
+  final CartItemModel cartIte;
+  final Function(CartItemModel cartitem) remove;
+  final Function priceTotal;
+  const CartTitle({
     Key? key,
-    required this.cartItems,
+    required this.cartIte,
+    required this.remove,
     required this.utilsService,
+    required this.priceTotal,
   }) : super(key: key);
 
   final UtilsService utilsService;
 
+  @override
+  State<CartTitle> createState() => _CartTitleState();
+}
+
+class _CartTitleState extends State<CartTitle> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,11 +37,11 @@ class CartTitle extends StatelessWidget {
         ),
         child: ListTile(
           leading: Image.network(
-            cartItems.item.img,
+            widget.cartIte.item.img,
             height: 50,
           ),
           title: Text(
-            cartItems.item.ItemName,
+            widget.cartIte.item.ItemName,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -38,8 +49,9 @@ class CartTitle extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           subtitle: Text(
-            utilsService.priceToCurrency(
-                double.parse(cartItems.item.precie) * cartItems.quantity),
+            widget.utilsService.priceToCurrency(
+                double.parse(widget.cartIte.item.precie) *
+                    widget.cartIte.quantity),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -48,9 +60,19 @@ class CartTitle extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           trailing: QuantityWidget(
-            result: (quantity) {},
-            suffxText: cartItems.item.unit,
-            value: cartItems.quantity,
+            result: (quantity) {
+              setState(
+                () {
+                  widget.cartIte.quantity = quantity;
+                  if (quantity == 0) {
+                    widget.remove(widget.cartIte);
+                  }
+                },
+              );
+            },
+            suffxText: widget.cartIte.item.unit,
+            value: widget.cartIte.quantity,
+            isRemovable: false,
           ),
         ),
       ),
