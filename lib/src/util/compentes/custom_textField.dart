@@ -58,6 +58,7 @@ class _FormDefaultState extends State<FormDefault> {
         color: Color.fromARGB(255, 4, 4, 4),
       ),
       decoration: InputDecoration(
+      
         prefixIcon: widget.iconTitipo,
         suffixIcon: widget.isSecret
             ? IconButton(
@@ -74,7 +75,7 @@ class _FormDefaultState extends State<FormDefault> {
         labelText: widget.inputMenssagem,
         isDense: true,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
     );

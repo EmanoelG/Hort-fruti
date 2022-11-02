@@ -96,33 +96,88 @@ class _ProfileTabState extends State<ProfileTab> {
       context: context,
       builder: (context) {
         return Dialog(
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                FormDefault(
-                  iconTitipo: Icon(Icons.lock),
-                  isSecret: true,
-                  inputMenssagem: 'Senha Atual',
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Atualizaçao de senha',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    FormDefault(
+                      iconTitipo: Icon(Icons.lock),
+                      isSecret: true,
+                      inputMenssagem: 'Senha Atual',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    FormDefault(
+                      iconTitipo: Icon(Icons.lock_outline),
+                      isSecret: true,
+                      inputMenssagem: 'Nova senha',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    FormDefault(
+                      iconTitipo: Icon(Icons.lock_outline),
+                      isSecret: true,
+                      inputMenssagem: 'Confirmar senha',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      height: 45,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: const Text(
+                          'atualizar',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 5,
+              ),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: IconButton(
+                  onPressed: (() {
+                    Navigator.of(context).pop();
+                  }),
+                  icon: const Icon(Icons.close),
                 ),
-                FormDefault(
-                  iconTitipo: Icon(Icons.lock),
-                  isSecret: true,
-                  inputMenssagem: 'Nova senha',
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                FormDefault(
-                  iconTitipo: Icon(Icons.lock),
-                  isSecret: true,
-                  inputMenssagem: 'Confirmar senha',
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
