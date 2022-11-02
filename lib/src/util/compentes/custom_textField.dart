@@ -15,6 +15,8 @@ class FormDefault extends StatefulWidget {
   TextInputAction? textInputAction;
   FocusNode? focus;
   FocusNode? nextFocus;
+  String? initiValue;
+  bool readOnly;
   FormDefault({
     Key? key,
     this.tipo,
@@ -29,6 +31,8 @@ class FormDefault extends StatefulWidget {
     this.textInputAction,
     this.focus,
     this.nextFocus,
+    this.initiValue = null,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -46,6 +50,8 @@ class _FormDefaultState extends State<FormDefault> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.readOnly,
+      initialValue: widget.initiValue,
       inputFormatters: widget.textinputformatt,
       obscureText: isObscureText,
       style: const TextStyle(

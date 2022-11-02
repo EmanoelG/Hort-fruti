@@ -98,6 +98,7 @@ class SingInScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FormDefault(
+              readOnly: false,
               type: TextInputType.emailAddress,
               iconTitipo: const Icon(Icons.email),
               inputMenssagem: 'e-mail',
@@ -107,6 +108,7 @@ class SingInScreen extends StatelessWidget {
               height: 10,
             ),
             FormDefault(
+              readOnly: false,
               type: TextInputType.visiblePassword,
               iconTitipo: const Icon(Icons.key),
               inputMenssagem: 'senha',

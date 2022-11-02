@@ -1,3 +1,5 @@
+import 'package:sacolao_de_frutas/src/models/user_model.dart';
+
 import '../models/card_item_model.dart';
 import '../models/item_model.dart';
 
@@ -64,3 +66,10 @@ List<CartItemModel> cartItems = [
   CartItemModel(item: morango, quantity: 2),
   CartItemModel(item: maracuja, quantity: 1),
 ];
+
+UserModel user = UserModel(
+    name: 'Emanoel Galvâo',
+    email: 'emanolegalvao42@gmail.com',
+    celular: '46 999094900',
+    cpf: '12391183925',
+    senha: 'semsneh123');

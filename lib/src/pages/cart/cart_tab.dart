@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
@@ -100,8 +102,9 @@ class _CartTabState extends State<CartTab> {
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                    onPressed: () {
-                      ShowOrderConfirmartion(context);
+                    onPressed: () async {
+                      bool? result = await showOrderConfirmartion(context);
+                      print(result);
                     },
                     child: const Text('Confirmar pedido'),
                   ),
@@ -114,14 +117,36 @@ class _CartTabState extends State<CartTab> {
     );
   }
 
-  Future<dynamic> ShowOrderConfirmartion(BuildContext context) {
-    return showDialog(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          child: Text('Confirma '),
-                        );
-                      },
-                    );
+  Future<bool?> showOrderConfirmartion(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Text('Confirmação'),
+          content: const Text('Deseja concluir o pedido ?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('Nâo'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: const Text('Sim'),
+            )
+          ],
+        );
+      },
+    );
   }
 }
