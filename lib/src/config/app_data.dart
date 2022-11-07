@@ -1,3 +1,4 @@
+import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
 
 import '../models/card_item_model.dart';
@@ -73,3 +74,27 @@ UserModel user = UserModel(
     celular: '46 999094900',
     cpf: '12391183925',
     senha: 'semsneh123');
+
+List<OrderModel> orders = [
+  OrderModel(
+    id: '12',
+    createDateTime: DateTime.parse('2021-11-08 10:00:00'),
+    overDueDateTime: DateTime.parse('2023-06-09 10:00:00'),
+    items: [
+      CartItemModel(item: abacate, quantity: 2),
+      CartItemModel(item: apple, quantity: 3)
+    ],
+    status: 'aguardando entrega',
+    copyAndPast: 'qwe12eas124s',
+    total: 12,
+  ),
+  OrderModel(
+    id: '12',
+    createDateTime: DateTime.parse('2021-11-08 10:00:00'),
+    overDueDateTime: DateTime.parse('2023-06-09 10:00:00'),
+    items: [CartItemModel(item: abacate, quantity: 2)],
+    status: 'aguardando entrega',
+    copyAndPast: 'asf135',
+    total: 21,
+  ),
+];

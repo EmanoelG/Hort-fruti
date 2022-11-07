@@ -34,7 +34,7 @@ class _ProfileTabState extends State<ProfileTab> {
             inputMenssagem: 'Usuario',
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           FormDefault(
             readOnly: true,
@@ -44,7 +44,7 @@ class _ProfileTabState extends State<ProfileTab> {
             inputMenssagem: 'Nome',
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           FormDefault(
             readOnly: true,
@@ -54,7 +54,7 @@ class _ProfileTabState extends State<ProfileTab> {
             inputMenssagem: 'Phone',
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           FormDefault(
             readOnly: true,
@@ -64,7 +64,7 @@ class _ProfileTabState extends State<ProfileTab> {
             inputMenssagem: 'CPF',
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           SizedBox(
             height: 50,
@@ -120,7 +120,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     FormDefault(
                       iconTitipo: Icon(Icons.lock),
@@ -128,7 +128,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       inputMenssagem: 'Senha Atual',
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     FormDefault(
                       iconTitipo: Icon(Icons.lock_outline),
@@ -136,7 +136,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       inputMenssagem: 'Nova senha',
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     FormDefault(
                       iconTitipo: Icon(Icons.lock_outline),
@@ -144,7 +144,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       inputMenssagem: 'Confirmar senha',
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     SizedBox(
                       height: 45,

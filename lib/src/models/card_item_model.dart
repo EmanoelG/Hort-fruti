@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
 
 class CartItemModel {
@@ -7,4 +9,6 @@ class CartItemModel {
     required this.item,
     required this.quantity,
   });
+
+  double totalPrice() => double.parse(item.precie) * quantity;
 }

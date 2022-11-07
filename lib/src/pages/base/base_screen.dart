@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../cart/cart_tab.dart';
 import '../home/home_tab.dart';
+import '../orders/order_tab.dart';
 import '../profile/profile_tab.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -33,12 +34,12 @@ class _BaseScreenState extends State<BaseScreen> {
       physics: const NeverScrollableScrollPhysics(),
       controller: _pagaeController,
       children: [
-        HomeTab(),
-        CartTab(),
+        const HomeTab(),
+        const OrdersTab(),
         Container(
           color: Colors.yellowAccent,
         ),
-        ProfileTab(),
+        const ProfileTab(),
       ],
     );
   }
