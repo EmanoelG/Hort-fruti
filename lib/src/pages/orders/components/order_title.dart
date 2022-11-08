@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sacolao_de_frutas/src/models/card_item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 
 import '../../../service/forma_services.dart';
 import '../../../util/font_app.dart';
+import 'order_status_widget.dart';
 
 class OrderTitle extends StatelessWidget {
   final OrderModel order;
@@ -32,18 +34,22 @@ class OrderTitle extends StatelessWidget {
                     child: ListView(
                       children: order.items.map(
                         (order) {
-                          return Row(
-                            children: [
-                              TextApp(
-                                texto: order.quantity.toString(),
-                              )
-                            ],
-                          );
+                          return _orderItemWidget(order);
                         },
                       ).toList(),
                     ),
                   ),
-                  Expanded(child: Container(color: Colors.blue)),
+                  const VerticalDivider(
+                    color: Colors.black,
+                    thickness: 1,
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: OrderStatusWidget(
+                      status: order.status,
+                      isOverDue: order.overDueDateTime.isBefore(DateTime.now()),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -56,11 +62,34 @@ class OrderTitle extends StatelessWidget {
                 texto: 'Pedido ${order.id}',
               ),
               TextApp(
+                colorFont: Colors.black,
                 texto: service.FormatDateTime(order.createDateTime),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Padding _orderItemWidget(CartItemModel order) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextApp(
+            texto: order.quantity.toString() + ' ' + order.item.unit + ' ',
+          ),
+          Expanded(
+            child: TextApp(
+              texto: order.item.ItemName.toString(),
+            ),
+          ),
+          TextApp(
+            texto: service.priceToCurrency(order.totalPrice()),
+          ),
+        ],
       ),
     );
   }
