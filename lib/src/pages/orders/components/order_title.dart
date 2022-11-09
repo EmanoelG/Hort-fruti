@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sacolao_de_frutas/src/config/app_data.dart';
 
 import 'package:sacolao_de_frutas/src/models/card_item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
@@ -23,27 +24,34 @@ class OrderTitle extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          initiallyExpanded: order.status == 'pending_payment',
           childrenPadding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 150,
+            IntrinsicHeight(
               child: Row(
                 children: [
+                  //Lista de produto
                   Expanded(
                     flex: 2,
-                    child: ListView(
-                      children: order.items.map(
-                        (order) {
-                          return _orderItemWidget(order);
-                        },
-                      ).toList(),
+                    child: SizedBox(
+                      height: 150,
+                      child: ListView(
+                        children: order.items.map(
+                          (order) {
+                            return _orderItemWidget(order);
+                          },
+                        ).toList(),
+                      ),
                     ),
                   ),
+                  //Divisao
                   const VerticalDivider(
                     color: Colors.black,
                     thickness: 1,
                     width: 8,
                   ),
+                  //Status do pedido
                   Expanded(
                     child: OrderStatusWidget(
                       status: order.status,
@@ -51,6 +59,39 @@ class OrderTitle extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+
+            //total
+            Text.rich(
+              TextSpan(
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+                children: [
+                  const TextSpan(
+                    text: 'Total ',
+                  ),
+                  TextSpan(
+                    text: service.priceToCurrency(order.total),
+                  ),
+                ],
+              ),
+            ), //botao
+            Visibility(
+              visible: order.status == 'pending_payment',
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: (() {}),
+                icon: const Icon(Icons.pix),
+                label: TextApp(
+                  texto: 'Ver QrCode pix',
+                ),
               ),
             ),
           ],
