@@ -1,14 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:sacolao_de_frutas/src/service/forma_services.dart';
+import 'package:sacolao_de_frutas/src/util/font_app.dart';
+
+import '../../models/order_model.dart';
 
 class PaymentDialog extends StatelessWidget {
-  const PaymentDialog({Key? key}) : super(key: key);
-
+  final OrderModel order;
+  PaymentDialog({Key? key, required this.order}) : super(key: key);
+  final UtilsService service = UtilsService();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      height: 20,
-      width: 20,
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextApp(texto: 'Pagamento com Pix', fontSize: 16),
+                  //QRDCODE
+                  QrImage(
+                    data:
+                        "asfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasf",
+                    version: QrVersions.auto,
+                    size: 200.0,
+                  ),
+                  //VENCIEMNTO
+                  TextApp(
+                      texto:
+                          'Venciemnto ${service.FormatDateTime(order.overDueDateTime)}'), //TOTAL
+                  TextApp(
+                      texto: 'Total: ${service.priceToCurrency(order.total)}'),
+                  //BOTAO COPIA E COLA
+                  OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        )),
+                    icon: const Icon(Icons.copy),
+                    onPressed: () {},
+                    label: TextApp(
+                      texto: 'Copiar código Pix',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: IconButton(
+                onPressed: (() {
+                  Navigator.of(context).pop();
+                }),
+                icon: const Icon(Icons.close),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

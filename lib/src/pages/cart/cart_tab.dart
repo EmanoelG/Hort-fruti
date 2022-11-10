@@ -1,12 +1,11 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-
+import '../../config/app_data.dart' as app_data;
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/forma_services.dart';
 
 import '../../config/app_data.dart';
 import '../../models/card_item_model.dart';
+import '../profile/payment_dialog.dart';
 import 'components/card_item.dart';
 
 class CartTab extends StatefulWidget {
@@ -104,7 +103,16 @@ class _CartTabState extends State<CartTab> {
                     ),
                     onPressed: () async {
                       bool? result = await showOrderConfirmartion(context);
-                      print(result);
+                      if (result ?? false) {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return PaymentDialog(
+                              order: app_data.orders.first,
+                            );
+                          },
+                        );
+                      }
                     },
                     child: const Text('Confirmar pedido'),
                   ),

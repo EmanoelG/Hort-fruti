@@ -39,6 +39,7 @@ dependencies:
   badges: ^2.0.3
   cached_network_image: ^3.2.1
   intl: ^0.17.0
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:

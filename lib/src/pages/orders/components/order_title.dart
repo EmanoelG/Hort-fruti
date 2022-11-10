@@ -92,7 +92,9 @@ class OrderTitle extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (_) {
-                      return const PaymentDialog();
+                      return PaymentDialog(
+                        order: order,
+                      );
                     },
                   );
                 }),
