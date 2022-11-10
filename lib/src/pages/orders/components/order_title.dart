@@ -6,6 +6,7 @@ import 'package:sacolao_de_frutas/src/models/order_model.dart';
 
 import '../../../service/forma_services.dart';
 import '../../../util/font_app.dart';
+import '../../profile/payment_dialog.dart';
 import 'order_status_widget.dart';
 
 class OrderTitle extends StatelessWidget {
@@ -87,7 +88,14 @@ class OrderTitle extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onPressed: (() {}),
+                onPressed: (() {
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return const PaymentDialog();
+                    },
+                  );
+                }),
                 icon: const Icon(Icons.pix),
                 label: TextApp(
                   texto: 'Ver QrCode pix',
