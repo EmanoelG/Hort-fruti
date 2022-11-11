@@ -60,12 +60,12 @@ class _BaseScreenState extends State<BaseScreen> {
           icon: Icon(Icons.home),
         ),
         BottomNavigationBarItem(
-          label: 'Carinho',
-          icon: Icon(Icons.shopping_cart_outlined),
-        ),
-        BottomNavigationBarItem(
           label: 'Pedidos',
           icon: Icon(Icons.list),
+        ),
+        BottomNavigationBarItem(
+          label: 'Carinho',
+          icon: Icon(Icons.shopping_cart_outlined),
         ),
         BottomNavigationBarItem(
           label: 'Usuário',
