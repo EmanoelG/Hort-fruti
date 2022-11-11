@@ -5,7 +5,7 @@ import 'package:sacolao_de_frutas/src/service/forma_services.dart';
 
 import '../../config/app_data.dart';
 import '../../models/card_item_model.dart';
-import '../profile/payment_dialog.dart';
+import '../common_widgets/payment_dialog.dart';
 import 'components/card_item.dart';
 
 class CartTab extends StatefulWidget {

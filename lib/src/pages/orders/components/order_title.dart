@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/config/app_data.dart';
 
 import 'package:sacolao_de_frutas/src/models/card_item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 
 import '../../../service/forma_services.dart';
 import '../../../util/font_app.dart';
-import '../../profile/payment_dialog.dart';
+import '../../common_widgets/payment_dialog.dart';
 import 'order_status_widget.dart';
 
 class OrderTitle extends StatelessWidget {

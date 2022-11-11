@@ -36,9 +36,7 @@ class _BaseScreenState extends State<BaseScreen> {
       children: [
         const HomeTab(),
         const OrdersTab(),
-        Container(
-          color: Colors.yellowAccent,
-        ),
+        CartTab(),
         const ProfileTab(),
       ],
     );
@@ -66,7 +64,7 @@ class _BaseScreenState extends State<BaseScreen> {
           icon: Icon(Icons.shopping_cart_outlined),
         ),
         BottomNavigationBarItem(
-          label: 'Produtos',
+          label: 'Pedidos',
           icon: Icon(Icons.list),
         ),
         BottomNavigationBarItem(
