@@ -1,3 +1,5 @@
+import 'package:add_to_cart_animation/add_to_cart_animation.dart';
+import 'package:add_to_cart_animation/add_to_cart_icon.dart';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,11 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   String selectCategory = 'Frutas';
+  GlobalKey<CartIconKey> gkCart = GlobalKey<CartIconKey>();
+  late Function(GlobalKey) runAddToCardAnimation;
+  void itemSelectedCartAnimation(GlobalKey gkImage) {
+    runAddToCardAnimation(gkImage);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +34,20 @@ class _HomeTabState extends State<HomeTab> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
-            child: Badge(
-              badgeColor: CustomColors.colorDestac,
-              badgeContent:
-                  const Text('0', style: TextStyle(color: Colors.white)),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: CustomColors.colorButtonMain,
+            child: GestureDetector(
+              onTap: () {
+                
+              },
+              child: Badge(
+                badgeColor: CustomColors.colorDestac,
+                badgeContent:
+                    const Text('0', style: TextStyle(color: Colors.white)),
+                child: AddToCartIcon(
+                  key: gkCart,
+                  icon: Icon(
+                    Icons.shopping_cart_outlined,
+                    color: CustomColors.colorButtonMain,
+                  ),
                 ),
               ),
             ),
@@ -89,6 +101,7 @@ class _HomeTabState extends State<HomeTab> {
         itemBuilder: (context, index) {
           return ItemTitle(
             Item: app_data.items[index],
+            runAddToCardAnimationMethod: itemSelectedCartAnimation,
           );
         },
       ),
@@ -120,31 +133,40 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Padding _searchproduto() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: TextFormField(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          isDense: true,
-          hintText: 'Pesquisar por produto',
-          hintStyle: TextStyle(
-            color: Colors.grey.shade400,
-            fontSize: 12,
-          ),
-          prefix: const Icon(
-            Icons.search,
-            color: Colors.black26,
-            size: 21,
-          ),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(60),
+  _searchproduto() {
+    return AddToCartAnimation(
+      gkCart: gkCart,
+      previewCurve: Curves.ease,
+      previewDuration: const Duration(milliseconds: 100),
+      receiveCreateAddToCardAnimationMethod: (addToCardAnimationMethod) {
+        // You can run the animation by addToCardAnimationMethod, just pass trough the the global key of  the image as parameter
+        runAddToCardAnimation = addToCardAnimationMethod;
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: TextFormField(
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            isDense: true,
+            hintText: 'Pesquisar por produto',
+            hintStyle: TextStyle(
+              color: Colors.grey.shade400,
+              fontSize: 12,
             ),
-            borderSide: BorderSide(
-              width: 0,
-              style: BorderStyle.none,
+            prefix: const Icon(
+              Icons.search,
+              color: Colors.black26,
+              size: 21,
+            ),
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(60),
+              ),
+              borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
             ),
           ),
         ),

@@ -11,9 +11,12 @@ import '../../product/product_screen.dart';
 
 class ItemTitle extends StatelessWidget {
   final ItemModel Item;
+  final GlobalKey imageOk = GlobalKey();
+  late void Function(GlobalKey) runAddToCardAnimationMethod;
   ItemTitle({
     Key? key,
     required this.Item,
+    required this.runAddToCardAnimationMethod,
   }) : super(key: key);
   final UtilsService utilsService = UtilsService();
   @override
@@ -40,12 +43,21 @@ class ItemTitle extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Center(
-                    child: CachedNetworkImage(
-                      imageUrl: Item.img,
-                      width: 400,
-                      fit: BoxFit.cover,
-              
+                  // CachedNetworkImage(
+                  // imageUrl: Item.img,
+                  // key: imageOk,
+                  // width: 400,
+                  // fit: BoxFit.cover,
+                  // ),
+                  Expanded(
+                    child: Hero(
+                      tag: Item.img,
+                      child: Container(
+                        child: Image.network(
+                          Item.img,
+                          key: imageOk,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -91,7 +103,9 @@ class ItemTitle extends StatelessWidget {
           top: 4,
           right: 4,
           child: GestureDetector(
-            onTap: (() {}),
+            onTap: (() {
+              runAddToCardAnimationMethod(imageOk);
+            }),
             child: Container(
               height: 30,
               width: 30,
