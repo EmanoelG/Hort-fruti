@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import '../../config/custom_color.dart';
+import '../../service/forma_services.dart';
 import 'components/category_title.dart';
 import '../../config/app_data.dart' as app_data;
 import 'components/item_title.dart';
@@ -14,7 +15,7 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   String selectCategory = 'Frutas';
-
+  final UtilsService service = UtilsService();
   late Function(GlobalKey) runAddToCardAnimation;
   void itemSelectedCartAnimation(GlobalKey gkImage) {
     runAddToCardAnimation(gkImage);
@@ -50,21 +51,26 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Text _titlehometab() {
-    return const Text.rich(
-      TextSpan(
-        children: [
-          TextSpan(
-            text: 'Super',
-            style: TextStyle(
-                color: Color.fromARGB(255, 3, 3, 3),
-                fontWeight: FontWeight.bold),
-          ),
-          TextSpan(
-            text: 'Sacolão',
-            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-          ),
-        ],
+  _titlehometab() {
+    return GestureDetector(
+      onTap: () {
+        service.showToats(message: 'Olá, mundo !');
+      },
+      child: const Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: 'Super',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 3, 3, 3),
+                  fontWeight: FontWeight.bold),
+            ),
+            TextSpan(
+              text: 'Sacolão',
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }

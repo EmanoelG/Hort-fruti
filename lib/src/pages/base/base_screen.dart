@@ -50,7 +50,9 @@ class _BaseScreenState extends State<BaseScreen> {
         setState(
           () {
             _intCurrentIntegrado = indexTap;
-            _pagaeController.jumpToPage(indexTap);
+            _pagaeController.animateToPage(indexTap, //easeInCubic
+                duration: Duration(seconds: 1),
+                curve: Curves.easeInOut);
           },
         );
       },
