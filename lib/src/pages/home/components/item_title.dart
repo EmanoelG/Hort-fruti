@@ -44,12 +44,10 @@ class ItemTitle extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   CachedNetworkImage(
-                  imageUrl: Item.img,
-                  key: imageOk,
-                  width: 400,
-                  fit: BoxFit.cover,
+                    imageUrl: Item.img,
+                    width: 400,
+                    fit: BoxFit.cover,
                   ),
-                
                   const SizedBox(
                     height: 5,
                   ),
@@ -94,7 +92,7 @@ class ItemTitle extends StatelessWidget {
           right: 4,
           child: GestureDetector(
             onTap: (() {
-              runAddToCardAnimationMethod(imageOk);
+              //  runAddToCardAnimationMethod(imageOk);
             }),
             child: Container(
               height: 30,

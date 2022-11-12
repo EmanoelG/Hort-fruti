@@ -1,6 +1,4 @@
-import 'package:add_to_cart_animation/add_to_cart_animation.dart';
 import 'package:badges/badges.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../config/custom_color.dart';
 import 'components/category_title.dart';
@@ -34,18 +32,15 @@ class _HomeTabState extends State<HomeTab> {
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
             child: GestureDetector(
-              onTap: () {
-                
-              },
+              onTap: () {},
               child: Badge(
                 badgeColor: CustomColors.colorDestac,
                 badgeContent:
                     const Text('0', style: TextStyle(color: Colors.white)),
-                child:  Icon(
-                    Icons.shopping_cart_outlined,
-                    color: CustomColors.colorButtonMain,
-                  ),
-                
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: CustomColors.colorButtonMain,
+                ),
               ),
             ),
           )
@@ -131,35 +126,34 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   _searchproduto() {
-   return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: TextFormField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            isDense: true,
-            hintText: 'Pesquisar por produto',
-            hintStyle: TextStyle(
-              color: Colors.grey.shade400,
-              fontSize: 12,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: TextFormField(
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          isDense: true,
+          hintText: 'Pesquisar por produto',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade400,
+            fontSize: 12,
+          ),
+          prefix: const Icon(
+            Icons.search,
+            color: Colors.black26,
+            size: 21,
+          ),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(60),
             ),
-            prefix: const Icon(
-              Icons.search,
-              color: Colors.black26,
-              size: 21,
-            ),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(60),
-              ),
-              borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
+            borderSide: BorderSide(
+              width: 0,
+              style: BorderStyle.none,
             ),
           ),
         ),
       ),
-    
+    );
   }
 }
