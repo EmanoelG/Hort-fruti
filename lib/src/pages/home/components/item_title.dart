@@ -11,7 +11,7 @@ import '../../product/product_screen.dart';
 
 class ItemTitle extends StatelessWidget {
   final ItemModel Item;
-  final GlobalKey imageOk = GlobalKey();
+
   late void Function(GlobalKey) runAddToCardAnimationMethod;
   ItemTitle({
     Key? key,
@@ -43,23 +43,13 @@ class ItemTitle extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  // CachedNetworkImage(
-                  // imageUrl: Item.img,
-                  // key: imageOk,
-                  // width: 400,
-                  // fit: BoxFit.cover,
-                  // ),
-                  Expanded(
-                    child: Hero(
-                      tag: Item.img,
-                      child: Container(
-                        child: Image.network(
-                          Item.img,
-                          key: imageOk,
-                        ),
-                      ),
-                    ),
+                  CachedNetworkImage(
+                  imageUrl: Item.img,
+                  key: imageOk,
+                  width: 400,
+                  fit: BoxFit.cover,
                   ),
+                
                   const SizedBox(
                     height: 5,
                   ),

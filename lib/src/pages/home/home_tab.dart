@@ -1,5 +1,4 @@
 import 'package:add_to_cart_animation/add_to_cart_animation.dart';
-import 'package:add_to_cart_animation/add_to_cart_icon.dart';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   String selectCategory = 'Frutas';
-  GlobalKey<CartIconKey> gkCart = GlobalKey<CartIconKey>();
+
   late Function(GlobalKey) runAddToCardAnimation;
   void itemSelectedCartAnimation(GlobalKey gkImage) {
     runAddToCardAnimation(gkImage);
@@ -42,13 +41,11 @@ class _HomeTabState extends State<HomeTab> {
                 badgeColor: CustomColors.colorDestac,
                 badgeContent:
                     const Text('0', style: TextStyle(color: Colors.white)),
-                child: AddToCartIcon(
-                  key: gkCart,
-                  icon: Icon(
+                child:  Icon(
                     Icons.shopping_cart_outlined,
                     color: CustomColors.colorButtonMain,
                   ),
-                ),
+                
               ),
             ),
           )
@@ -134,15 +131,7 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   _searchproduto() {
-    return AddToCartAnimation(
-      gkCart: gkCart,
-      previewCurve: Curves.ease,
-      previewDuration: const Duration(milliseconds: 100),
-      receiveCreateAddToCardAnimationMethod: (addToCardAnimationMethod) {
-        // You can run the animation by addToCardAnimationMethod, just pass trough the the global key of  the image as parameter
-        runAddToCardAnimation = addToCardAnimationMethod;
-      },
-      child: Padding(
+   return Padding(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: TextFormField(
           decoration: InputDecoration(
@@ -171,6 +160,6 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ),
       ),
-    );
+    
   }
 }
