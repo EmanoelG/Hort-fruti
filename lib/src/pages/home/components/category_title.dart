@@ -19,22 +19,29 @@ class CategoryTitle extends StatefulWidget {
 class _CategoryTitleState extends State<CategoryTitle> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onPresseds,
-      child: Align(
-        alignment: Alignment.center,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          decoration: BoxDecoration(
-            color: widget.isSelect ? Colors.green.shade600 : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Text(
-            widget.category,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: widget.isSelect ? 16 : 14,
-                color: widget.isSelect ? Colors.white : Colors.red),
+    return ClipRRect(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: widget.onPresseds,
+        child: Ink(
+          child: Align(
+            alignment: Alignment.center,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              decoration: BoxDecoration(
+                color: widget.isSelect
+                    ? Colors.green.shade600
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                widget.category,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: widget.isSelect ? 16 : 14,
+                    color: widget.isSelect ? Colors.white : Colors.red),
+              ),
+            ),
           ),
         ),
       ),

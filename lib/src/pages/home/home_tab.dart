@@ -97,37 +97,43 @@ class _HomeTabState extends State<HomeTab> {
         ),
         itemCount: app_data.categorias.length,
         itemBuilder: (context, index) {
-          return ItemTitle(
-            Item: app_data.items[index],
-            runAddToCardAnimationMethod: itemSelectedCartAnimation,
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: ItemTitle(
+              Item: app_data.items[index],
+              runAddToCardAnimationMethod: itemSelectedCartAnimation,
+            ),
           );
         },
       ),
     );
   }
 
-  Container _categoria() {
-    return Container(
-      height: 40,
-      child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (_, index) {
-            return CategoryTitle(
-              category: app_data.categorias[index],
-              isSelect: app_data.categorias[index] == selectCategory,
-              onPresseds: () {
-                setState(
-                  () {
-                    selectCategory = app_data.categorias[index];
-                  },
-                );
-              },
-            );
-          },
-          separatorBuilder: (_, index) => const SizedBox(
-                width: 10,
-              ),
-          itemCount: app_data.categorias.length),
+  _categoria() {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        height: 25,
+        child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) {
+              return CategoryTitle(
+                category: app_data.categorias[index],
+                isSelect: app_data.categorias[index] == selectCategory,
+                onPresseds: () {
+                  setState(
+                    () {
+                      selectCategory = app_data.categorias[index];
+                    },
+                  );
+                },
+              );
+            },
+            separatorBuilder: (_, index) => const SizedBox(
+                  width: 10,
+                ),
+            itemCount: app_data.categorias.length),
+      ),
     );
   }
 

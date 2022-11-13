@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Super sacolão',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.green,
@@ -19,4 +20,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
- 
