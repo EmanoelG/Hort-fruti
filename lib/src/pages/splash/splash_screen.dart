@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/pages/auth/login/sing_in_scren.dart';
+import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
 
 import '../../config/custom_color.dart';
 import '../../util/push_function.dart';
@@ -25,13 +26,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Material(
+      child: _body(),
+    );
+  }
+
+  _body() {
     return Container(
-      color: CustomColors.colorAppMain,
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: Color.fromARGB(98, 2, 46, 4),
-        ),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomLeft,
+            colors: [
+              CustomColors.colorButtonMain,
+              Color.fromARGB(255, 90, 207, 94),
+              Color.fromARGB(255, 215, 240, 188),
+            ]),
       ),
+      child: TitleApp(fontTitle: 40),
     );
   }
 }
+
+    // child: const Center(
+    //     child: CircularProgressIndicator(
+    //       color: Color.fromARGB(98, 2, 46, 4),
+    //     ),
+    //   ),

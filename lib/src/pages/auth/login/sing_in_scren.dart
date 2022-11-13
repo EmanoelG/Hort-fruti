@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,7 @@ class SingInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.colorAppMain,
+      backgroundColor: Color.fromARGB(255, 215, 240, 188),
       body: _telalogin(context),
     );
   }
@@ -23,26 +25,42 @@ class SingInScreen extends StatelessWidget {
   _telalogin(context) {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: SizedBox(
         height: size.height,
         width: size.width,
         child: Column(
           children: [
             Expanded(
-              child: _titleLogin(),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 40,
-              ),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(40.0),
+              flex: 1,
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        CustomColors.colorButtonMain,
+                        Color.fromARGB(255, 90, 207, 94),
+                        Color.fromARGB(255, 215, 240, 188),
+                      ]),
                 ),
+                child: TitleApp(fontTitle: 40),
               ),
-              child: _formLogin(context),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  //     color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                //color: Colors.white,
+                child: _formLogin(context),
+              ),
             ),
           ],
         ),
@@ -50,7 +68,7 @@ class SingInScreen extends StatelessWidget {
     );
   }
 
-  Column _titleLogin() {
+  _titleLogin() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

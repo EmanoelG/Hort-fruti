@@ -120,6 +120,7 @@ class _ItemTitleState extends State<ItemTitle> {
             ),
             child: Material(
               child: InkWell(
+                
                 onTap: (() {
                   switchIcon();
                 }),
