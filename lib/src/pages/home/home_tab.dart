@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import '../../config/custom_color.dart';
 import '../../service/forma_services.dart';
+import '../common_widgets/title_app.dart';
 import 'components/category_title.dart';
 import '../../config/app_data.dart' as app_data;
 import 'components/item_title.dart';
@@ -28,7 +29,7 @@ class _HomeTabState extends State<HomeTab> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: _titlehometab(),
+        title: TitleApp(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
@@ -48,30 +49,6 @@ class _HomeTabState extends State<HomeTab> {
         ],
       ),
       body: _body(context),
-    );
-  }
-
-  _titlehometab() {
-    return GestureDetector(
-      onTap: () {
-        service.showToats(message: 'Olá, mundo !');
-      },
-      child: const Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: 'Super',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 3, 3, 3),
-                  fontWeight: FontWeight.bold),
-            ),
-            TextSpan(
-              text: 'Sacolão',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

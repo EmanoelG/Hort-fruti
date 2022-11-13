@@ -1,14 +1,13 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
 import '../../../config/custom_color.dart';
 import '../../../util/compentes/custom_textField.dart';
 import '../../base/base_screen.dart';
+import '../../common_widgets/title_app.dart';
 import '../cadastro/sing_up_screen.dart';
-
 
 class SingInScreen extends StatelessWidget {
   const SingInScreen({Key? key}) : super(key: key);
@@ -55,7 +54,7 @@ class SingInScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _tltleLoginRich(),
+        TitleApp(fontTitle: 30),
         SizedBox(
           height: 30,
           child: DefaultTextStyle(
@@ -72,24 +71,6 @@ class SingInScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Text _tltleLoginRich() {
-    return const Text.rich(
-      TextSpan(
-        style: TextStyle(fontSize: 40),
-        children: [
-          TextSpan(
-            text: 'Super',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          TextSpan(
-            text: 'Sacolão',
-            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
     );
   }
 

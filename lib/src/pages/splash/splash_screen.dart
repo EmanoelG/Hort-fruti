@@ -4,7 +4,6 @@ import 'package:sacolao_de_frutas/src/pages/auth/login/sing_in_scren.dart';
 import '../../config/custom_color.dart';
 import '../../util/push_function.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // criar a regra de firebase etc.
     super.initState();
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 3),
     ).then(
       (value) => push(context, const SingInScreen()),
     );

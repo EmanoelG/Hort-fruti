@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/pages/auth/splash_screen.dart';
+import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
