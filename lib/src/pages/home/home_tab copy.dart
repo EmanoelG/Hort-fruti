@@ -28,7 +28,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 1800)).then((value) {
+    Future.delayed(Duration(seconds: 5)).then((value) {
       setState(() {
         isLoading = false;
       });
@@ -88,25 +88,48 @@ class _HomeTabState extends State<HomeTab> {
   Expanded _griditens(context) {
     final size = MediaQuery.of(context).size;
     return Expanded(
-      child: GridView.builder(
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 9 / 11.5,
-          maxCrossAxisExtent: 200,
-        ),
-        itemCount: app_data.categorias.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(5),
-            child: ItemTitle(
-              Item: app_data.items[index],
-              runAddToCardAnimationMethod: itemSelectedCartAnimation,
+      child: isLoading
+          ? GridView.builder(
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 9 / 11.5,
+                maxCrossAxisExtent: 200,
+              ),
+              itemCount: app_data.categorias.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: ItemTitle(
+                    Item: app_data.items[index],
+                    runAddToCardAnimationMethod: itemSelectedCartAnimation,
+                  ),
+                );
+              },
+            )
+          : GridView.count(
+              physics: const BouncingScrollPhysics(),
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 9 / 11.5,
+              children: List.generate(
+                6,
+                (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CustomShimmer(
+                      highlightColor: Color.fromARGB(255, 215, 240, 188),
+                      baseColor: Color.fromARGB(255, 90, 207, 94),
+                      height: size.height,
+                      width: size.width,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  );
+                },
+              ),
             ),
-          );
-        },
-      ),
     );
   }
 
