@@ -44,7 +44,15 @@ class _SplashScreenState extends State<SplashScreen> {
               Color.fromARGB(255, 215, 240, 188),
             ]),
       ),
-      child: TitleApp(fontTitle: 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TitleApp(fontTitle: 40),
+          const CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.white),
+          )
+        ],
+      ),
     );
   }
 }

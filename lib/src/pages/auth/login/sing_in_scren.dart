@@ -30,6 +30,7 @@ class SingInScreen extends StatelessWidget {
         height: size.height,
         width: size.width,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Expanded(
               flex: 1,
@@ -45,20 +46,18 @@ class SingInScreen extends StatelessWidget {
                         Color.fromARGB(255, 215, 240, 188),
                       ]),
                 ),
-                child: TitleApp(fontTitle: 40),
+                child: _titleLogin(),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: const BoxDecoration(
-                  //     color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
                 ),
-                //color: Colors.white,
                 child: _formLogin(context),
               ),
             ),
@@ -158,7 +157,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  pushReplace(context, SingUpScreen());
+                  push(context, SingUpScreen());
                 },
                 child: const Text(
                   'Criar Conta',

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
+import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
+
+import '../../base/base_screen.dart';
 
 class SingUpScreen extends StatelessWidget {
   SingUpScreen({Key? key}) : super(key: key);
@@ -22,64 +25,56 @@ class SingUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: CustomColors.colorAppMain,
-      body: _formCadastro(size, context),
-    );
-  }
-
-  SingleChildScrollView _formCadastro(Size size, context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: size.height,
-        width: size.width,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: IconButton(
-                onPressed: () {
-                  pop(context);
-                },
-                icon: const Icon(Icons.arrow_back),
+      appBar: AppBar(),
+      backgroundColor: Color.fromARGB(255, 215, 240, 188),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      CustomColors.colorButtonMain,
+                      Color.fromARGB(255, 90, 207, 94),
+                      Color.fromARGB(255, 215, 240, 188),
+                    ]),
               ),
+              child: TextApp(texto: 'data'),
             ),
-            Column(
-              children: [
-                const Expanded(
-                  child: Center(
-                    child: Text(
-                      'Cadastro',
-                      style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 40,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(40.0),
-                    ),
-                  ),
-                  child: _formFieldCadastro(),
-                ),
-              ],
+              ),
+              child: _formCadastro(context),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Column _formFieldCadastro() {
+  _formCadastro(context) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Container(
+        child: _formFieldCadastro(context),
+      ),
+    );
+  }
+
+  _formFieldCadastro(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -129,28 +124,21 @@ class SingUpScreen extends StatelessWidget {
     );
   }
 
-  SizedBox _buttonCadastrar() {
-    return SizedBox(
+  _buttonCadastrar() {
+    SizedBox(
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
-            side: BorderSide(
-              width: 2,
-              color: CustomColors.colorButtonMain,
-            ),
           ),
         ),
         onPressed: () {
-          // pushReplace(
-          //   context,
-          //   const SingUpScreen(),
-          // );
+          //pushReplace(context, const BaseScreen(), replace: true);
         },
         child: const Text(
-          'Criar Conta',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          'Entrar',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );
