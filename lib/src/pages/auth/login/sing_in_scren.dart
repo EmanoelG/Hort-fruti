@@ -2,6 +2,8 @@ import 'dart:ffi';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
 
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
@@ -125,7 +127,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  pushReplace(context, const BaseScreen(), replace: true);
+                  Get.toNamed(PagesRoutes.homeTab);
                 },
                 child: const Text(
                   'Entrar',

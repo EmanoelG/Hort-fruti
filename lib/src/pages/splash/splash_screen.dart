@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/pages/auth/login/sing_in_scren.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
-
+import 'package:get/get.dart';
 import '../../config/custom_color.dart';
 import '../../util/push_function.dart';
+import '../app_route/app_pages.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,11 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // criar a regra de firebase etc.
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 3),
-    ).then(
-      (value) => push(context, const SingInScreen()),
-    );
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.offAllNamed(PagesRoutes.singInRoute);
+    });
   }
 
   @override

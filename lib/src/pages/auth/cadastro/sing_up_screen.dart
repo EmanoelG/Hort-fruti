@@ -3,12 +3,9 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
-import 'package:sacolao_de_frutas/src/util/push_function.dart';
-
-import '../../base/base_screen.dart';
 
 class SingUpScreen extends StatelessWidget {
-  SingUpScreen({Key? key}) : super(key: key);
+  SingUpScreen() : super();
   var cpfFormat = MaskTextInputFormatter(
       mask: '###.###.###-##',
       filter: {

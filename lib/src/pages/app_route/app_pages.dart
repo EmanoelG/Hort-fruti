@@ -17,7 +17,18 @@ abstract class AppPages {
     ),
     GetPage(
       name: '/signup',
-      page: () => SingUpScreen(),
+      page: () => SingInScreen(),
+    ),
+        GetPage(
+      name: '/hometab',
+      page: () => HomeTab(),
     ),
   ];
+}
+
+abstract class PagesRoutes {
+  static const String singInRoute = 'signup';
+  static const String singUpRoute = 'signin';
+  static const String splashScreen = 'splashscreen';
+   static const String homeTab = 'hometab';
 }
