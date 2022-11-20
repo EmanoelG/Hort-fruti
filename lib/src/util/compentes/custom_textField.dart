@@ -8,6 +8,9 @@ class FormDefault extends StatefulWidget {
   String? inputMenssagem;
   bool? isObscureText;
   bool isSecret;
+  int? maxLenght;
+  int? minLines;
+  final String? Function(String?) validatorValue;
   List<TextInputFormatter>? textinputformatt;
   TextEditingController? controller;
   FormFieldValidator<String>? validator;
@@ -17,6 +20,8 @@ class FormDefault extends StatefulWidget {
   FocusNode? nextFocus;
   String? initiValue;
   bool readOnly;
+  TextInputType keyboardType;
+
   FormDefault({
     Key? key,
     this.tipo,
@@ -24,6 +29,9 @@ class FormDefault extends StatefulWidget {
     this.inputMenssagem,
     this.isObscureText,
     required this.isSecret,
+    this.maxLenght = 50,
+    this.minLines = 1,
+    required this.validatorValue,
     this.textinputformatt,
     this.controller,
     this.validator,
@@ -33,6 +41,7 @@ class FormDefault extends StatefulWidget {
     this.nextFocus,
     this.initiValue = null,
     this.readOnly = false,
+    this.keyboardType = TextInputType.none,
   }) : super(key: key);
 
   @override
@@ -50,15 +59,25 @@ class _FormDefaultState extends State<FormDefault> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: widget.maxLenght,
+      minLines: widget.minLines,
+      keyboardType: widget.keyboardType,
+      validator: widget.validatorValue,
+      key: widget.key,
+      controller: widget.controller,
       readOnly: widget.readOnly,
       initialValue: widget.initiValue,
       inputFormatters: widget.textinputformatt,
       obscureText: isObscureText,
+      onFieldSubmitted: (String text) {
+        if (widget.nextFocus != null) {
+          FocusScope.of(context).requestFocus(widget.nextFocus);
+        }
+      },
       style: const TextStyle(
         color: Color.fromARGB(255, 4, 4, 4),
       ),
       decoration: InputDecoration(
-      
         prefixIcon: widget.iconTitipo,
         suffixIcon: widget.isSecret
             ? IconButton(

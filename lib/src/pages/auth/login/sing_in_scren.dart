@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
 
@@ -14,7 +15,10 @@ import '../../common_widgets/title_app.dart';
 import '../cadastro/sing_up_screen.dart';
 
 class SingInScreen extends StatelessWidget {
-  const SingInScreen({Key? key}) : super(key: key);
+  SingInScreen({Key? key}) : super(key: key);
+  final _formKeys = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,21 +98,44 @@ class SingInScreen extends StatelessWidget {
   }
 
   Form _formLogin(context) => Form(
+        key: _formKeys,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FormDefault(
+              keyboardType: TextInputType.emailAddress,
+              controller: emailController,
               readOnly: false,
               type: TextInputType.emailAddress,
               iconTitipo: const Icon(Icons.email),
               inputMenssagem: 'e-mail',
               isSecret: false,
+              validatorValue: (email_validator) {
+                if (email_validator == null || email_validator.isEmpty) {
+                  return 'Preencha o campo de e-mail corretamente !';
+                }
+                if (!email_validator.isEmail) {
+                  return 'Digite um e-mail valido !';
+                }
+              },
             ),
             const SizedBox(
               height: 10,
             ),
             FormDefault(
+              keyboardType: TextInputType.text,
+              validatorValue: (password) {
+                if (password == null || password.isEmpty) {
+                  return 'Preencha o campo de senha corretamente !';
+                }
+                if (password.length <= 7) {
+                  return 'Password precisa ter no minimo 7 carcter';
+                }
+
+                return null;
+              },
               readOnly: false,
+              controller: passwordController,
               type: TextInputType.visiblePassword,
               iconTitipo: const Icon(Icons.key),
               inputMenssagem: 'senha',
@@ -127,7 +154,13 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Get.toNamed(PagesRoutes.homeTab);
+                  if (_formKeys.currentState!.validate()) {
+                    String _email = emailController.text;
+                    String _password = passwordController.text;
+                    print('Key: ' + _email);
+                    print(_password);
+                    Get.off(PagesRoutes.baseRoute);
+                  }
                 },
                 child: const Text(
                   'Entrar',
@@ -159,7 +192,8 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  push(context, SingUpScreen());
+                  // push(context, SingUpScreen());
+                  print('Tela principal ');
                 },
                 child: const Text(
                   'Criar Conta',

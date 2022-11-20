@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:sacolao_de_frutas/src/pages/base/base_screen.dart';
 import 'package:sacolao_de_frutas/src/pages/home/home_tab%20copy.dart';
 import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
 
@@ -13,15 +14,19 @@ abstract class AppPages {
     ),
     GetPage(
       name: '/signin',
-      page: () => const SingInScreen(),
+      page: () =>  SingInScreen(),
     ),
     GetPage(
       name: '/signup',
       page: () => SingInScreen(),
     ),
-        GetPage(
+    GetPage(
       name: '/hometab',
       page: () => HomeTab(),
+    ),
+    GetPage(
+      name: '/',
+      page: () => BaseScreen(),
     ),
   ];
 }
@@ -30,5 +35,6 @@ abstract class PagesRoutes {
   static const String singInRoute = 'signup';
   static const String singUpRoute = 'signin';
   static const String splashScreen = 'splashscreen';
-   static const String homeTab = 'hometab';
+  static const String homeTab = 'hometab';
+  static const String baseRoute = '/';
 }

@@ -133,31 +133,31 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-/* */
   _categoria() {
     return Material(
       color: Colors.transparent,
       child: Container(
         height: 25,
         child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) {
-              return CategoryTitle(
-                category: app_data.categorias[index],
-                isSelect: app_data.categorias[index] == selectCategory,
-                onPresseds: () {
-                  setState(
-                    () {
-                      selectCategory = app_data.categorias[index];
-                    },
-                  );
-                },
-              );
-            },
-            separatorBuilder: (_, index) => const SizedBox(
-                  width: 10,
-                ),
-            itemCount: app_data.categorias.length),
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (_, index) {
+            return CategoryTitle(
+              category: app_data.categorias[index],
+              isSelect: app_data.categorias[index] == selectCategory,
+              onPresseds: () {
+                setState(
+                  () {
+                    selectCategory = app_data.categorias[index];
+                  },
+                );
+              },
+            );
+          },
+          separatorBuilder: (_, index) => const SizedBox(
+            width: 10,
+          ),
+          itemCount: app_data.categorias.length,
+        ),
       ),
     );
   }

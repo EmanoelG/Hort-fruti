@@ -27,6 +27,10 @@ class _ProfileTabState extends State<ProfileTab> {
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
         children: <Widget>[
           FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             readOnly: true,
             initiValue: appdata.user.email,
             iconTitipo: Icon(Icons.email),
@@ -37,6 +41,10 @@ class _ProfileTabState extends State<ProfileTab> {
             height: 10,
           ),
           FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             readOnly: true,
             initiValue: appdata.user.name,
             iconTitipo: Icon(Icons.person),
@@ -47,6 +55,10 @@ class _ProfileTabState extends State<ProfileTab> {
             height: 10,
           ),
           FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             readOnly: true,
             initiValue: appdata.user.celular,
             iconTitipo: Icon(Icons.phone),
@@ -57,6 +69,10 @@ class _ProfileTabState extends State<ProfileTab> {
             height: 10,
           ),
           FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             readOnly: true,
             initiValue: appdata.user.cpf,
             iconTitipo: Icon(Icons.file_copy),
@@ -123,6 +139,10 @@ class _ProfileTabState extends State<ProfileTab> {
                       height: 10,
                     ),
                     FormDefault(
+                      validatorValue: (email) {
+                        if (email == null)
+                          return 'Preencha e-mail ou senha corretamente !';
+                      },
                       iconTitipo: Icon(Icons.lock),
                       isSecret: true,
                       inputMenssagem: 'Senha Atual',
@@ -131,6 +151,10 @@ class _ProfileTabState extends State<ProfileTab> {
                       height: 10,
                     ),
                     FormDefault(
+                      validatorValue: (email) {
+                        if (email == null)
+                          return 'Preencha e-mail ou senha corretamente !';
+                      },
                       iconTitipo: Icon(Icons.lock_outline),
                       isSecret: true,
                       inputMenssagem: 'Nova senha',
@@ -139,6 +163,10 @@ class _ProfileTabState extends State<ProfileTab> {
                       height: 10,
                     ),
                     FormDefault(
+                      validatorValue: (email) {
+                        if (email == null)
+                          return 'Preencha e-mail ou senha corretamente !';
+                      },
                       iconTitipo: Icon(Icons.lock_outline),
                       isSecret: true,
                       inputMenssagem: 'Confirmar senha',

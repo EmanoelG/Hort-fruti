@@ -3,6 +3,9 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
+import 'package:get/get.dart';
+
+import '../../app_route/app_pages.dart';
 
 class SingUpScreen extends StatelessWidget {
   SingUpScreen() : super();
@@ -76,6 +79,10 @@ class SingUpScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             type: TextInputType.name,
             inputMenssagem: 'Nome',
             iconTitipo: const Icon(Icons.person),
@@ -84,6 +91,10 @@ class SingUpScreen extends StatelessWidget {
           height: 10,
         ),
         FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             type: TextInputType.emailAddress,
             inputMenssagem: 'Email',
             iconTitipo: const Icon(Icons.person),
@@ -92,6 +103,10 @@ class SingUpScreen extends StatelessWidget {
           height: 10,
         ),
         FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             type: TextInputType.number,
             inputMenssagem: 'Cpf',
             textinputformatt: [cpfFormat],
@@ -101,6 +116,10 @@ class SingUpScreen extends StatelessWidget {
           height: 10,
         ),
         FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             type: TextInputType.visiblePassword,
             inputMenssagem: 'Senha',
             iconTitipo: const Icon(Icons.lock),
@@ -109,6 +128,10 @@ class SingUpScreen extends StatelessWidget {
           height: 10,
         ),
         FormDefault(
+            validatorValue: (email) {
+              if (email == null)
+                return 'Preencha e-mail ou senha corretamente !';
+            },
             type: TextInputType.visiblePassword,
             inputMenssagem: 'Confirma senha',
             iconTitipo: const Icon(Icons.lock),
@@ -132,6 +155,8 @@ class SingUpScreen extends StatelessWidget {
         ),
         onPressed: () {
           //pushReplace(context, const BaseScreen(), replace: true);
+          Get.toNamed(PagesRoutes.baseRoute);
+          //  print('Voltou !');
         },
         child: const Text(
           'Entrar',
