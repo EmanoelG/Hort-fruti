@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
-import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
+import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 
 void main() {
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 

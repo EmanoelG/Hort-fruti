@@ -13,6 +13,7 @@ import '../../../util/compentes/custom_textField.dart';
 import '../../base/base_screen.dart';
 import '../../common_widgets/title_app.dart';
 import '../cadastro/sing_up_screen.dart';
+import '../controller/auth_controller.dart';
 
 class SingInScreen extends StatelessWidget {
   SingInScreen({Key? key}) : super(key: key);
@@ -147,25 +148,41 @@ class SingInScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
-                onPressed: () {
-                  if (_formKeys.currentState!.validate()) {
-                    String _email = emailController.text;
-                    String _password = passwordController.text;
-                    print('Key: ' + _email);
-                    print(_password);
-                    Get.off(PagesRoutes.baseRoute);
-                  }
+              child: GetX<AuthController>(
+                builder: (controllerAuth) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
+                    onPressed: controllerAuth.isLoading.value
+                        ? null
+                        : () {
+                            FocusScope.of(context).unfocus();
+                            if (_formKeys.currentState!.validate()) {
+                              String _email = emailController.text;
+                              String _password = passwordController.text;
+                              print('Key: ' + _email);
+                              print(_password);
+                              controllerAuth.signIn(
+                                  email: _email, password: _password);
+                              // Get.off(PagesRoutes.baseRoute);
+                            } else {
+                              print('Campos nao validos ');
+                            }
+                          },
+                    child: controllerAuth.isLoading.value
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : const Text(
+                            'Entrar',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                  );
                 },
-                child: const Text(
-                  'Entrar',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
               ),
             ),
             Align(

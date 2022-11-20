@@ -7,5 +7,9 @@ class AuthController extends GetxController {
 
   Future<void> signIn({required String email, required String password}) async {
     isLoading.value = true;
+
+    await Future.delayed(Duration(seconds: 5));
+
+    isLoading.value = false;
   }
 }
