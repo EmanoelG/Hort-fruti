@@ -43,6 +43,7 @@ dependencies:
   fluttertoast: ^8.1.1
   shimmer: ^2.0.0
   get: ^4.6.5
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
