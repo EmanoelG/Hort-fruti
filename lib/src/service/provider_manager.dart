@@ -1,0 +1,43 @@
+import 'package:dio/dio.dart';
+
+abstract class HttpMetod {
+  static const String post = 'post';
+  static const String get = 'get';
+  static const String put = 'put';
+  static const String delete = 'delete';
+  static const String patch = 'patch';
+}
+
+class HttpManager {
+  Future restRequest(
+      {required String url,
+      required String metod,
+      Map? headers,
+      Map? body}) async {
+    final defaultHeaders = headers?.cast<String, String>() ?? {}
+      ..addAll(
+        {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'X-Parse-Application-Id': 'g1Oui3JqxnY4S1ykpQWHwEKGOe0dRYCPvPF4iykc',
+          'X-Parse-REST-API-Key': 'rFBKU8tk0m5ZlKES2CGieOaoYz6TgKxVMv8jRIsN'
+        },
+      );
+
+    Dio dio = Dio();
+    try {
+      dio.request(
+        url,
+        options: Options(
+          method: metod,
+          headers: defaultHeaders,
+        ),
+        data: body,
+      );
+    } on DioError catch (error) {
+      print('DioError:  ${error}');
+    } catch (e) {
+      print('Error generic:  ${e}');
+    }
+  }
+}
