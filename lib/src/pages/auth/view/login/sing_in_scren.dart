@@ -158,18 +158,41 @@ class SingInScreen extends StatelessWidget {
                     ),
                     onPressed: controllerAuth.isLoading.value
                         ? null
-                        : () {
+                        : () async {
                             FocusScope.of(context).unfocus();
                             if (_formKeys.currentState!.validate()) {
                               String _email = emailController.text;
                               String _password = passwordController.text;
-                              print('Key: ' + _email);
-                              print(_password);
-                              controllerAuth.signIn(
+
+                              bool? acess = await controllerAuth.signIn(
                                   email: _email, password: _password);
-                              // Get.off(PagesRoutes.baseRoute);
+                              if (acess = true) {
+                                print('Deu trueee');
+                                //  Get.offAllNamed(PagesRoutes.baseRoute);
+                              }
                             } else {
-                              print('Campos nao validos ');
+                              print('Deu falsee');
+                              //   showDialog(
+                              //     context: context,
+                              //     builder: (context) {
+                              //       return AlertDialog(
+                              //         shape: RoundedRectangleBorder(
+                              //             borderRadius:
+                              //                 BorderRadius.circular(20)),
+                              //         title:
+                              //             const Text('usuário não encontrado '),
+                              //         actions: [
+                              //           TextButton(
+                              //             onPressed: () {
+                              //               Navigator.of(context).pop(false);
+                              //             },
+                              //             child: const Text('ok'),
+                              //           ),
+                              //         ],
+                              //       );
+                              //     },
+                              //   );
+                              //
                             }
                           },
                     child: controllerAuth.isLoading.value
