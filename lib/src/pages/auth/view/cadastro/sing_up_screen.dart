@@ -5,7 +5,7 @@ import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import 'package:get/get.dart';
 
-import '../../app_route/app_pages.dart';
+import '../../../app_route/app_pages.dart';
 
 class SingUpScreen extends StatelessWidget {
   SingUpScreen() : super();

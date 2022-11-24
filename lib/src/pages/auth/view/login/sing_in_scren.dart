@@ -8,12 +8,12 @@ import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
 
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
-import '../../../config/custom_color.dart';
-import '../../../util/compentes/custom_textField.dart';
-import '../../base/base_screen.dart';
-import '../../common_widgets/title_app.dart';
+import '../../../../config/custom_color.dart';
+import '../../../../util/compentes/custom_textField.dart';
+import '../../../base/base_screen.dart';
+import '../../../common_widgets/title_app.dart';
 import '../cadastro/sing_up_screen.dart';
-import '../controller/auth_controller.dart';
+import '../../controller/auth_controller.dart';
 
 class SingInScreen extends StatelessWidget {
   SingInScreen({Key? key}) : super(key: key);

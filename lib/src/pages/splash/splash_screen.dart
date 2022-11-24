@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/pages/auth/login/sing_in_scren.dart';
+import 'package:sacolao_de_frutas/src/pages/auth/view/login/sing_in_scren.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
 import 'package:get/get.dart';
 import '../../config/custom_color.dart';

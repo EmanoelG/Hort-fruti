@@ -9,7 +9,7 @@ abstract class HttpMetod {
 }
 
 class HttpManager {
-  Future restRequest(
+  Future<Map> restRequest(
       {required String url,
       required String metod,
       Map? headers,
@@ -26,7 +26,7 @@ class HttpManager {
 
     Dio dio = Dio();
     try {
-      dio.request(
+      Response response = await dio.request(
         url,
         options: Options(
           method: metod,
@@ -34,10 +34,13 @@ class HttpManager {
         ),
         data: body,
       );
+      return response.data;
     } on DioError catch (error) {
       print('DioError:  ${error}');
+      return error.response!.data;
     } catch (e) {
       print('Error generic:  ${e}');
+      return {};
     }
   }
 }

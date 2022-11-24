@@ -3,8 +3,8 @@ import 'package:sacolao_de_frutas/src/pages/base/base_screen.dart';
 import 'package:sacolao_de_frutas/src/pages/home/home_tab%20copy.dart';
 import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
 
-import '../auth/cadastro/sing_up_screen.dart';
-import '../auth/login/sing_in_scren.dart';
+import '../auth/view/cadastro/sing_up_screen.dart';
+import '../auth/view/login/sing_in_scren.dart';
 
 abstract class AppPages {
   static final page = <GetPage>[
