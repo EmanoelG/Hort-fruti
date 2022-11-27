@@ -17,6 +17,23 @@ class UtilsService {
     }
   }
 
+  Future<String?> loadLocalData(String keyRead) async {
+    try {
+      return _storage.read(key: keyRead);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<bool> deleteLocalData(String keyRead) async {
+    try {
+      _storage.delete(key: keyRead);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   String priceToCurrency(double price) {
     NumberFormat numberFormat = NumberFormat.simpleCurrency(locale: 'pt_BR');
     return numberFormat.format(price);

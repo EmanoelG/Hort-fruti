@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/pages/auth/view/login/sing_in_scren.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
 import 'package:get/get.dart';
 import '../../config/custom_color.dart';
-import '../../util/push_function.dart';
+import '../../service/form_services.dart';
+import '../../service/provider_manager.dart';
 import '../app_route/app_pages.dart';
+import '../auth/controller/auth_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,15 +15,23 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
+  final UtilsService _utils = UtilsService();
   @override
   void initState() {
     // criar a regra de firebase etc.
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
 
+    Future.delayed(const Duration(seconds: 3), () {
       Get.offAllNamed(PagesRoutes.singInRoute);
     });
+  }
+
+  _loadTokenUser() async {
+    String? userToken = await _utils.loadLocalData(KeysApp.userToken);
+    if (userToken!.isEmpty) {
+      AuthController authController = AuthController();
+      authController.validateToken(userToken);
+    }
   }
 
   @override

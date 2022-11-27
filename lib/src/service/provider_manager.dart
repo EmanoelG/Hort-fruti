@@ -42,3 +42,8 @@ class HttpManager {
     }
   }
 }
+
+abstract class KeysApp {
+  static String userKey = 'user_key';
+  static String userToken = 'userToken';
+}
