@@ -7,7 +7,7 @@ class UserModel {
   String? celular;
   String? cpf;
   String? senha;
-  String? toke;
+  String? token;
   UserModel({
     this.id,
     this.name,
@@ -15,7 +15,7 @@ class UserModel {
     this.celular,
     this.cpf,
     this.senha,
-    this.toke,
+    this.token,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +26,7 @@ class UserModel {
       'phone': celular,
       'cpf': cpf,
       'senha': senha,
-      'toke': toke,
+      'token': token,
     };
   }
 
@@ -37,7 +37,7 @@ class UserModel {
       email: map['email'],
       celular: map['phone'],
       cpf: map['cpf'],
-      toke: map['token'],
+      token: map['token'],
     );
   }
 
@@ -48,6 +48,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, celular: $celular, cpf: $cpf, senha: $senha, toke: $toke)';
+    return 'UserModel(id: $id, name: $name, email: $email, celular: $celular, cpf: $cpf, senha: $senha, token: $token)';
   }
 }

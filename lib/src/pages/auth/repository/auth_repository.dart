@@ -13,7 +13,7 @@ class AuthRepository {
     try {
       final result = await _httpManager.restRequest(
           url: EndPoints.validateToken,
-          metod: HttpMetod.get,
+          metod: HttpMetod.post,
           headers: token_header);
       if (result['result'] != null) {
         UserModel _user = UserModel();

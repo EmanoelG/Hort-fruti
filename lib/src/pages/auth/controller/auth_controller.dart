@@ -10,22 +10,31 @@ import '../result/auth_result.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
+
   final UtilsService _utils = UtilsService();
   UserModel userModel = UserModel();
+
   Future<void> signIn({required String email, required String password}) async {
     isLoading.value = true;
     AuthResult _user;
-    AuthRepository login_app = AuthRepository();
-    _user = await login_app.sigIn(email: email, password: password);
+    AuthRepository loginApp = AuthRepository();
+    _user = await loginApp.sigIn(email: email, password: password);
     isLoading.value = false;
+    _user.when(
+      sucess: (UserModel user) async {
+        userModel = user;
+        // Get.offAllNamed(PagesRoutes.baseRoute);
+      },
+      error: (msg) {
+        _utils.showToats(message: msg, isError: true);
+      },
+    );
+  }
+
+  Future<void> validateToken(String? token) async {
+    AuthResult _user;
+    AuthRepository loginApp = AuthRepository();
+    _user = await loginApp.validateToken(token ?? '');
     _user.printInfo();
-    _user.when(sucess: (UserModel user) {
-      this.userModel = user;
-      Get.offAllNamed(PagesRoutes.baseRoute);
-    }, error: (Msg) {
-      print('Error ao tentar logar: ' + Msg);
-      _utils.showToats(message: Msg, isError: true);
-    });
-    UserModel iuser = UserModel();
   }
 }
