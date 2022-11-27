@@ -163,33 +163,10 @@ class SingInScreen extends StatelessWidget {
                             if (_formKeys.currentState!.validate()) {
                               String _email = emailController.text;
                               String _password = passwordController.text;
-                              bool acess;
-                              acess = await controllerAuth.signIn(
+                          
+                             await controllerAuth.signIn(
                                   email: _email, password: _password);
-                              if (acess == true) {
-                                //    Get.offAllNamed(PagesRoutes.baseRoute);
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      title:
-                                          const Text('usuário não encontrado '),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop(false);
-                                          },
-                                          child: const Text('ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
+                            
                             }
                           },
                     child: controllerAuth.isLoading.value

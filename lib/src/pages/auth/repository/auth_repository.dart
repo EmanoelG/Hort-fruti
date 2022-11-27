@@ -6,6 +6,27 @@ import 'auth_errors.dart';
 
 class AuthRepository {
   final HttpManager _httpManager = HttpManager();
+  Future<AuthResult> validateToken(String token) async {
+    Map<String, String> token_header = {
+      'X-Parse-Session-Token': token,
+    };
+    try {
+      final result = await _httpManager.restRequest(
+          url: EndPoints.validateToken,
+          metod: HttpMetod.get,
+          headers: token_header);
+      if (result['result'] != null) {
+        UserModel _user = UserModel();
+        _user = UserModel.fromMap(result['result']);
+        return AuthResult.sucess(_user);
+      } else {
+        return AuthResult.error(authErrorString(result['error']));
+      }
+    } catch (e) {
+      return AuthResult.error('{"error": "Internal error ${e.toString()}"  }');
+    }
+  }
+
   Future<AuthResult> sigIn(
       {required String email, required String password}) async {
     try {
