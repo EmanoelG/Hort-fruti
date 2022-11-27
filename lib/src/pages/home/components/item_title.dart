@@ -6,7 +6,7 @@ import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
 import '../../../config/custom_color.dart';
 import '../../../models/item_model.dart';
-import '../../../service/forma_services.dart';
+import '../../../service/form_services.dart';
 import '../../product/product_screen.dart';
 
 class ItemTitle extends StatefulWidget {

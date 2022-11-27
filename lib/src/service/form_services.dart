@@ -1,9 +1,22 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class UtilsService {
+  final _storage = const FlutterSecureStorage();
+  Future<bool> saveLocalData(Map<String, dynamic> data) async {
+    try {
+      await _storage.write(key: data.keys.first, value: data.values.first);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   String priceToCurrency(double price) {
     NumberFormat numberFormat = NumberFormat.simpleCurrency(locale: 'pt_BR');
     return numberFormat.format(price);

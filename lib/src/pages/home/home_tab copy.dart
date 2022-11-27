@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../config/custom_color.dart';
-import '../../service/forma_services.dart';
+import '../../service/form_services.dart';
 import '../common_widgets/title_app.dart';
 import 'components/category_title.dart';
 import '../../config/app_data.dart' as app_data;

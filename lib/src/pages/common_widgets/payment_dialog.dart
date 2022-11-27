@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:sacolao_de_frutas/src/service/forma_services.dart';
+import 'package:sacolao_de_frutas/src/service/form_services.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 
 import '../../models/order_model.dart';

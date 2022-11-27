@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
-import 'package:sacolao_de_frutas/src/service/forma_services.dart';
+import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../common_widgets/quantity_widget.dart';
 

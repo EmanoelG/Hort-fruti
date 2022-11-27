@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../config/app_data.dart' as app_data;
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
-import 'package:sacolao_de_frutas/src/service/forma_services.dart';
+import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../config/app_data.dart';
 import '../../models/card_item_model.dart';

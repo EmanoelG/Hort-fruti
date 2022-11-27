@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
-import 'package:sacolao_de_frutas/src/service/forma_services.dart';
+import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../app_route/app_pages.dart';
 import '../repository/auth_repository.dart';
@@ -23,6 +23,10 @@ class AuthController extends GetxController {
     _user.when(
       sucess: (UserModel user) async {
         userModel = user;
+        Map<String, String> token_user = {
+          'user_token': userModel.token.toString(),
+        };
+        _utils.saveLocalData(token_user);
         // Get.offAllNamed(PagesRoutes.baseRoute);
       },
       error: (msg) {
