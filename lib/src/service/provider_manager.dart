@@ -36,10 +36,8 @@ class HttpManager {
       );
       return response.data;
     } on DioError catch (error) {
-      print('DioError:  ${error}');
-      return error.response!.data;
+      return error.response?.data ?? {};
     } catch (e) {
-      print('Error generic:  ${e}');
       return {};
     }
   }
