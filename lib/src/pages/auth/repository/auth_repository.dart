@@ -1,13 +1,13 @@
-import 'dart:ffi';
-
 import 'package:sacolao_de_frutas/src/service/provider_manager.dart';
-
 import '../../../const/endpoint.dart';
 import '../../../models/user_model.dart';
+import '../result/auth_result.dart';
+import 'auth_errors.dart';
 
 class AuthRepository {
   final HttpManager _httpManager = HttpManager();
-  Future<bool> sigIn({required String email, required String password}) async {
+  Future<AuthResult> sigIn(
+      {required String email, required String password}) async {
     try {
       final result = await _httpManager.restRequest(
         url: EndPoints.signin,
@@ -17,13 +17,12 @@ class AuthRepository {
       if (result['result'] != null) {
         UserModel _user = UserModel();
         _user = UserModel.fromMap(result['result']);
-        return true;
+        return AuthResult.sucess(_user);
       } else {
-        return false;
+        return AuthResult.error(authErrorString(result['error']));
       }
     } catch (e) {
-      print('Req erro: ${e}');
-      return false;
+      return AuthResult.error('{"error": "Internal error ${e.toString()}"  }');
     }
   }
 }
