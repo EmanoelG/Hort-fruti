@@ -19,7 +19,9 @@ class UtilsService {
 
   Future<String?> loadLocalData(String keyRead) async {
     try {
-      return _storage.read(key: keyRead);
+      var teste = await _storage.read(key: keyRead);
+      print('TESTE $teste');
+      return teste;
     } catch (e) {
       return null;
     }

@@ -15,6 +15,12 @@ class AuthController extends GetxController {
   final UtilsService _utils = UtilsService();
   UserModel userModel = UserModel();
 
+  @override
+  void onInit() {
+    super.onInit();
+    validateToken();
+  }
+
   Future<void> signIn({required String email, required String password}) async {
     isLoading.value = true;
     AuthResult _user;
@@ -36,19 +42,32 @@ class AuthController extends GetxController {
     );
   }
 
-  Future<void> signOut({required String email}) async {
+  Future<void> signOut({required String key}) async {
     userModel = UserModel();
-    // _utils.deleteLocalData()
+    await _utils.deleteLocalData(KeysApp.userToken);
   }
 
-  Future<void> validateToken(String? token) async {
+  Future<void> validateToken() async {
+    String userToken = await _utils.loadLocalData(KeysApp.userToken) ?? '';
     AuthResult _user;
-    String? tokenData = await _utils.loadLocalData(token ?? '');
-    if (tokenData == null) {
-      Get.offAllNamed(PagesRoutes.baseRoute);
+    if (userToken == null) {
+      Get.offAllNamed(PagesRoutes.singInRoute);
     } else {
       AuthRepository loginApp = AuthRepository();
-      _user = await loginApp.validateToken(tokenData);
+      _user = await loginApp.validateToken(userToken);
+      _user.when(
+        sucess: (user) {
+          userModel = user;
+          Get.offAllNamed(PagesRoutes.baseRoute);
+        },
+        error: (error) {
+          signOut(
+            key: KeysApp.userToken,
+          );
+          Get.offAllNamed(PagesRoutes.singInRoute);
+        },
+      );
+
       _user.printInfo();
     }
   }

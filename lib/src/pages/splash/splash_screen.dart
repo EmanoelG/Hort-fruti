@@ -7,32 +7,8 @@ import '../../service/provider_manager.dart';
 import '../app_route/app_pages.dart';
 import '../auth/controller/auth_controller.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  final UtilsService _utils = UtilsService();
-  @override
-  void initState() {
-    // criar a regra de firebase etc.
-    super.initState();
-
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.offAllNamed(PagesRoutes.singInRoute);
-    });
-  }
-
-  _loadTokenUser() async {
-    String? userToken = await _utils.loadLocalData(KeysApp.userToken);
-    if (userToken!.isEmpty) {
-      AuthController authController = AuthController();
-      authController.validateToken(userToken);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-    // child: const Center(
+// child: const Center(
     //     child: CircularProgressIndicator(
     //       color: Color.fromARGB(98, 2, 46, 4),
     //     ),
