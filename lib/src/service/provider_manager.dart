@@ -9,11 +9,12 @@ abstract class HttpMetod {
 }
 
 class HttpManager {
-  Future<Map> restRequest(
-      {required String url,
-      required String metod,
-      Map? headers,
-      Map? body}) async {
+  Future<Map> restRequest({
+    required String url,
+    required String metod,
+    Map? headers,
+     Map<String, dynamic>? body,
+  }) async {
     final defaultHeaders = headers?.cast<String, String>() ?? {}
       ..addAll(
         {

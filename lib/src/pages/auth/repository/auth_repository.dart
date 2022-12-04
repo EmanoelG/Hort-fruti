@@ -15,13 +15,7 @@ class AuthRepository {
           url: EndPoints.validateToken,
           metod: HttpMetod.post,
           headers: token_header);
-      if (result['result'] != null) {
-        UserModel _user = UserModel();
-        _user = UserModel.fromMap(result['result']);
-        return AuthResult.sucess(_user);
-      } else {
-        return AuthResult.error(authErrorString(result['error']));
-      }
+      return handleuserOrError(result);
     } catch (e) {
       return AuthResult.error('{"error": "Internal error ${e.toString()}"  }');
     }
@@ -35,15 +29,24 @@ class AuthRepository {
         metod: HttpMetod.post,
         body: {"email": email, "password": password},
       );
-      if (result['result'] != null) {
-        UserModel _user = UserModel();
-        _user = UserModel.fromMap(result['result']);
-        return AuthResult.sucess(_user);
-      } else {
-        return AuthResult.error(authErrorString(result['error']));
-      }
+      return handleuserOrError(result);
     } catch (e) {
       return AuthResult.error('{"error": "Internal error ${e.toString()}"  }');
     }
+  }
+
+  Future<AuthResult?> singUp(UserModel user) async {
+
+    var result = await _httpManager.restRequest(
+      url: EndPoints.signUpW,
+      metod: HttpMetod.post,
+      body: user.toJson(),
+    );
+
+    return handleuserOrError(result);
+  }
+
+  handleuserOrError(Map<dynamic, dynamic> result) {
+    handleuserOrError(result);
   }
 }

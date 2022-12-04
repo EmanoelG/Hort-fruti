@@ -10,11 +10,11 @@ abstract class AppPages {
   static final page = <GetPage>[
     GetPage(
       name: '/splashscreen',
-      page: () =>  SplashScreen(),
+      page: () => SplashScreen(),
     ),
     GetPage(
       name: '/signin',
-      page: () =>  SingInScreen(),
+      page: () => SingUpScreen(),
     ),
     GetPage(
       name: '/signup',

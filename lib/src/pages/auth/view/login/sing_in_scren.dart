@@ -163,10 +163,9 @@ class SingInScreen extends StatelessWidget {
                             if (_formKeys.currentState!.validate()) {
                               String _email = emailController.text;
                               String _password = passwordController.text;
-                          
-                             await controllerAuth.signIn(
+
+                              await controllerAuth.signIn(
                                   email: _email, password: _password);
-                            
                             }
                           },
                     child: controllerAuth.isLoading.value
@@ -206,8 +205,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // push(context, SingUpScreen());
-                  print('Tela principal ');
+                  Get.offNamed(PagesRoutes.singUpRoute);
                 },
                 child: const Text(
                   'Criar Conta',
