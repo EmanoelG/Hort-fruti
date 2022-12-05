@@ -6,7 +6,16 @@ String authErrorString(String? code) {
       return 'Token expirado ou invalido !';
     case 'INVALID_TOKEN':
       return 'é necessário informar um token';
-    default: //
+
+    case 'INVALID_PHONE':
+      return 'Ocorreu um erro ao cadastrar usuário: Celular inválido !';
+    case 'INVALID_CPF':
+      return 'Ocorreu um erro ao cadastrar usuário: CPF inválido !';
+    case 'INVALID_FULLNAME':
+      return 'Ocorreu um erro ao cadastrar usuário: nOME inválido !';
+    case 'INVALID_DATA':
+      return 'Ocorreu um erro ao cadastrar usuário: Informacôes inválidas !';
+    default:
       return 'Um erro infinito';
   }
 }

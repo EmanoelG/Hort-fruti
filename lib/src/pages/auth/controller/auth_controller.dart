@@ -42,6 +42,27 @@ class AuthController extends GetxController {
     );
   }
 
+  Future<void> singUp(UserModel user) async {
+    isLoading.value = true;
+    AuthRepository loginApp = AuthRepository();
+    AuthResult? authResult = await loginApp.singUp(user);
+    authResult!.when(
+      sucess: (user) {
+        isLoading.value = false;
+        this.userModel = user;
+        Map<String, String> token_user = {
+          KeysApp.userToken: user.token.toString(),
+        };
+        _utils.saveLocalData(token_user);
+        Get.offAllNamed(PagesRoutes.baseRoute);
+      },
+      error: (message) {
+        isLoading.value = false;
+        _utils.showToats(message: message);
+      },
+    );
+  }
+
   Future<void> signOut({required String key}) async {
     userModel = UserModel();
     await _utils.deleteLocalData(KeysApp.userToken);

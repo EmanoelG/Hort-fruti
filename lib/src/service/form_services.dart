@@ -52,7 +52,7 @@ class UtilsService {
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
+      timeInSecForIosWeb: 3,
       backgroundColor: isError ? Colors.red : Colors.white,
       textColor: isError ? Colors.white : Colors.black,
       fontSize: 14,

@@ -13,7 +13,7 @@ class HttpManager {
     required String url,
     required String metod,
     Map? headers,
-     Map<String, dynamic>? body,
+    Map? body,
   }) async {
     final defaultHeaders = headers?.cast<String, String>() ?? {}
       ..addAll(

@@ -18,15 +18,13 @@ class UserModel {
     this.token,
   });
 
-  Map<String, dynamic> toMap() {
+  toMap() {
     return {
-      'id': id,
       'fullname': name,
       'email': email,
       'phone': celular,
       'cpf': cpf,
-      'senha': senha,
-      'token': token,
+      'password': senha,
     };
   }
 

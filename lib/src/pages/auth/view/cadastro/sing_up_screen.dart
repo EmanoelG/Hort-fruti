@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:sacolao_de_frutas/src/models/user_model.dart';
 import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 
@@ -237,9 +238,16 @@ class SingUpScreen extends StatelessWidget {
                           if (_formKeys.currentState!.validate()) {
                             String _email = emailController.text;
                             String _password = passwordController.text;
-
-                            await controllerAuth.signIn(
-                                email: _email, password: _password);
+                            String _phone = phoneCntroller.text;
+                            String name = nameController.text;
+                            String _cpf = cpfController.text;
+                            UserModel usuerUp = UserModel();
+                            usuerUp.email = _email;
+                            usuerUp.name = name;
+                            usuerUp.cpf = _cpf;
+                            usuerUp.senha = _password;
+                            usuerUp.celular = _phone;
+                            await controllerAuth.singUp(usuerUp);
                           }
                         },
                   child: controllerAuth.isLoading.value

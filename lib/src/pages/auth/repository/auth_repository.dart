@@ -36,17 +36,30 @@ class AuthRepository {
   }
 
   Future<AuthResult?> singUp(UserModel user) async {
-
+    print(user.toJson());
     var result = await _httpManager.restRequest(
       url: EndPoints.signUpW,
       metod: HttpMetod.post,
-      body: user.toJson(),
+      body: {
+        "email": user.email,
+        "password": user.senha,
+        "fullname": user.name,
+        "phone": user.celular,
+        "cpf": user.cpf
+      },
     );
 
     return handleuserOrError(result);
   }
 
   handleuserOrError(Map<dynamic, dynamic> result) {
-    handleuserOrError(result);
+    print('result: ' + result.toString());
+    if (result['result'] != null) {
+      UserModel _user = UserModel();
+      _user = UserModel.fromMap(result['result']);
+      return AuthResult.sucess(_user);
+    } else {
+      return AuthResult.error(authErrorString(result['error']));
+    }
   }
 }
