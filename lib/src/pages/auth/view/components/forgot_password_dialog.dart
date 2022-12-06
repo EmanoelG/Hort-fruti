@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../util/compentes/custom_textField.dart';
 
@@ -11,7 +12,7 @@ class ForgotPasswordDialog extends StatelessWidget {
   }) : super(key: key) {
     emailController.text = email;
   }
-
+  final formFieldKey = GlobalKey<FormFieldState>();
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -56,13 +57,22 @@ class ForgotPasswordDialog extends StatelessWidget {
 
                 // Campo de email
                 FormDefault(
+                  keyFomr: formFieldKey,
                   readOnly: true,
                   controller: emailController,
                   type: TextInputType.emailAddress,
                   iconTitipo: const Icon(Icons.email),
                   inputMenssagem: 'Email',
                   isSecret: false,
-                  validatorValue: (String) {},
+                  validatorValue: (email_validator) {
+                    if (email_validator == null || email_validator.isEmpty) {
+                      return 'Preencha o campo de Email corretamente !';
+                    }
+                    if (!email_validator.isEmail) {
+                      return 'Digite um e-mail valido !';
+                    }
+                    return null;
+                  },
                 ),
 
                 // Confirmar
@@ -76,7 +86,9 @@ class ForgotPasswordDialog extends StatelessWidget {
                       color: Colors.green,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    formFieldKey.currentState!.validate();
+                  },
                   child: const Text(
                     'Recuperar',
                     style: TextStyle(

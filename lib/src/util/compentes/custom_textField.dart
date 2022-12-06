@@ -21,6 +21,7 @@ class FormDefault extends StatefulWidget {
   String? initiValue;
   bool readOnly;
   TextInputType keyboardType;
+  final GlobalKey<FormFieldState>? keyFomr;
 
   FormDefault({
     Key? key,
@@ -42,6 +43,7 @@ class FormDefault extends StatefulWidget {
     this.initiValue = null,
     this.readOnly = false,
     this.keyboardType = TextInputType.none,
+    this.keyFomr,
   }) : super(key: key);
 
   @override
@@ -63,7 +65,7 @@ class _FormDefaultState extends State<FormDefault> {
       minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       validator: widget.validatorValue,
-      key: widget.key,
+      key: widget.keyFomr,
       controller: widget.controller,
       readOnly: widget.readOnly,
       initialValue: widget.initiValue,
