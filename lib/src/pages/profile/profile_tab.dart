@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
+import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 import 'package:sacolao_de_frutas/src/config/app_data.dart' as appdata;
+
+import '../app_route/app_pages.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -16,10 +21,7 @@ class _ProfileTabState extends State<ProfileTab> {
       appBar: AppBar(
         title: const Text('Perfil do usuário'),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.logout),
-          ),
+          logout_user(),
         ],
       ),
       body: ListView(
@@ -104,6 +106,17 @@ class _ProfileTabState extends State<ProfileTab> {
           ),
         ],
       ),
+    );
+  }
+
+  logout_user() {
+    AuthController auth = AuthController();
+    return IconButton(
+      onPressed: () async {
+        await auth.signOut(key: 'key');
+        Get.offNamed(PagesRoutes.singInRoute);
+      },
+      icon: const Icon(Icons.logout),
     );
   }
 

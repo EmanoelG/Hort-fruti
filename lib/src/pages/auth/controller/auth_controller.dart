@@ -63,9 +63,9 @@ class AuthController extends GetxController {
     );
   }
 
-  Future<void> signOut({required String key}) async {
+  Future<bool> signOut({required String key}) async {
     userModel = UserModel();
-    await _utils.deleteLocalData(KeysApp.userToken);
+    return await _utils.deleteLocalData(KeysApp.userToken);
   }
 
   Future<void> validateToken() async {

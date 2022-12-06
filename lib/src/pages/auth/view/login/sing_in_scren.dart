@@ -14,6 +14,7 @@ import '../../../base/base_screen.dart';
 import '../../../common_widgets/title_app.dart';
 import '../cadastro/sing_up_screen.dart';
 import '../../controller/auth_controller.dart';
+import '../components/forgot_password_dialog.dart';
 
 class SingInScreen extends StatelessWidget {
   SingInScreen({Key? key}) : super(key: key);
@@ -184,7 +185,17 @@ class SingInScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  print('Clicou !');
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return ForgotPasswordDialog(
+                        email: emailController.text,
+                      );
+                    },
+                  );
+                },
                 child: const Text(
                   'esqueceu a senha?',
                   style: TextStyle(color: Colors.red),
