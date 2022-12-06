@@ -42,6 +42,11 @@ class AuthController extends GetxController {
     );
   }
 
+  Future<void> restPass(String email) async {
+    AuthRepository loginApp = AuthRepository();
+    loginApp.resetPassword(email);
+  }
+
   Future<void> singUp(UserModel user) async {
     isLoading.value = true;
     AuthRepository loginApp = AuthRepository();

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
+import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
@@ -21,7 +22,7 @@ class SingInScreen extends StatelessWidget {
   final _formKeys = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  final _utilsServices = UtilsService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,9 +186,8 @@ class SingInScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {
-                  print('Clicou !');
-                  showDialog(
+                onPressed: () async {
+                  final bool? result = await showDialog(
                     context: context,
                     builder: (_) {
                       return ForgotPasswordDialog(
@@ -195,6 +195,10 @@ class SingInScreen extends StatelessWidget {
                       );
                     },
                   );
+                  if (result ?? false == true) {
+                    _utilsServices.showToats(
+                        message: 'E-mail de recuperação foi enviado !');
+                  }
                 },
                 child: const Text(
                   'esqueceu a senha?',
