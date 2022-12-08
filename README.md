@@ -1,4 +1,4 @@
-# sacolao_de_frutas
+# Hort-Fruti
 
 A new Flutter project.
 
