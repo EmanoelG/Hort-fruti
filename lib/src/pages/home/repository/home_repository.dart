@@ -6,7 +6,7 @@ import '../result/home_result.dart';
 
 class HomeRespository {
   final HttpManager _httpManager = HttpManager();
-  getAllCategories() async {
+  Future<HomeResult<CategoryModel>> getAllCategories() async {
     try {
       final result = await _httpManager.restRequest(
         url: EndPoints.getAllCategoria,
@@ -24,6 +24,9 @@ class HomeRespository {
         return HomeResult<CategoryModel>.error(
             'Ocorreu um erro inesperado ao recuperar categorias !');
       }
-    } catch (e) {}
+    } catch (e) {
+      return HomeResult<CategoryModel>.error(
+          'Ocorreu um erro inesperado ao recuperar categorias !');
+    }
   }
 }

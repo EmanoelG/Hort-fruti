@@ -30,7 +30,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
-    Get.find<HomeController>().principalTela();
+   
     Future.delayed(Duration(milliseconds: 1800)).then((value) {
       setState(() {
         isLoading = false;
