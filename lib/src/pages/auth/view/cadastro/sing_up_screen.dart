@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
-import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
+import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 
 import 'package:sacolao_de_frutas/src/util/push_function.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../cart/cart_tab.dart';
-import '../home/home_tab.dart';
+import '../home/view/home_tab.dart';
 import '../orders/order_tab.dart';
 import '../profile/profile_tab.dart';
 

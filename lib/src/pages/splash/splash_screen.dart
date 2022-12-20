@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../config/custom_color.dart';
 import '../../service/form_services.dart';
 import '../../service/provider_manager.dart';
-import '../app_route/app_pages.dart';
+import '../pages_routes/app_pages.dart';
 import '../auth/controller/auth_controller.dart';
 
 class SplashScreen extends StatelessWidget {

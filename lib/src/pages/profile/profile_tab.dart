@@ -5,7 +5,7 @@ import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 import 'package:sacolao_de_frutas/src/config/app_data.dart' as appdata;
 
-import '../app_route/app_pages.dart';
+import '../pages_routes/app_pages.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);

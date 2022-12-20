@@ -1,12 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
+import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../config/custom_color.dart';
-import '../../service/form_services.dart';
-import '../common_widgets/title_app.dart';
+import '../../../config/custom_color.dart';
+import '../../../service/form_services.dart';
+import '../../common_widgets/title_app.dart';
 import 'components/category_title.dart';
-import '../../config/app_data.dart' as app_data;
+import '../../../config/app_data.dart' as app_data;
 import 'components/item_title.dart';
 
 class HomeTab extends StatefulWidget {
@@ -28,6 +30,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
+    Get.find<HomeController>().principalTela();
     Future.delayed(Duration(milliseconds: 1800)).then((value) {
       setState(() {
         isLoading = false;

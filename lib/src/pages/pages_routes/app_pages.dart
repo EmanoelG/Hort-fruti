@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:sacolao_de_frutas/src/pages/base/base_screen.dart';
+import 'package:sacolao_de_frutas/src/pages/home/binding/home_binding.dart';
 import 'package:sacolao_de_frutas/src/pages/home/home_tab%20copy.dart';
 import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
 
@@ -27,6 +28,9 @@ abstract class AppPages {
     GetPage(
       name: '/',
       page: () => BaseScreen(),
+      bindings: [
+        HomeBinding(),
+      ],
     ),
   ];
 }

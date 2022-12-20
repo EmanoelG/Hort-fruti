@@ -5,9 +5,9 @@ import 'package:shimmer/shimmer.dart';
 import '../../config/custom_color.dart';
 import '../../service/form_services.dart';
 import '../common_widgets/title_app.dart';
-import 'components/category_title.dart';
+import 'view/components/category_title.dart';
 import '../../config/app_data.dart' as app_data;
-import 'components/item_title.dart';
+import 'view/components/item_title.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);

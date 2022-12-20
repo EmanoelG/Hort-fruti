@@ -4,7 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sacolao_de_frutas/src/pages/app_route/app_pages.dart';
+import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import 'package:sacolao_de_frutas/src/util/push_function.dart';

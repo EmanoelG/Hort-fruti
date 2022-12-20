@@ -5,7 +5,7 @@ import 'package:sacolao_de_frutas/src/models/user_model.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../../service/provider_manager.dart';
-import '../../app_route/app_pages.dart';
+import '../../pages_routes/app_pages.dart';
 import '../repository/auth_repository.dart';
 import '../result/auth_result.dart';
 
