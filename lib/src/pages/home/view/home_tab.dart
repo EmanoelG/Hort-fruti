@@ -30,7 +30,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
-   
+
     Future.delayed(Duration(milliseconds: 1800)).then((value) {
       setState(() {
         isLoading = false;
@@ -45,7 +45,7 @@ class _HomeTabState extends State<HomeTab> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: TitleApp(),
+        //title: TitleApp(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),

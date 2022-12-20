@@ -24,10 +24,18 @@ class HomeController extends GetxController {
     homeResult.when(
       sucess: (data) {
         allCategories.assignAll(data);
+        print('Todas as Categorias: ' + allCategories.toString());
       },
       error: (er) {
         _utils.showToats(message: er);
       },
     );
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    print('Iniciouu !');
+    getAllCategories();
   }
 }

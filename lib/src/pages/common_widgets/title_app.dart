@@ -21,14 +21,14 @@ class TitleApp extends StatelessWidget {
         TextSpan(
           children: [
             TextSpan(
-              text: 'Super',
+              text: 'Green',
               style: TextStyle(
                   color: greenTitleColor ?? Color.fromARGB(255, 3, 3, 3),
                   fontWeight: FontWeight.bold,
                   fontSize: fontTitle + 0),
             ),
             TextSpan(
-              text: 'Sacolão',
+              text: 'Grocer',
               style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
