@@ -7,5 +7,4 @@ part 'auth_result.freezed.dart';
 class AuthResult with _$AuthResult {
   factory AuthResult.sucess(UserModel user) = Sucess;
   factory AuthResult.error(String message) = Error;
-  
 }

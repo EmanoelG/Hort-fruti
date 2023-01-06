@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sacolao_de_frutas/src/models/category_model.dart';
+import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/pages/home/result/home_result.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
@@ -22,9 +22,9 @@ class HomeController extends GetxController {
     setLoading(false);
 
     homeResult.when(
-      sucess: (data) {
+      sucess: (data) async {
         allCategories.assignAll(data);
-        print('Todas as Categorias: ' + allCategories.toString());
+        print('Todas as Categorias: $allCategories');
       },
       error: (er) {
         _utils.showToats(message: er);
