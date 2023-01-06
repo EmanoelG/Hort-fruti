@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_result.dart';
 
@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeResult<T> {
+  Object get data => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<T> data) sucess,
@@ -112,6 +113,7 @@ class _$Sucess<T> implements Sucess<T> {
   final List<T> _data;
   @override
   List<T> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
   }
@@ -205,6 +207,7 @@ class _$Sucess<T> implements Sucess<T> {
 abstract class Sucess<T> implements HomeResult<T> {
   factory Sucess(final List<T> data) = _$Sucess<T>;
 
+  @override
   List<T> get data;
   @JsonKey(ignore: true)
   _$$SucessCopyWith<T, _$Sucess<T>> get copyWith =>
@@ -336,6 +339,7 @@ class _$Error<T> implements Error<T> {
 abstract class Error<T> implements HomeResult<T> {
   factory Error(final String data) = _$Error<T>;
 
+  @override
   String get data;
   @JsonKey(ignore: true)
   _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>

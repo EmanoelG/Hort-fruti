@@ -24,7 +24,7 @@ class HomeController extends GetxController {
     homeResult.when(
       sucess: (data) async {
         allCategories.assignAll(data);
-        print('Todas as Categorias: $allCategories');
+        print('Todas as Categorias: ${allCategories.toString()}');
       },
       error: (er) {
         _utils.showToats(message: er);
