@@ -44,9 +44,9 @@ class HomeController extends GetxController {
   Future<void> getAllProducts() async {
     setLoading(true);
     Map<String, dynamic> body = {
-      "page": 0,
+      'page': currentCategory!.pagination,
       "title": null,
-      "categoryId": "5mjkt5ERRo",
+      'categoryId': currentCategory!.id,
       "itemsPerPage": 6
     };
     HomeResult<ItemModel> homeResult =
