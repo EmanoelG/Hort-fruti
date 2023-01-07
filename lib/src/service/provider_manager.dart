@@ -15,7 +15,7 @@ class HttpManager {
     Map? headers,
     Map? body,
   }) async {
-    final defaultHeaders = headers?.cast<String, String>() ?? {}
+    final defaultHeaders = headers?.cast<String, dynamic>() ?? {}
       ..addAll(
         {
           'content-type': 'application/json',

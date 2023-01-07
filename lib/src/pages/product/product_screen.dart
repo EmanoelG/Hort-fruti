@@ -72,7 +72,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                       ),
                       Text(
                         utilsService.priceToCurrency(
-                          double.parse(widget.itemMod.precie),
+                          (widget.itemMod.price),
                         ),
                         style: const TextStyle(
                           fontSize: 23,

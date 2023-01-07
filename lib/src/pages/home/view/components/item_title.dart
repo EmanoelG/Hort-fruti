@@ -53,6 +53,7 @@ class _ItemTitleState extends State<ItemTitle> {
                   ),
                 );
               },
+              //IMG PRODUTO
               child: Ink(
                 // elevation: 1,
                 // shape: RoundedRectangleBorder(
@@ -63,11 +64,12 @@ class _ItemTitleState extends State<ItemTitle> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       CachedNetworkImage(
                         imageUrl: widget.Item.img,
                         width: 400,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                       const SizedBox(
                         height: 5,
@@ -86,8 +88,8 @@ class _ItemTitleState extends State<ItemTitle> {
                       Text.rich(TextSpan(
                         children: [
                           TextSpan(
-                            text: utilsService.priceToCurrency(
-                                double.parse(widget.Item.precie)),
+                            text: utilsService
+                                .priceToCurrency((widget.Item.price)),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -110,6 +112,7 @@ class _ItemTitleState extends State<ItemTitle> {
             ),
           ),
         ),
+        //CART ICON
         Positioned(
           top: 4,
           right: 4,
@@ -120,7 +123,6 @@ class _ItemTitleState extends State<ItemTitle> {
             ),
             child: Material(
               child: InkWell(
-                
                 onTap: (() {
                   switchIcon();
                 }),

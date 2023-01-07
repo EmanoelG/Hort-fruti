@@ -10,5 +10,5 @@ class CartItemModel {
     required this.quantity,
   });
 
-  double totalPrice() => double.parse(item.precie) * quantity;
+  double totalPrice() => item.price * quantity;
 }

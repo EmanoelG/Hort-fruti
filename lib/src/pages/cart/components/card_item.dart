@@ -50,8 +50,7 @@ class _CartTitleState extends State<CartTitle> {
           ),
           subtitle: Text(
             widget.utilsService.priceToCurrency(
-                double.parse(widget.cartIte.item.precie) *
-                    widget.cartIte.quantity),
+                (widget.cartIte.item.price) * widget.cartIte.quantity),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,

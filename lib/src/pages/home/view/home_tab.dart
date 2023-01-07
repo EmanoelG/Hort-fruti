@@ -19,23 +19,10 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  String selectCategory = 'Frutas';
   final UtilsService service = UtilsService();
   late Function(GlobalKey) runAddToCardAnimation;
-  bool isLoading = true;
   void itemSelectedCartAnimation(GlobalKey gkImage) {
     runAddToCardAnimation(gkImage);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(Duration(milliseconds: 1800)).then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    });
   }
 
   @override
@@ -69,75 +56,92 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   _body(BuildContext context) {
-    return isLoading
-        ? Shimmer.fromColors(
-            highlightColor: Color.fromARGB(255, 215, 240, 188),
-            baseColor: Color.fromARGB(255, 90, 207, 94),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [_searchproduto(), _categoria(), _griditens(context)],
-              ),
-            ),
-          )
-        : Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [_searchproduto(), _categoria(), _griditens(context)],
-            ),
-          );
-  }
-
-  Expanded _griditens(context) {
-    final size = MediaQuery.of(context).size;
-    return Expanded(
-      child: GridView.builder(
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 9 / 11.5,
-          maxCrossAxisExtent: 200,
-        ),
-        itemCount: app_data.categorias.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(5),
-            child: ItemTitle(
-              Item: app_data.items[index],
-              runAddToCardAnimationMethod: itemSelectedCartAnimation,
-            ),
-          );
-        },
-      ),
+    return GetBuilder<HomeController>(
+      builder: (controller) {
+        return controller.isLoading
+            ? Shimmer.fromColors(
+                highlightColor: Color.fromARGB(255, 215, 240, 188),
+                baseColor: Color.fromARGB(255, 90, 207, 94),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      _searchproduto(),
+                      _categoria(),
+                      _griditens(context)
+                    ],
+                  ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    _searchproduto(),
+                    _categoria(),
+                    _griditens(context)
+                  ],
+                ),
+              );
+      },
     );
   }
 
-/* */
+  _griditens(context) {
+    final size = MediaQuery.of(context).size;
+    return GetBuilder<HomeController>(
+      builder: (controller) {
+        return Expanded(
+          child: GridView.builder(
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 9 / 11.5,
+              maxCrossAxisExtent: 200,
+            ),
+            itemCount: controller.allProducts.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(5),
+                child: ItemTitle(
+                  Item: controller.allProducts[index],
+                  runAddToCardAnimationMethod: itemSelectedCartAnimation,
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
   _categoria() {
     return Material(
       color: Colors.transparent,
-      child: Container(
-        height: 25,
-        child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) {
-              return CategoryTitle(
-                category: app_data.categorias[index],
-                isSelect: app_data.categorias[index] == selectCategory,
-                onPresseds: () {
-                  setState(
-                    () {
-                      selectCategory = app_data.categorias[index];
+      child: GetBuilder<HomeController>(
+        builder: (controller) {
+          return Container(
+            height: 25,
+            child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index) {
+                  return CategoryTitle(
+                    category: controller.allCategories[index].title,
+                    isSelect: controller.allCategories[index] ==
+                        controller.currentCategory,
+                    onPresseds: () {
+                      controller
+                          .selectCategory(controller.allCategories[index]);
                     },
                   );
                 },
-              );
-            },
-            separatorBuilder: (_, index) => const SizedBox(
-                  width: 10,
-                ),
-            itemCount: app_data.categorias.length),
+                separatorBuilder: (_, index) => const SizedBox(
+                      width: 10,
+                    ),
+                itemCount: controller.allCategories.length),
+          );
+        },
       ),
     );
   }

@@ -28,7 +28,7 @@ class _CartTabState extends State<CartTab> {
 
   double cartTotalPrice() {
     cartItems.forEach((element) {
-      total = total + double.parse(element.item.precie) * element.quantity;
+      total = total + (element.item.price) * element.quantity;
     });
     return total;
   }
