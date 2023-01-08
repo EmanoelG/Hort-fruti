@@ -21,6 +21,7 @@ class HomeController extends GetxController {
   selectCategory(CategoryModel categpry) {
     currentCategory = categpry;
     update();
+   // if (currentCategory!.items.isEmpty) return;
     getAllProducts();
   }
 
