@@ -55,63 +55,93 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
+  // _body(BuildContext context) {
+  //   return GetBuilder<HomeController>(
+  //     builder: (controller) {
+  //       return controller.isCategoryLoading
+  //           ? Shimmer.fromColors(
+  //               highlightColor: Color.fromARGB(255, 215, 240, 188),
+  //               baseColor: Color.fromARGB(255, 90, 207, 94),
+  //               child: Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Column(
+  //                   children: [
+  //                     _searchproduto(),
+  //                     _categoria(),
+  //                     _griditens(context)
+  //                   ],
+  //                 ),
+  //               ),
+  //             )
+  //           : Padding(
+  //               padding: const EdgeInsets.all(8.0),
+  //               child: Column(
+  //                 children: [
+  //                   _searchproduto(),
+  //                   _categoria(),
+  //                   _griditens(context)
+  //                 ],
+  //               ),
+  //             );
+  //     },
+  //   );
+  // }
   _body(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (controller) {
-        return controller.isLoading
-            ? Shimmer.fromColors(
-                highlightColor: Color.fromARGB(255, 215, 240, 188),
-                baseColor: Color.fromARGB(255, 90, 207, 94),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      _searchproduto(),
-                      _categoria(),
-                      _griditens(context)
-                    ],
-                  ),
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    _searchproduto(),
-                    _categoria(),
-                    _griditens(context)
-                  ],
-                ),
-              );
-      },
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [_searchproduto(), _categoria(), _griditens(context)],
+        ),
+      ),
     );
   }
 
   _griditens(context) {
-    final size = MediaQuery.of(context).size;
     return GetBuilder<HomeController>(
       builder: (controller) {
-        return Expanded(
-          child: GridView.builder(
-            physics: const BouncingScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 9 / 11.5,
-              maxCrossAxisExtent: 200,
-            ),
-            itemCount: controller.allProducts.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(5),
-                child: ItemTitle(
-                  Item: controller.allProducts[index],
-                  runAddToCardAnimationMethod: itemSelectedCartAnimation,
+        return controller.isProductLoading
+            ? Expanded(
+                child: Shimmer.fromColors(
+                    highlightColor: Color.fromARGB(255, 215, 240, 188),
+                    baseColor: Color.fromARGB(255, 90, 207, 94),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: GridView.count(
+                        physics: const BouncingScrollPhysics(),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 9 / 11.5,
+                        children: List.generate(
+                          10,
+                          (index) => CustomShimmer(
+                            height: double.infinity,
+                            width: double.infinity,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                    )),
+              )
+            : Expanded(
+                child: GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 9 / 11.5,
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: controller.allProducts.length,
+                  itemBuilder: (context, index) {
+                    return ItemTitle(
+                      Item: controller.allProducts[index],
+                      runAddToCardAnimationMethod: itemSelectedCartAnimation,
+                    );
+                  },
                 ),
               );
-            },
-          ),
-        );
       },
     );
   }

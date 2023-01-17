@@ -69,7 +69,8 @@ class _ItemTitleState extends State<ItemTitle> {
                       CachedNetworkImage(
                         imageUrl: widget.Item.img,
                         width: 400,
-                        fit: BoxFit.fill,
+                        height: 100,
+                        fit: BoxFit.contain,
                       ),
                       const SizedBox(
                         height: 5,

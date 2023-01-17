@@ -8,25 +8,38 @@ import '../repository/home_repository.dart';
 
 class HomeController extends GetxController {
   final homeRespository = HomeRespository();
+
   final UtilsService _utils = UtilsService();
-  bool isLoading = false;
+
+  bool isCategoryLoading = false;
+
+  bool isProductLoading = true;
+
   List<CategoryModel> allCategories = [];
+
   List<ItemModel> allProducts = [];
+
   CategoryModel? currentCategory;
-  void setLoading(bool value) {
-    isLoading = value;
+
+  void setLoading(bool value, {bool isProduct = false}) {
+    if (!isProduct) {
+      isCategoryLoading = value;
+    } else {
+      isProductLoading = value;
+    }
+
     update();
   }
 
   selectCategory(CategoryModel categpry) {
     currentCategory = categpry;
     update();
-   // if (currentCategory!.items.isEmpty) return;
     getAllProducts();
   }
 
   Future<void> getAllCategories() async {
     setLoading(true);
+
     HomeResult<CategoryModel> homeResult =
         await homeRespository.getAllCategories();
     setLoading(false);
@@ -43,7 +56,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getAllProducts() async {
-    setLoading(true);
+    setLoading(true, isProduct: true);
     Map<String, dynamic> body = {
       'page': currentCategory!.pagination,
       "title": null,
@@ -52,7 +65,7 @@ class HomeController extends GetxController {
     };
     HomeResult<ItemModel> homeResult =
         await homeRespository.getAllProducts(body);
-    setLoading(false);
+    setLoading(false, isProduct: true);
 
     homeResult.when(
       sucess: (data) async {
@@ -68,8 +81,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print('Iniciouu !');
+
     getAllCategories();
-    //getAllProducts();
   }
 }

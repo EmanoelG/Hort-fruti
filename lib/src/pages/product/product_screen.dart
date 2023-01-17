@@ -26,8 +26,9 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
             children: [
               Expanded(
                 child: Hero(
-                    tag: widget.itemMod.img,
-                    child: Image.network(widget.itemMod.img)),
+                  tag: widget.itemMod.img,
+                  child: Image.network(widget.itemMod.img),
+                ),
               ),
               Expanded(
                 child: Container(
