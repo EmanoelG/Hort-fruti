@@ -6,20 +6,21 @@ import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../repository/home_repository.dart';
 
+int itemsPerPage = 6;
+
 class HomeController extends GetxController {
   final homeRespository = HomeRespository();
-
   final UtilsService _utils = UtilsService();
-
   bool isCategoryLoading = false;
-
   bool isProductLoading = true;
-
   List<CategoryModel> allCategories = [];
-
   List<ItemModel> allProducts = [];
 
   CategoryModel? currentCategory;
+  bool get isLastPage {
+    if (currentCategory!.items.length < itemsPerPage) return true;
+    return currentCategory!.pagination * itemsPerPage > allProducts.length;
+  }
 
   void setLoading(bool value, {bool isProduct = false}) {
     if (!isProduct) {
@@ -55,13 +56,21 @@ class HomeController extends GetxController {
     );
   }
 
-  Future<void> getAllProducts() async {
-    setLoading(true, isProduct: true);
+  void loadMoreProducts() {
+    currentCategory!.pagination++;
+    getAllProducts(canLoading: false);
+  }
+
+  Future<void> getAllProducts({bool canLoading = true}) async {
+    if (canLoading = true) {
+      setLoading(true, isProduct: true);
+    }
+
     Map<String, dynamic> body = {
       'page': currentCategory!.pagination,
-      "title": null,
-      'categoryId': currentCategory!.id,
-      "itemsPerPage": 6
+      //"title": null,
+      // 'categoryId': currentCategory!.id,
+      "itemsPerPage": itemsPerPage
     };
     HomeResult<ItemModel> homeResult =
         await homeRespository.getAllProducts(body);
@@ -69,7 +78,7 @@ class HomeController extends GetxController {
 
     homeResult.when(
       sucess: (data) async {
-        allProducts.assignAll(data);
+        allProducts.addAll(data);
       },
       error: (er) {
         print('Deu error $er');

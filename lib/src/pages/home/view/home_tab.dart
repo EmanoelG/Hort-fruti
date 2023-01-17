@@ -134,7 +134,12 @@ class _HomeTabState extends State<HomeTab> {
                     crossAxisCount: 2,
                   ),
                   itemCount: controller.allProducts.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (_, index) {
+                    if (((index + 1) == controller.allProducts.length) &&
+                        !controller.isLastPage) {
+                      print('Ultimo');
+                      controller.loadMoreProducts;
+                    }
                     return ItemTitle(
                       Item: controller.allProducts[index],
                       runAddToCardAnimationMethod: itemSelectedCartAnimation,
