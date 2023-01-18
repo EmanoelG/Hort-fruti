@@ -6,16 +6,14 @@ import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../repository/home_repository.dart';
 
-int itemsPerPage = 6;
-
 class HomeController extends GetxController {
   final homeRespository = HomeRespository();
   final UtilsService _utils = UtilsService();
   bool isCategoryLoading = false;
   bool isProductLoading = true;
   List<CategoryModel> allCategories = [];
-  List<ItemModel> allProducts = [];
-
+  List<ItemModel> get allProducts => currentCategory?.items ?? [];
+  int itemsPerPage = 6;
   CategoryModel? currentCategory;
   bool get isLastPage {
     if (currentCategory!.items.length < itemsPerPage) return true;
@@ -56,13 +54,13 @@ class HomeController extends GetxController {
     );
   }
 
-  void loadMoreProducts() {
+  loadMoreProducts() {
     currentCategory!.pagination++;
     getAllProducts(canLoading: false);
   }
 
   Future<void> getAllProducts({bool canLoading = true}) async {
-    if (canLoading = true) {
+    if (canLoading == true) {
       setLoading(true, isProduct: true);
     }
 
@@ -78,7 +76,7 @@ class HomeController extends GetxController {
 
     homeResult.when(
       sucess: (data) async {
-        allProducts.addAll(data);
+        currentCategory!.items.addAll(data);
       },
       error: (er) {
         print('Deu error $er');

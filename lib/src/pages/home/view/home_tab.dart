@@ -128,22 +128,28 @@ class _HomeTabState extends State<HomeTab> {
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     childAspectRatio: 9 / 11.5,
-                    crossAxisCount: 2,
                   ),
                   itemCount: controller.allProducts.length,
                   itemBuilder: (_, index) {
-                    if (((index + 1) == controller.allProducts.length) &&
-                        !controller.isLastPage) {
-                      print('Ultimo');
-                      controller.loadMoreProducts;
+                    if ((index) == controller.allProducts.length - 1) {
+                      try {
+                        if (!controller.isLastPage) {
+                          controller.loadMoreProducts;
+                        } else {
+                          print('Ultimo 2');
+                          // controller.loadMoreProducts;
+                        }
+                      } catch (e) {
+                        print('ERRor 2');
+                      }
                     }
                     return ItemTitle(
-                      Item: controller.allProducts[index],
-                      runAddToCardAnimationMethod: itemSelectedCartAnimation,
-                    );
+                        Item: controller.allProducts[index],
+                        runAddToCardAnimationMethod: itemSelectedCartAnimation);
                   },
                 ),
               );
