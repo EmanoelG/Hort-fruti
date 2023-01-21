@@ -99,58 +99,61 @@ class _HomeTabState extends State<HomeTab> {
 
   _griditens(context) {
     return GetBuilder<HomeController>(
-      builder: (controller) {
-        return controller.isProductLoading
+      builder: (controllerFuncionaPvrf) {
+        return !controllerFuncionaPvrf.isProductLoading
             ? Expanded(
-                child: Shimmer.fromColors(
-                    highlightColor: Color.fromARGB(255, 215, 240, 188),
-                    baseColor: Color.fromARGB(255, 90, 207, 94),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: GridView.count(
-                        physics: const BouncingScrollPhysics(),
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 9 / 11.5,
-                        children: List.generate(
-                          10,
-                          (index) => CustomShimmer(
-                            height: double.infinity,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
-                    )),
+                child: ListView.builder(
+                  findChildIndexCallback: (key) {
+                    controllerFuncionaPvrf.seilaUe();
+                  },
+                  scrollDirection: Axis.vertical,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: controllerFuncionaPvrf.allProducts.length,
+                  itemBuilder: (_, index) {
+                    // if ((index + 1) == controllerFuncionaPvrf.allProducts.length) {
+                    //   try {
+                    //     if (!controllerFuncionaPvrf.isLastPage) {
+                    //       setState(() {
+                    //         controllerFuncionaPvrf.SeilaUe;
+                    //       });
+                    //     } else {
+                    //       print('Ultimo 2');
+                    //       // controller.loadMoreProducts;
+                    //     }
+                    //   } catch (e) {
+                    //     print('ERRor 2');
+                    //   }
+                    // }
+                    if (((index + 1) ==
+                            controllerFuncionaPvrf.allProducts.length) &&
+                        !controllerFuncionaPvrf.isLastPage) {
+                      controllerFuncionaPvrf.seilaUe();
+                    }
+                    print(index);
+                    return ItemTitle(
+                        Item: controllerFuncionaPvrf.allProducts[index],
+                        runAddToCardAnimationMethod: itemSelectedCartAnimation);
+                  },
+                ),
               )
             : Expanded(
-                child: GridView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: GridView.count(
+                    physics: const BouncingScrollPhysics(),
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     childAspectRatio: 9 / 11.5,
+                    children: List.generate(
+                      10,
+                      (index) => CustomShimmer(
+                        height: double.infinity,
+                        width: double.infinity,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                   ),
-                  itemCount: controller.allProducts.length,
-                  itemBuilder: (_, index) {
-                    if ((index) == controller.allProducts.length - 1) {
-                      try {
-                        if (!controller.isLastPage) {
-                          controller.loadMoreProducts;
-                        } else {
-                          print('Ultimo 2');
-                          // controller.loadMoreProducts;
-                        }
-                      } catch (e) {
-                        print('ERRor 2');
-                      }
-                    }
-                    return ItemTitle(
-                        Item: controller.allProducts[index],
-                        runAddToCardAnimationMethod: itemSelectedCartAnimation);
-                  },
                 ),
               );
       },
