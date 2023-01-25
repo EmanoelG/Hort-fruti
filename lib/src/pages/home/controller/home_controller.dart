@@ -16,6 +16,8 @@ class HomeController extends GetxController {
   List<CategoryModel> allCategories = [];
   List<ItemModel> get allProducts => currentCategory?.items ?? [];
 
+  RxString searchTitle = ''.obs;
+
   CategoryModel? currentCategory;
   bool get isLastPage {
     if (currentCategory!.items.length < itemsPerPage) return true;
@@ -78,7 +80,6 @@ class HomeController extends GetxController {
 
     homeResult.when(
       sucess: (data) async {
-        print('Buscou !');
         currentCategory!.items.addAll(data);
       },
       error: (er) {
@@ -91,7 +92,9 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
+    debounce(searchTitle, (_) {
+      print('Hello, word !');
+    }, time: const Duration(seconds: 1));
     getAllCategories();
   }
 }

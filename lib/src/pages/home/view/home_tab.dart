@@ -25,6 +25,8 @@ class _HomeTabState extends State<HomeTab> {
     runAddToCardAnimation(gkImage);
   }
 
+  final controllerGlob = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,37 +57,6 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  // _body(BuildContext context) {
-  //   return GetBuilder<HomeController>(
-  //     builder: (controller) {
-  //       return controller.isCategoryLoading
-  //           ? Shimmer.fromColors(
-  //               highlightColor: Color.fromARGB(255, 215, 240, 188),
-  //               baseColor: Color.fromARGB(255, 90, 207, 94),
-  //               child: Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Column(
-  //                   children: [
-  //                     _searchproduto(),
-  //                     _categoria(),
-  //                     _griditens(context)
-  //                   ],
-  //                 ),
-  //               ),
-  //             )
-  //           : Padding(
-  //               padding: const EdgeInsets.all(8.0),
-  //               child: Column(
-  //                 children: [
-  //                   _searchproduto(),
-  //                   _categoria(),
-  //                   _griditens(context)
-  //                 ],
-  //               ),
-  //             );
-  //     },
-  //   );
-  // }
   _body(BuildContext context) {
     return Container(
       child: Padding(
@@ -110,26 +81,11 @@ class _HomeTabState extends State<HomeTab> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: controllerFuncionaPvrf.allProducts.length,
                   itemBuilder: (_, index) {
-                    // if ((index + 1) == controllerFuncionaPvrf.allProducts.length) {
-                    //   try {
-                    //     if (!controllerFuncionaPvrf.isLastPage) {
-                    //       setState(() {
-                    //         controllerFuncionaPvrf.SeilaUe;
-                    //       });
-                    //     } else {
-                    //       print('Ultimo 2');
-                    //       // controller.loadMoreProducts;
-                    //     }
-                    //   } catch (e) {
-                    //     print('ERRor 2');
-                    //   }
-                    // }
                     if (((index + 1) ==
                             controllerFuncionaPvrf.allProducts.length) &&
                         !controllerFuncionaPvrf.isLastPage) {
                       controllerFuncionaPvrf.seilaUe();
                     }
-                    print(index);
                     return ItemTitle(
                         Item: controllerFuncionaPvrf.allProducts[index],
                         runAddToCardAnimationMethod: itemSelectedCartAnimation);
@@ -194,6 +150,10 @@ class _HomeTabState extends State<HomeTab> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: TextFormField(
+        onChanged: ((value) {
+          controllerGlob.searchTitle.value = value;
+          // print(value);
+        }),
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
