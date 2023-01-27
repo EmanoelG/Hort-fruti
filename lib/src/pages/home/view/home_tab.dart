@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +22,7 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   final UtilsService service = UtilsService();
+  final searchController = TextEditingController();
   late Function(GlobalKey) runAddToCardAnimation;
   void itemSelectedCartAnimation(GlobalKey gkImage) {
     runAddToCardAnimation(gkImage);
@@ -149,35 +152,52 @@ class _HomeTabState extends State<HomeTab> {
   _searchproduto() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: TextFormField(
-        onChanged: ((value) {
-          controllerGlob.searchTitle.value = value;
-          // print(value);
-        }),
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          isDense: true,
-          hintText: 'Pesquisar por produto',
-          hintStyle: TextStyle(
-            color: Colors.grey.shade400,
-            fontSize: 12,
-          ),
-          prefix: const Icon(
-            Icons.search,
-            color: Colors.black26,
-            size: 21,
-          ),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(60),
+      child: GetBuilder<HomeController>(
+        builder: (controller) {
+          return TextFormField(
+            controller: searchController,
+            onChanged: ((value) {
+              controllerGlob.searchTitle.value = value;
+              // print(value);
+            }),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              isDense: true,
+              hintText: 'Pesquisar por produto',
+              hintStyle: TextStyle(
+                color: Colors.grey.shade400,
+                fontSize: 12,
+              ),
+              suffixIcon: controller.searchTitle.value.isNotEmpty
+                  ? IconButton(
+                      onPressed: () {
+                        searchController.clear();
+                        controller.searchTitle.value = searchController.text;
+                        FocusScope.of(context).unfocus();
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        size: 21,
+                      ))
+                  : null,
+              prefix: const Icon(
+                Icons.search,
+                color: Colors.black26,
+                size: 21,
+              ),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(60),
+                ),
+                borderSide: BorderSide(
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
+              ),
             ),
-            borderSide: BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
