@@ -5,7 +5,6 @@ import '../../../const/endpoint.dart';
 import '../../../service/provider_manager.dart';
 import '../result/home_result.dart';
 
-//Parei aqui, na aula 95 e minuro 9:38
 class HomeRespository {
   final HttpManager _httpManager = HttpManager();
 
@@ -44,15 +43,11 @@ class HomeRespository {
         body: body,
       );
       if (result['result'] != null) {
-        // print(result['result']);
         List<ItemModel> data =
             (List<Map<String, dynamic>>.from(result['result']))
                 .map(ItemModel.fromJson)
                 .toList();
-      
         // List<Map<String, dynamic>>.from(result['result'])
-        //     .map(ItemModel.fromJson)
-        //     .toList();
         return HomeResult.sucess(data);
       } else {
         return HomeResult.error('Erro ao solicitar produtos ao servidor !');

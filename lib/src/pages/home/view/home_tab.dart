@@ -1,16 +1,14 @@
-import 'dart:ffi';
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';
-import '../../common_widgets/title_app.dart';
 import 'components/category_title.dart';
-import '../../../config/app_data.dart' as app_data;
 import 'components/item_title.dart';
 
 class HomeTab extends StatefulWidget {
@@ -73,26 +71,51 @@ class _HomeTabState extends State<HomeTab> {
 
   _griditens(context) {
     return GetBuilder<HomeController>(
-      builder: (controllerFuncionaPvrf) {
-        return !controllerFuncionaPvrf.isProductLoading
+      builder: (controllerItens) {
+        return !controllerItens.isProductLoading
             ? Expanded(
-                child: ListView.builder(
-                  findChildIndexCallback: (key) {
-                    controllerFuncionaPvrf.seilaUe();
-                  },
-                  scrollDirection: Axis.vertical,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: controllerFuncionaPvrf.allProducts.length,
-                  itemBuilder: (_, index) {
-                    if (((index + 1) ==
-                            controllerFuncionaPvrf.allProducts.length) &&
-                        !controllerFuncionaPvrf.isLastPage) {
-                      controllerFuncionaPvrf.seilaUe();
-                    }
-                    return ItemTitle(
-                        Item: controllerFuncionaPvrf.allProducts[index],
-                        runAddToCardAnimationMethod: itemSelectedCartAnimation);
-                  },
+                child: Visibility(
+                  visible:
+                      (controllerItens.currentCategory?.items ?? []).isNotEmpty,
+                  child: GridView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 9 / 11.5,
+                      maxCrossAxisExtent: 200,
+                    ),
+                    findChildIndexCallback: (key) {
+                      controllerItens.seilaUe();
+                    },
+                    scrollDirection: Axis.vertical,
+                    itemCount: controllerItens.allProducts.length,
+                    itemBuilder: (_, index) {
+                      if (((index + 1) == controllerItens.allProducts.length) &&
+                          !controllerItens.isLastPage) {
+                        controllerItens.seilaUe();
+                      }
+                      return ItemTitle(
+                          Item: controllerItens.allProducts[index],
+                          runAddToCardAnimationMethod:
+                              itemSelectedCartAnimation);
+                    },
+                  ),
+                  replacement: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: [
+                      Icon(
+                        Icons.search_off,
+                        size: 40,
+                        color: CustomColors.colorDestac,
+                      ),
+                      TextApp(
+                        texto: 'Não há items para apresentar',
+                      ),
+                    ],
+                  ),
                 ),
               )
             : Expanded(
@@ -158,7 +181,7 @@ class _HomeTabState extends State<HomeTab> {
             controller: searchController,
             onChanged: ((value) {
               controllerGlob.searchTitle.value = value;
-              // print(value);
+              //  FilterByTitle();
             }),
             decoration: InputDecoration(
               filled: true,

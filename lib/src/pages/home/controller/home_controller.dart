@@ -60,7 +60,36 @@ class HomeController extends GetxController {
 
   Future<void> seilaUe() async {
     currentCategory!.pagination++;
+    print('Buscando mais produtos');
     getAllProducts(canLoading: false);
+  }
+
+  void FilterByTitle() {
+    for (var category in allCategories) {
+      category.items.clear();
+      category.pagination = 0;
+    }
+
+    if (searchTitle.isEmpty) {
+      allCategories.removeAt(0);
+    } else {
+      CategoryModel? c = allCategories.firstWhereOrNull((cat) => cat.id == '');
+
+      if (c == null) {
+        final allProductsCategorys =
+            CategoryModel(title: 'Todos', id: '', items: [], pagination: 0);
+
+        allCategories.insert(0, allProductsCategorys);
+      } else {
+        c.items.clear();
+        c.pagination = 0;
+      }
+    }
+
+    currentCategory = allCategories.first;
+
+    update();
+    getAllProducts();
   }
 
   Future<void> getAllProducts({bool canLoading = true}) async {
@@ -71,9 +100,17 @@ class HomeController extends GetxController {
     Map<String, dynamic> body = {
       'page': currentCategory!.pagination,
       // "title": null,
-      //'categoryId': currentCategory!.id,
-      "itemsPerPage": itemsPerPage
+      'categoryId': currentCategory!.id,
+      'itemsPerPage': itemsPerPage
     };
+
+    if (searchTitle.value.isNotEmpty) {
+      body['title'] = searchTitle.value;
+      if (currentCategory!.id == '') {
+        body.remove('categoryId');
+      }
+    }
+
     HomeResult<ItemModel> homeResult =
         await homeRespository.getAllProducts(body);
     setLoading(false, isProduct: true);
@@ -92,9 +129,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    debounce(searchTitle, (_) {
-      print('Hello, word !');
-    }, time: const Duration(seconds: 1));
+    debounce(searchTitle, (_) => FilterByTitle(),
+        time: const Duration(seconds: 1));
     getAllCategories();
   }
 }
