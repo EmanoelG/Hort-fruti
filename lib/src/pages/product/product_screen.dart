@@ -95,25 +95,27 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 55,
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
+                        //height: 55,
+                        child: Expanded(
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {},
-                          label: const Text(
-                            'Adicionar',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                            onPressed: () {},
+                            label: const Text(
+                              'Adicionar',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          icon: const Icon(
-                            Icons.shopping_cart_checkout_outlined,
+                            icon: const Icon(
+                              Icons.shopping_cart_checkout_outlined,
+                            ),
                           ),
                         ),
                       )

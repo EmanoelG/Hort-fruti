@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
 
 class CartItemModel {

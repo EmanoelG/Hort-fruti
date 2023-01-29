@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';

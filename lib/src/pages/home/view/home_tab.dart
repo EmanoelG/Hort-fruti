@@ -1,10 +1,10 @@
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
+import 'package:sacolao_de_frutas/src/pages/home/view/components/title_gpd.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';
@@ -69,6 +69,7 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
+  void titel() {}
   _griditens(context) {
     return GetBuilder<HomeController>(
       builder: (controllerItens) {
@@ -96,6 +97,7 @@ class _HomeTabState extends State<HomeTab> {
                           !controllerItens.isLastPage) {
                         controllerItens.seilaUe();
                       }
+
                       return ItemTitle(
                           Item: controllerItens.allProducts[index],
                           runAddToCardAnimationMethod:
@@ -104,7 +106,6 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   replacement: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-
                     children: [
                       Icon(
                         Icons.search_off,
