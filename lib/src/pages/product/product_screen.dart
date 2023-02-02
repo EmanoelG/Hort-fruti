@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
+import 'package:sacolao_de_frutas/src/pages/base/controller/navigation_controller.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../common_widgets/quantity_widget.dart';
@@ -14,7 +16,7 @@ class ProdutctScreen extends StatefulWidget {
 
 class _ProdutctScreenState extends State<ProdutctScreen> {
   final UtilsService utilsService = UtilsService();
-
+  final navigationController = Get.find<NavigationController>();
   int cartItemQuantity = 1;
 
   @override
@@ -96,26 +98,30 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                       ),
                       SizedBox(
                         //height: 55,
-                        child: Expanded(
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
                               ),
                             ),
-                            onPressed: () {},
-                            label: const Text(
-                              'Adicionar',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          onPressed: () {
+                            //Fechar
+                            Get.back();
+                            //Abrir o carrinho
+                            navigationController
+                                .navigationPageView(NavigationTabs.cart);
+                          },
+                          label: const Text(
+                            'Adicionar',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                            icon: const Icon(
-                              Icons.shopping_cart_checkout_outlined,
-                            ),
+                          ),
+                          icon: const Icon(
+                            Icons.shopping_cart_checkout_outlined,
                           ),
                         ),
                       )
