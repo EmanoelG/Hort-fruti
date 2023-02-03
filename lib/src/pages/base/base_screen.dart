@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/base/controller/navigation_controller.dart';
 
-import '../cart/cart_tab.dart';
+import '../cart/view/cart_tab.dart';
 import '../home/view/home_tab.dart';
 import '../orders/order_tab.dart';
 import '../profile/profile_tab.dart';
