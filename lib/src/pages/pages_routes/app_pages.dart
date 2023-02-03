@@ -6,6 +6,7 @@ import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
 
 import '../auth/view/cadastro/sing_up_screen.dart';
 import '../auth/view/login/sing_in_scren.dart';
+import '../cart/binding/cart_binding.dart';
 import '../home/view/home_tab.dart';
 
 abstract class AppPages {
@@ -32,6 +33,7 @@ abstract class AppPages {
       bindings: [
         NavigationBinding(),
         HomeBinding(),
+        CartBinding(),
       ],
     ),
   ];
