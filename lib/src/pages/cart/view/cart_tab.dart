@@ -4,7 +4,7 @@ import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../../config/app_data.dart';
-import '../../../models/card_item_model.dart';
+import '../../../models/cart_item_model.dart';
 import '../../common_widgets/payment_dialog.dart';
 import 'components/card_item.dart';
 
@@ -19,18 +19,19 @@ class _CartTabState extends State<CartTab> {
   final UtilsService utilsService = UtilsService();
   double total = 0;
   void removeItemFromCart(CartItemModel cartitem) {
-    setState(() {
-      cartItems.remove(cartitem);
-      utilsService.showToats(
-          message: '${cartitem.item.ItemName} removido do carinho !');
-    });
+    // setState(() {
+    //   cartItems.remove(cartitem);
+    //   utilsService.showToats(
+    //       message: '${cartitem.item.ItemName} removido do carinho !');
+    // });
   }
 
   double cartTotalPrice() {
-    cartItems.forEach((element) {
-      total = total + (element.item.price) * element.quantity;
-    });
-    return total;
+    // cartItems.forEach((element) {
+    //   total = total + (element.item.price) * element.quantity;
+    // });
+    // return total;
+    return 0;
   }
 
   @override

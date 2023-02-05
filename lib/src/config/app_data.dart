@@ -1,7 +1,7 @@
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
 
-import '../models/card_item_model.dart';
+import '../models/cart_item_model.dart';
 import '../models/item_model.dart';
 
 ItemModel apple = ItemModel(

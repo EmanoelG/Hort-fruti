@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/custom_color.dart';
-import '../../../../models/card_item_model.dart';
+import '../../../../models/cart_item_model.dart';
 import '../../../../service/form_services.dart';
 import '../../../common_widgets/quantity_widget.dart';
 

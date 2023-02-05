@@ -1,4 +1,4 @@
-import 'card_item_model.dart';
+import 'cart_item_model.dart';
 
 class OrderModel {
   String id;

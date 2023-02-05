@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sacolao_de_frutas/src/models/card_item_model.dart';
+import 'package:sacolao_de_frutas/src/models/cart_item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 
 import '../../../service/form_services.dart';
