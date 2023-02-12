@@ -69,7 +69,6 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  void titel() {}
   _griditens(context) {
     return GetBuilder<HomeController>(
       builder: (controllerItens) {
@@ -97,7 +96,6 @@ class _HomeTabState extends State<HomeTab> {
                           !controllerItens.isLastPage) {
                         controllerItens.seilaUe();
                       }
-
                       return ItemTitle(
                           Item: controllerItens.allProducts[index],
                           runAddToCardAnimationMethod:

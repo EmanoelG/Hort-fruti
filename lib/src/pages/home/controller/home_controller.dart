@@ -34,22 +34,25 @@ class HomeController extends GetxController {
     update();
   }
 
-  selectCategory(CategoryModel categpry) {
-    currentCategory = categpry;
+  selectCategory(CategoryModel category) {
+    currentCategory = category;
     update();
+    if (currentCategory!.items.isNotEmpty) return;
     getAllProducts();
   }
 
   Future<void> getAllCategories() async {
-    //  setLoading(true);
+    // setLoading(true, isProduct: true);
 
     HomeResult<CategoryModel> homeResult =
         await homeRespository.getAllCategories();
-    //  setLoading(false);
+    //setLoading(false, isProduct: true);
     homeResult.when(
       sucess: (data) async {
         allCategories.assignAll(data);
+
         if (allCategories.isEmpty) return;
+
         selectCategory(data.first);
       },
       error: (er) {
@@ -60,7 +63,7 @@ class HomeController extends GetxController {
 
   Future<void> seilaUe() async {
     currentCategory!.pagination++;
-    print('Buscando mais produtos');
+    print('Buscando mais produtos ${currentCategory!.pagination}');
     getAllProducts(canLoading: false);
   }
 
@@ -99,7 +102,6 @@ class HomeController extends GetxController {
 
     Map<String, dynamic> body = {
       'page': currentCategory!.pagination,
-      // "title": null,
       'categoryId': currentCategory!.id,
       'itemsPerPage': itemsPerPage
     };
@@ -113,11 +115,13 @@ class HomeController extends GetxController {
 
     HomeResult<ItemModel> homeResult =
         await homeRespository.getAllProducts(body);
+
     setLoading(false, isProduct: true);
 
     homeResult.when(
       sucess: (data) async {
         currentCategory!.items.addAll(data);
+        //  currentCategory!.items = data;
       },
       error: (er) {
         print('Deu error $er');
