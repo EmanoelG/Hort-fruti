@@ -31,4 +31,23 @@ class CartRepository {
           'Ocorreu um erro ao recuperar os items do carinho !');
     }
   }
+
+  Future<CartResult<String>> addItemToCart({
+    required String userId,
+    required String token,
+    required String productId,
+    required int quantity,
+  }) async {
+    final result = await _httpManager.restRequest(
+        url: EndPoints.addItemToCart,
+        metod: HttpMetod.post,
+        body: {"user": userId, "quantity": quantity, "productId": productId},
+        headers: {"X-Parse-Session-Token": token});
+
+    if (result['result'] != null) {
+      return CartResult.success(result['result']['id']);
+    } else {
+      return CartResult.error('Nâo possivel salvar !');
+    }
+  }
 }

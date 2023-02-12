@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import 'package:sacolao_de_frutas/src/pages/base/controller/navigation_controller.dart';
+import 'package:sacolao_de_frutas/src/pages/cart/controller/cart_controller.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../common_widgets/quantity_widget.dart';
@@ -18,7 +19,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
   final UtilsService utilsService = UtilsService();
   final navigationController = Get.find<NavigationController>();
   int cartItemQuantity = 1;
-
+  final cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,6 +111,10 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                             //Fechar
                             Get.back();
                             //Abrir o carrinho
+                             cartController.addItemToCart(
+                              item: widget.itemMod,
+                              quantity: cartItemQuantity,
+                            );
                             navigationController
                                 .navigationPageView(NavigationTabs.cart);
                           },
