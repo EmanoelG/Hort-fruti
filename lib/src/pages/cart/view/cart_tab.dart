@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sacolao_de_frutas/src/pages/cart/controller/cart_controller.dart';
 import '../../../config/app_data.dart' as app_data;
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
@@ -43,18 +45,22 @@ class _CartTabState extends State<CartTab> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: cartItems.length,
-              itemBuilder: (context, index) {
-                return CartTitle(
-                  utilsService: utilsService,
-                  cartIte: cartItems[index],
-                  remove: removeItemFromCart,
-                  priceTotal: (total) {
-                    setState(
-                      () {
-                        this.total = 0;
-                        this.total = total;
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return ListView.builder(
+                  itemCount: controller.cartItems.length,
+                  itemBuilder: (context, index) {
+                    print(controller.cartItems);
+                    return CartTitle(
+                      utilsService: utilsService,
+                      cartIte: controller.cartItems[index],
+                      priceTotal: (total) {
+                        setState(
+                          () {
+                            this.total = 0;
+                            this.total = total;
+                          },
+                        );
                       },
                     );
                   },
@@ -79,51 +85,56 @@ class _CartTabState extends State<CartTab> {
                     spreadRadius: 2,
                   )
                 ]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Total Geral',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  utilsService.priceToCurrency(cartTotalPrice()),
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: CustomColors.colorButtonMain),
-                ),
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Total Geral',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
-                    onPressed: () async {
-                      bool? result = await showOrderConfirmartion(context);
-                      if (result ?? false) {
-                        showDialog(
-                          context: context,
-                          builder: (_) {
-                            return PaymentDialog(
-                              order: app_data.orders.first,
+                    Text(
+                      utilsService.priceToCurrency(controller.cartTotalPrice()),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: CustomColors.colorButtonMain),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                        onPressed: () async {
+                          bool? result = await showOrderConfirmartion(context);
+                          if (result ?? false) {
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return PaymentDialog(
+                                  order: app_data.orders.first,
+                                );
+                              },
                             );
-                          },
-                        );
-                      } else {
-                        utilsService.showToats(
-                            message: 'Pedido não confirmado !', isError: true);
-                      }
-                    },
-                    child: const Text('Confirmar pedido'),
-                  ),
-                ),
-              ],
+                          } else {
+                            utilsService.showToats(
+                                message: 'Pedido não confirmado !',
+                                isError: true);
+                          }
+                        },
+                        child: const Text('Confirmar pedido'),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           )
         ],

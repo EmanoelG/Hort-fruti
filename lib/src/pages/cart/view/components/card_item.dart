@@ -7,12 +7,10 @@ import '../../../common_widgets/quantity_widget.dart';
 
 class CartTitle extends StatefulWidget {
   final CartItemModel cartIte;
-  final Function(CartItemModel cartitem) remove;
   final Function priceTotal;
   const CartTitle({
     Key? key,
     required this.cartIte,
-    required this.remove,
     required this.utilsService,
     required this.priceTotal,
   }) : super(key: key);
@@ -62,7 +60,7 @@ class _CartTitleState extends State<CartTitle> {
                 () {
                   widget.cartIte.quantity = quantity;
                   if (quantity == 0) {
-                    widget.remove(widget.cartIte);
+                    //   widget.remove(widget.cartIte);
                   }
                 },
               );
