@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:sacolao_de_frutas/src/config/app_data.dart' as app_data;
 import 'package:sacolao_de_frutas/src/util/push_function.dart';
@@ -7,6 +8,7 @@ import 'package:sacolao_de_frutas/src/util/push_function.dart';
 import '../../../../config/custom_color.dart';
 import '../../../../models/item_model.dart';
 import '../../../../service/form_services.dart';
+import '../../../pages_routes/app_pages.dart';
 import '../../../product/product_screen.dart';
 
 class ItemTitle extends StatefulWidget {
@@ -50,12 +52,8 @@ class _ItemTitleState extends State<ItemTitle> {
           child: Material(
             child: InkWell(
               onTap: () {
-                push(
-                  context,
-                  ProdutctScreen(
-                    itemMod: widget.Item,
-                  ),
-                );
+//widget.Item
+                Get.toNamed(PagesRoutes.productRoute, arguments: widget.Item);
               },
               //IMG PRODUTO
               child: Ink(

@@ -8,8 +8,7 @@ import 'package:sacolao_de_frutas/src/service/form_services.dart';
 import '../common_widgets/quantity_widget.dart';
 
 class ProdutctScreen extends StatefulWidget {
-  final ItemModel itemMod;
-  ProdutctScreen({Key? key, required this.itemMod}) : super(key: key);
+  ProdutctScreen({Key? key}) : super(key: key);
 
   @override
   State<ProdutctScreen> createState() => _ProdutctScreenState();
@@ -19,6 +18,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
   final UtilsService utilsService = UtilsService();
   final navigationController = Get.find<NavigationController>();
   int cartItemQuantity = 1;
+  final ItemModel item = Get.arguments;
   final cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
             children: [
               Expanded(
                 child: Hero(
-                  tag: widget.itemMod.img,
-                  child: Image.network(widget.itemMod.img),
+                  tag: item.img,
+                  child: Image.network(item.img),
                 ),
               ),
               Expanded(
@@ -55,14 +55,14 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.itemMod.ItemName,
+                            item.ItemName,
                             style: const TextStyle(
                               fontSize: 27,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           QuantityWidget(
-                            suffxText: widget.itemMod.unit,
+                            suffxText: item.unit,
                             value: cartItemQuantity,
                             result: (quantity) {
                               setState(
@@ -76,7 +76,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                       ),
                       Text(
                         utilsService.priceToCurrency(
-                          (widget.itemMod.price),
+                          (item.price),
                         ),
                         style: const TextStyle(
                           fontSize: 23,
@@ -89,7 +89,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                           padding: const EdgeInsets.all(8.0),
                           child: SingleChildScrollView(
                             child: Text(
-                              widget.itemMod.description,
+                              item.description,
                               style: const TextStyle(
                                 height: 1.5,
                               ),
@@ -111,8 +111,8 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                             //Fechar
                             Get.back();
                             //Abrir o carrinho
-                             cartController.addItemToCart(
-                              item: widget.itemMod,
+                            cartController.addItemToCart(
+                              item: item,
                               quantity: cartItemQuantity,
                             );
                             navigationController

@@ -2,6 +2,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:sacolao_de_frutas/src/pages/base/base_screen.dart';
 import 'package:sacolao_de_frutas/src/pages/base/binding/navigation_binding.dart';
 import 'package:sacolao_de_frutas/src/pages/home/binding/home_binding.dart';
+import 'package:sacolao_de_frutas/src/pages/product/product_screen.dart';
 import 'package:sacolao_de_frutas/src/pages/splash/splash_screen.dart';
 
 import '../auth/view/cadastro/sing_up_screen.dart';
@@ -11,6 +12,10 @@ import '../home/view/home_tab.dart';
 
 abstract class AppPages {
   static final page = <GetPage>[
+    GetPage(
+      name: '/${PagesRoutes.productRoute}',
+      page: () => ProdutctScreen(),
+    ),
     GetPage(
       name: '/splashscreen',
       page: () => SplashScreen(),
@@ -40,6 +45,7 @@ abstract class AppPages {
 }
 
 abstract class PagesRoutes {
+  static const String productRoute = 'product';
   static const String singInRoute = 'signup';
   static const String singUpRoute = 'signin';
   static const String splashScreen = 'splashscreen';
