@@ -8,6 +8,7 @@ import 'package:sacolao_de_frutas/src/util/push_function.dart';
 import '../../../../config/custom_color.dart';
 import '../../../../models/item_model.dart';
 import '../../../../service/form_services.dart';
+import '../../../cart/controller/cart_controller.dart';
 import '../../../pages_routes/app_pages.dart';
 import '../../../product/product_screen.dart';
 
@@ -27,16 +28,15 @@ class ItemTitle extends StatefulWidget {
 
 class _ItemTitleState extends State<ItemTitle> {
   final UtilsService utilsService = UtilsService();
-
+  final cartController = Get.find<CartController>();
   IconData titleIcon = Icons.add_shopping_cart_outlined;
 
   Future<void> switchIcon() async {
     setState(() => titleIcon = Icons.check);
-    Future.delayed(Duration(seconds: 3)).then((value) {
-      // setState(() {
-      //   titleIcon = Icons.add_shopping_cart_outlined;
-      // });
-    });
+
+    await Future.delayed(Duration(milliseconds: 1500));
+
+    setState(() => titleIcon = Icons.add_shopping_cart_outlined);
   }
 
   @override
@@ -128,6 +128,7 @@ class _ItemTitleState extends State<ItemTitle> {
               child: InkWell(
                 onTap: (() {
                   switchIcon();
+                  cartController.addItemToCart(item: widget.Item);
                 }),
                 child: Ink(
                   height: 30,

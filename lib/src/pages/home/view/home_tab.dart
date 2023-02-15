@@ -1,12 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';
+import '../../cart/controller/cart_controller.dart';
 import 'components/category_title.dart';
 import 'components/item_title.dart';
 
@@ -38,17 +38,23 @@ class _HomeTabState extends State<HomeTab> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
-            child: GestureDetector(
-              onTap: () {},
-              child: Badge(
-                badgeColor: CustomColors.colorDestac,
-                badgeContent:
-                    const Text('0', style: TextStyle(color: Colors.white)),
-                child: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: CustomColors.colorButtonMain,
-                ),
-              ),
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: Badge(
+                    badgeColor: CustomColors.colorDestac,
+                    badgeContent: Text(
+                      controller.cartItems.length.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    child: Icon(
+                      Icons.shopping_cart_outlined,
+                      color: CustomColors.colorButtonMain,
+                    ),
+                  ),
+                );
+              },
             ),
           )
         ],
