@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
-import 'package:sacolao_de_frutas/src/pages/home/view/components/title_gpd.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';

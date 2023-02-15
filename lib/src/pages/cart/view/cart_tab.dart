@@ -52,16 +52,7 @@ class _CartTabState extends State<CartTab> {
                   itemBuilder: (context, index) {
                     print(controller.cartItems);
                     return CartTitle(
-                      utilsService: utilsService,
                       cartIte: controller.cartItems[index],
-                      priceTotal: (total) {
-                        setState(
-                          () {
-                            this.total = 0;
-                            this.total = total;
-                          },
-                        );
-                      },
                     );
                   },
                 );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sacolao_de_frutas/src/config/app_data.dart';
+import 'package:sacolao_de_frutas/src/pages/cart/controller/cart_controller.dart';
 
 import '../../../../config/custom_color.dart';
 import '../../../../models/cart_item_model.dart';
@@ -7,21 +10,18 @@ import '../../../common_widgets/quantity_widget.dart';
 
 class CartTitle extends StatefulWidget {
   final CartItemModel cartIte;
-  final Function priceTotal;
   const CartTitle({
     Key? key,
     required this.cartIte,
-    required this.utilsService,
-    required this.priceTotal,
   }) : super(key: key);
-
-  final UtilsService utilsService;
 
   @override
   State<CartTitle> createState() => _CartTitleState();
 }
 
 class _CartTitleState extends State<CartTitle> {
+  final UtilsService utilsService = UtilsService();
+  final controller = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +45,7 @@ class _CartTitleState extends State<CartTitle> {
             textAlign: TextAlign.left,
           ),
           subtitle: Text(
-            widget.utilsService.priceToCurrency(
+            utilsService.priceToCurrency(
                 (widget.cartIte.item.price) * widget.cartIte.quantity),
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -56,13 +56,9 @@ class _CartTitleState extends State<CartTitle> {
           ),
           trailing: QuantityWidget(
             result: (quantity) {
-              setState(
-                () {
-                  widget.cartIte.quantity = quantity;
-                  if (quantity == 0) {
-                    //   widget.remove(widget.cartIte);
-                  }
-                },
+              controller.changeItemQuantity(
+                item: widget.cartIte,
+                quantity: quantity,
               );
             },
             suffxText: widget.cartIte.item.unit,
