@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/cart/controller/cart_controller.dart';
+import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/app_data.dart' as app_data;
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
@@ -44,13 +45,27 @@ class _CartTabState extends State<CartTab> {
       ),
       body: Column(
         children: [
+          //Lista de itens do carinho
           Expanded(
             child: GetBuilder<CartController>(
               builder: (controller) {
+                if (controller.cartItems.isEmpty) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.remove_shopping_cart,
+                        size: 40,
+                        color: Colors.black,
+                      ),
+                      TextApp(texto: 'Não há itens no carrinho ')
+                    ],
+                  );
+                }
+
                 return ListView.builder(
                   itemCount: controller.cartItems.length,
                   itemBuilder: (context, index) {
-                    print(controller.cartItems);
                     return CartTitle(
                       cartIte: controller.cartItems[index],
                     );
@@ -62,6 +77,7 @@ class _CartTabState extends State<CartTab> {
           const SizedBox(
             height: 20,
           ),
+
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
