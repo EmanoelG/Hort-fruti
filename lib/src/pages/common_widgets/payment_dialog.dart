@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
@@ -25,10 +26,16 @@ class PaymentDialog extends StatelessWidget {
                 children: [
                   TextApp(texto: 'Pagamento com Pix', fontSize: 16),
                   //QRDCODE
-                  QrImage(
-                    data: order.qrCodeImage,
-                    version: QrVersions.auto,
-                    size: 200.0,
+                  // QrImage(
+                  //   data: service.decodeQrCodeImage(order.qrCodeImage),
+                  //   version: QrVersions.auto,
+                  //   size: 200.0,
+                  // ),
+
+                  Image.memory(
+                    service.decodeQrCodeImage(order.qrCodeImage),
+                    height: 200,
+                    width: 200,
                   ),
                   //VENCIEMNTO
                   TextApp(
@@ -45,7 +52,12 @@ class PaymentDialog extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         )),
                     icon: const Icon(Icons.copy),
-                    onPressed: () {},
+                    onPressed: () {
+                      FlutterClipboard.copy(order.copyAndPast)
+                          .then((value) => print('copied'));
+
+                      //  service.decodeQrCodeImage(order.qrCodeImage),
+                    },
                     label: TextApp(
                       texto: 'Copiar código Pix',
                     ),

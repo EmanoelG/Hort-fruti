@@ -1,4 +1,6 @@
+import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,6 +26,11 @@ class UtilsService {
     } catch (e) {
       return null;
     }
+  }
+
+  Uint8List decodeQrCodeImage(String value) {
+    String base64String = value.split(',')[1];
+    return base64Decode(base64String);
   }
 
   Future<bool> deleteLocalData(String keyRead) async {
