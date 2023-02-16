@@ -53,8 +53,8 @@ class PaymentDialog extends StatelessWidget {
                         )),
                     icon: const Icon(Icons.copy),
                     onPressed: () {
-                      FlutterClipboard.copy(order.copyAndPast)
-                          .then((value) => print('copied'));
+                      FlutterClipboard.copy(order.copyAndPast).then((value) =>
+                          service.showToats(message: 'Código copiado !'));
 
                       //  service.decodeQrCodeImage(order.qrCodeImage),
                     },

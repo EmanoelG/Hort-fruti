@@ -117,20 +117,32 @@ class _CartTabState extends State<CartTab> {
                     ),
                     SizedBox(
                       height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        onPressed: () async {
-                          bool? result = await showOrderConfirmartion(context);
+                      child: GetBuilder<CartController>(
+                        builder: (controller) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                            ),
+                            onPressed: controller.isCheckoutLoad
+                                ? null
+                                : () async {
+                                    bool? result =
+                                        await showOrderConfirmartion(context);
 
-                          if (result ?? false) {
-                            await controllerCart.checkoutCart();
-                          }
+                                    if (result ?? false) {
+                                      await controllerCart.checkoutCart();
+                                    } else {
+                                      utilsService.showToats(
+                                          message: 'Pedido não confirmado !');
+                                    }
+                                  },
+                            child: controller.isCheckoutLoad
+                                ? const CircularProgressIndicator()
+                                : const Text('Confirmar pedido'),
+                          );
                         },
-                        child: const Text('Confirmar pedido'),
                       ),
                     ),
                   ],
