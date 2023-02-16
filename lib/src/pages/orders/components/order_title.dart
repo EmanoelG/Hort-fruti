@@ -113,7 +113,7 @@ class OrderTitle extends StatelessWidget {
               ),
               TextApp(
                 colorFont: Colors.black,
-                texto: service.FormatDateTime(order.createDateTime),
+                texto: service.FormatDateTime(order.overDueDateTime),
               ),
             ],
           ),

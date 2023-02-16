@@ -26,8 +26,7 @@ class PaymentDialog extends StatelessWidget {
                   TextApp(texto: 'Pagamento com Pix', fontSize: 16),
                   //QRDCODE
                   QrImage(
-                    data:
-                        "asfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasfasfasfasfasfasffasf",
+                    data: order.qrCodeImage,
                     version: QrVersions.auto,
                     size: 200.0,
                   ),

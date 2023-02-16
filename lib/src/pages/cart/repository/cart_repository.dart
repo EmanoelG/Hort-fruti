@@ -1,7 +1,9 @@
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:sacolao_de_frutas/src/const/endpoint.dart';
 import 'package:sacolao_de_frutas/src/models/cart_item_model.dart';
+import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/pages/cart/cart_result/cart_result.dart';
+import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../../service/provider_manager.dart';
 
@@ -49,6 +51,29 @@ class CartRepository {
         });
 
     return result.isEmpty;
+  }
+
+  Future<CartResult<OrderModel>> checkoutCart({
+    required String token,
+    required double total,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: EndPoints.checkout,
+      metod: HttpMetod.post,
+      body: {
+        "total": total,
+      },
+      headers: {
+        "X-Parse-Session-Token": token,
+      },
+    );
+
+    if (result['result'] != null) {
+      final order = OrderModel.fromJson(result['result']);
+      return CartResult<OrderModel>.success(order);
+    } else {
+      return CartResult.error('Falha ao fazer pedido');
+    }
   }
 
   Future<CartResult<String>> addItemToCart({

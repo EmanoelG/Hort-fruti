@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/pages/cart/controller/cart_controller.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/app_data.dart' as app_data;
@@ -9,6 +10,7 @@ import 'package:sacolao_de_frutas/src/service/form_services.dart';
 import '../../../config/app_data.dart';
 import '../../../models/cart_item_model.dart';
 import '../../common_widgets/payment_dialog.dart';
+import '../cart_result/cart_result.dart';
 import 'components/card_item.dart';
 
 class CartTab extends StatefulWidget {
@@ -36,6 +38,8 @@ class _CartTabState extends State<CartTab> {
     // return total;
     return 0;
   }
+
+  final controllerCart = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -121,19 +125,9 @@ class _CartTabState extends State<CartTab> {
                         ),
                         onPressed: () async {
                           bool? result = await showOrderConfirmartion(context);
+
                           if (result ?? false) {
-                            showDialog(
-                              context: context,
-                              builder: (_) {
-                                return PaymentDialog(
-                                  order: app_data.orders.first,
-                                );
-                              },
-                            );
-                          } else {
-                            utilsService.showToats(
-                                message: 'Pedido não confirmado !',
-                                isError: true);
+                            await controllerCart.checkoutCart();
                           }
                         },
                         child: const Text('Confirmar pedido'),

@@ -9,5 +9,6 @@ abstract class EndPoints {
   static const String getAllProducts = '$_urlBase/get-product-list';
   static const String getCartItems = '$_urlBase/get-cart-items';
   static const String addItemToCart = '$_urlBase/add-item-to-cart';
-   static const String changeItemQuantity = '$_urlBase/modify-item-quantity';
+  static const String changeItemQuantity = '$_urlBase/modify-item-quantity';
+  static const String checkout = '$_urlBase/checkout';
 }
