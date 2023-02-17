@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/models/cart_item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 
-import '../../../service/form_services.dart';
-import '../../../util/font_app.dart';
-import '../../common_widgets/payment_dialog.dart';
+import '../../../../service/form_services.dart';
+import '../../../../util/font_app.dart';
+import '../../../common_widgets/payment_dialog.dart';
 import 'order_status_widget.dart';
 
 class OrderTitle extends StatelessWidget {
@@ -113,7 +113,7 @@ class OrderTitle extends StatelessWidget {
               ),
               TextApp(
                 colorFont: Colors.black,
-                texto: service.FormatDateTime(order.overDueDateTime),
+                texto: service.FormatDateTime(order.createDateTime!),
               ),
             ],
           ),
