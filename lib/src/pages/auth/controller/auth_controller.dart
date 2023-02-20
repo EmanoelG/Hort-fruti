@@ -60,9 +60,6 @@ class AuthController extends GetxController {
     _user.when(
       sucess: (UserModel user) async {
         userModel = user;
-        Map<String, String> tokenUser = {
-          KeysApp.userToken: userModel.token.toString(),
-        };
         saveTokenAndProceedToBase();
         Get.offAllNamed(PagesRoutes.baseRoute);
       },
@@ -84,9 +81,6 @@ class AuthController extends GetxController {
       sucess: (user) {
         isLoading.value = false;
         userModel = user;
-        Map<String, String> tokenUser = {
-          KeysApp.userToken: userModel.token!,
-        };
         saveTokenAndProceedToBase();
         Get.offAllNamed(PagesRoutes.baseRoute);
       },
@@ -98,8 +92,6 @@ class AuthController extends GetxController {
   }
 
   Future<void> signOut() async {
-    // final authController = Get.find<AuthController>();
-    // userModel = UserModel();
     await _utils.deleteLocalData(KeysApp.userToken);
     Get.offAllNamed(PagesRoutes.singInRoute);
   }
