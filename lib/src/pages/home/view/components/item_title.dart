@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,13 +28,32 @@ class _ItemTitleState extends State<ItemTitle> {
   final UtilsService utilsService = UtilsService();
   final cartController = Get.find<CartController>();
   IconData titleIcon = Icons.add_shopping_cart_outlined;
+  late Timer _timer;
+  bool _addedToCart = false;
+  // Future<void> switchIcon() async {
+  //   setState(() => titleIcon = Icons.check);
 
-  Future<void> switchIcon() async {
-    setState(() => titleIcon = Icons.check);
+  //   await Future.delayed(const Duration(milliseconds: 1500));
 
-    await Future.delayed(const Duration(milliseconds: 1500));
+  //   setState(() => titleIcon = Icons.add_shopping_cart_outlined);
+  // }
 
-    setState(() => titleIcon = Icons.add_shopping_cart_outlined);
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void switchIcon() {
+    setState(() {
+      _addedToCart = true;
+      _timer = Timer(Duration(seconds: 3), () {
+        setState(() {
+          _addedToCart = false;
+          cartController.addItemToCart(item: widget.item);
+        });
+      });
+    });
   }
 
   @override
@@ -48,7 +69,6 @@ class _ItemTitleState extends State<ItemTitle> {
           child: Material(
             child: InkWell(
               onTap: () {
-//widget.Item
                 Get.toNamed(PagesRoutes.productRoute, arguments: widget.item);
               },
               //IMG PRODUTO
@@ -123,8 +143,12 @@ class _ItemTitleState extends State<ItemTitle> {
             child: Material(
               child: InkWell(
                 onTap: (() {
-                  switchIcon();
-                  cartController.addItemToCart(item: widget.item);
+                  // try {
+                  //   switchIcon();
+                  //   // ignore: empty_catches
+                  // } catch (e) {
+                  //   print('Error ' + e.toString());
+                  // }
                 }),
                 child: Ink(
                   height: 30,
@@ -132,10 +156,11 @@ class _ItemTitleState extends State<ItemTitle> {
                   decoration: const BoxDecoration(
                     color: Colors.green,
                   ),
-                  child: Icon(
-                    titleIcon,
-                    size: 20,
+                  child: IconButton(
+                    icon:
+                        Icon(_addedToCart ? Icons.check : Icons.shopping_cart),
                     color: Colors.white,
+                    onPressed: switchIcon,
                   ),
                 ),
               ),

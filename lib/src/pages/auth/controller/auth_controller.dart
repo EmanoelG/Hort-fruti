@@ -108,6 +108,7 @@ class AuthController extends GetxController {
   Future<void> validateToken() async {
     String userToken = await _utils.loadLocalData(KeysApp.userToken) ?? '';
     AuthResult _user;
+    // ignore: unnecessary_null_comparison
     if (userToken == null) {
       Get.offAllNamed(PagesRoutes.singInRoute);
       return;
