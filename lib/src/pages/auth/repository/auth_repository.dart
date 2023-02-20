@@ -1,3 +1,4 @@
+import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 import 'package:sacolao_de_frutas/src/service/provider_manager.dart';
 import '../../../const/endpoint.dart';
 import '../../../models/user_model.dart';
@@ -6,6 +7,29 @@ import 'auth_errors.dart';
 
 class AuthRepository {
   final HttpManager _httpManager = HttpManager();
+
+  Future<bool> changePassword({
+    required String email,
+    required String currentPassword,
+    required String newPassword,
+    required String token,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: EndPoints.changePassword,
+      metod: HttpMetod.post,
+      body: {
+        "email": email,
+        "currentPassword": currentPassword,
+        "newPassword": newPassword,
+      },
+      headers: {
+        "X-Parse-Session-Token": token,
+      },
+    );
+
+    return result['error'] == null;
+  }
+
   Future<AuthResult> validateToken(String token) async {
     Map<String, String> token_header = {
       'X-Parse-Session-Token': token,

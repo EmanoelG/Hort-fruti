@@ -16,24 +16,21 @@ class ProfileTab extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTab> {
   String senhaAtualController = '';
-
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Perfil do usuário'),
-          actions: [
-            logout_user(),
-          ],
-        ),
-        body: GetBuilder<AuthController>(
-          builder: (controller) {
-            return profile_info(controller);
-          },
-        ));
+      appBar: AppBar(
+        title: const Text('Perfil do usuário'),
+        actions: [
+          logout_user(),
+        ],
+      ),
+      body: profile_info(),
+    );
   }
 
-  ListView profile_info(controller) {
+  ListView profile_info() {
     return ListView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
@@ -43,7 +40,7 @@ class _ProfileTabState extends State<ProfileTab> {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
           },
           readOnly: true,
-          initiValue: controller.userModel.email,
+          initiValue: authController.userModel.email,
           iconTitipo: Icon(Icons.email),
           isSecret: false,
           inputMenssagem: 'Usuario',
@@ -56,7 +53,7 @@ class _ProfileTabState extends State<ProfileTab> {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
           },
           readOnly: true,
-          initiValue: controller.userModel.name,
+          initiValue: authController.userModel.name,
           iconTitipo: Icon(Icons.person),
           isSecret: false,
           inputMenssagem: 'Nome',
@@ -69,7 +66,7 @@ class _ProfileTabState extends State<ProfileTab> {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
           },
           readOnly: true,
-          initiValue: controller.userModel.celular,
+          initiValue: authController.userModel.celular,
           iconTitipo: Icon(Icons.phone),
           isSecret: false,
           inputMenssagem: 'Phone',
@@ -82,7 +79,7 @@ class _ProfileTabState extends State<ProfileTab> {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
           },
           readOnly: true,
-          initiValue: controller.userModel.cpf,
+          initiValue: authController.userModel.cpf,
           iconTitipo: Icon(Icons.file_copy),
           isSecret: true,
           inputMenssagem: 'CPF',
@@ -118,7 +115,7 @@ class _ProfileTabState extends State<ProfileTab> {
     AuthController auth = AuthController();
     return IconButton(
       onPressed: () async {
-        await auth.signOut(key: 'key');
+        await auth.signOut();
         Get.offNamed(PagesRoutes.singInRoute);
       },
       icon: const Icon(Icons.logout),
@@ -127,6 +124,7 @@ class _ProfileTabState extends State<ProfileTab> {
 
   Future<bool?> updatePassword() {
     final newPasswordControlller = TextEditingController();
+    final passwordNow = TextEditingController();
     final _formKey = GlobalKey<FormState>();
     return showDialog(
       context: context,
@@ -164,6 +162,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         keyboardType: TextInputType.text,
                         readOnly: false,
                         type: TextInputType.none,
+                        controller: passwordNow,
                         iconTitipo: const Icon(Icons.email),
                         inputMenssagem: 'Senha Atual',
                         isSecret: true,
@@ -209,23 +208,33 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _formKey.currentState!.validate();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: const Text(
-                            'atualizar',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
+                        child: Obx(() => ElevatedButton(
+                              onPressed: authController.isLoading.value
+                                  ? null
+                                  : () {
+                                      if (_formKey.currentState!.validate()) {
+                                        authController.changePassword(
+                                          senhaAtual: passwordNow.text,
+                                          novaSenha:
+                                              newPasswordControlller.text,
+                                        );
+                                      }
+                                    },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              child: authController.isLoading.value
+                                  ? CircularProgressIndicator()
+                                  : const Text(
+                                      'atualizar',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                            )),
                       ),
                     ],
                   ),
