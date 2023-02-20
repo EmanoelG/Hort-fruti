@@ -8,7 +8,7 @@ part 'order_model.g.dart';
 class OrderModel {
   String id;
 
-  @JsonKey(name: 'createdAt' )
+  @JsonKey(name: 'createdAt')
   DateTime? createDateTime;
 
   @JsonKey(name: 'due')
@@ -20,6 +20,8 @@ class OrderModel {
   @JsonKey(name: 'copiaecola')
   String copyAndPast;
   double total;
+
+  bool get isOverDue => overDueDateTime.isBefore(DateTime.now());
   OrderModel({
     required this.id,
     required this.createDateTime,
