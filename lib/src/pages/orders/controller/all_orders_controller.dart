@@ -24,8 +24,10 @@ class AllOrdersController extends GetxController {
     );
     result.when(
       sucess: (data) {
-        allOrders = data;
-        //print(allOrders);
+        allOrders = data
+          ..sort(
+            ((a, b) => b.createDateTime!.compareTo(a.createDateTime!)),
+          );
         update();
       },
       error: (error) {
