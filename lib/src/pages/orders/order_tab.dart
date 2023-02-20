@@ -16,23 +16,27 @@ class OrdersTab extends StatelessWidget {
       ),
       body: GetBuilder<AllOrdersController>(
         builder: (controller) {
-          return ListView.separated(
-            padding: EdgeInsets.all(10),
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (_, index) {
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: OrderTitle(order: controller.allOrders[index]),
-              );
-            },
-            separatorBuilder: (_, index) {
-              return const SizedBox(
-                height: 10,
-              );
-            },
-            itemCount: controller.allOrders.length,
+          return RefreshIndicator(
+            child: ListView.separated(
+              padding: EdgeInsets.all(10),
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (_, index) {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: OrderTitle(order: controller.allOrders[index]),
+                );
+              },
+              separatorBuilder: (_, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: controller.allOrders.length,
+            ),
+            onRefresh: () => controller.getAllOrders(),
+            //physics : AlwaysScrollableScrollPhysics()
           );
         },
       ),
