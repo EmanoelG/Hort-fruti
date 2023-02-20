@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sacolao_de_frutas">
-    <uses-permission android:name="android.permission.INTERNET" />xc
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="sacolao_de_frutas"
         android:name="${applicationName}"
@@ -32,4 +32,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    
 </manifest>
