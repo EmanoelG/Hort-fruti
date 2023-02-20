@@ -13,4 +13,5 @@ abstract class EndPoints {
   static const String checkout = '$_urlBase/checkout';
   static const String getOrders = '$_urlBase/get-orders';
   static const String getOrdersItems = '$_urlBase/get-order-items';
+  static const String changePassword = '$_urlBase/change-password';
 }

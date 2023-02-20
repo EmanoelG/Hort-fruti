@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
-import 'package:sacolao_de_frutas/src/config/app_data.dart' as appdata;
 
+import '../../service/validators.dart';
 import '../pages_routes/app_pages.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -15,97 +15,102 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  String senhaAtualController = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfil do usuário'),
-        actions: [
-          logout_user(),
-        ],
-      ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
-        children: <Widget>[
-          FormDefault(
-            validatorValue: (email) {
-              if (email == null)
-                return 'Preencha e-mail ou senha corretamente !';
-            },
-            readOnly: true,
-            initiValue: appdata.user.email,
-            iconTitipo: Icon(Icons.email),
-            isSecret: false,
-            inputMenssagem: 'Usuario',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          FormDefault(
-            validatorValue: (email) {
-              if (email == null)
-                return 'Preencha e-mail ou senha corretamente !';
-            },
-            readOnly: true,
-            initiValue: appdata.user.name,
-            iconTitipo: Icon(Icons.person),
-            isSecret: false,
-            inputMenssagem: 'Nome',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          FormDefault(
-            validatorValue: (email) {
-              if (email == null)
-                return 'Preencha e-mail ou senha corretamente !';
-            },
-            readOnly: true,
-            initiValue: appdata.user.celular,
-            iconTitipo: Icon(Icons.phone),
-            isSecret: false,
-            inputMenssagem: 'Phone',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          FormDefault(
-            validatorValue: (email) {
-              if (email == null)
-                return 'Preencha e-mail ou senha corretamente !';
-            },
-            readOnly: true,
-            initiValue: appdata.user.cpf,
-            iconTitipo: Icon(Icons.file_copy),
-            isSecret: true,
-            inputMenssagem: 'CPF',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 50,
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                side: const BorderSide(
-                  color: Colors.green,
-                ),
+        appBar: AppBar(
+          title: const Text('Perfil do usuário'),
+          actions: [
+            logout_user(),
+          ],
+        ),
+        body: GetBuilder<AuthController>(
+          builder: (controller) {
+            return profile_info(controller);
+          },
+        ));
+  }
+
+  ListView profile_info(controller) {
+    return ListView(
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
+      children: <Widget>[
+        FormDefault(
+          validatorValue: (email) {
+            if (email == null) return 'Preencha e-mail ou senha corretamente !';
+          },
+          readOnly: true,
+          initiValue: controller.userModel.email,
+          iconTitipo: Icon(Icons.email),
+          isSecret: false,
+          inputMenssagem: 'Usuario',
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        FormDefault(
+          validatorValue: (email) {
+            if (email == null) return 'Preencha e-mail ou senha corretamente !';
+          },
+          readOnly: true,
+          initiValue: controller.userModel.name,
+          iconTitipo: Icon(Icons.person),
+          isSecret: false,
+          inputMenssagem: 'Nome',
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        FormDefault(
+          validatorValue: (email) {
+            if (email == null) return 'Preencha e-mail ou senha corretamente !';
+          },
+          readOnly: true,
+          initiValue: controller.userModel.celular,
+          iconTitipo: Icon(Icons.phone),
+          isSecret: false,
+          inputMenssagem: 'Phone',
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        FormDefault(
+          validatorValue: (email) {
+            if (email == null) return 'Preencha e-mail ou senha corretamente !';
+          },
+          readOnly: true,
+          initiValue: controller.userModel.cpf,
+          iconTitipo: Icon(Icons.file_copy),
+          isSecret: true,
+          inputMenssagem: 'CPF',
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: 50,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
-              onPressed: () {
-                updatePassword();
-              },
-              child: const Text(
-                'Atualizar senha ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              side: const BorderSide(
+                color: Colors.green,
               ),
             ),
+            onPressed: () {
+              updatePassword();
+            },
+            child: const Text(
+              'Atualizar senha ',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -121,6 +126,8 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Future<bool?> updatePassword() {
+    final newPasswordControlller = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
     return showDialog(
       context: context,
       builder: (context) {
@@ -132,80 +139,96 @@ class _ProfileTabState extends State<ProfileTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'Atualizaçao de senha',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Atualizaçao de senha',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    FormDefault(
-                      validatorValue: (email) {
-                        if (email == null)
-                          return 'Preencha e-mail ou senha corretamente !';
-                      },
-                      iconTitipo: Icon(Icons.lock),
-                      isSecret: true,
-                      inputMenssagem: 'Senha Atual',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    FormDefault(
-                      validatorValue: (email) {
-                        if (email == null)
-                          return 'Preencha e-mail ou senha corretamente !';
-                      },
-                      iconTitipo: Icon(Icons.lock_outline),
-                      isSecret: true,
-                      inputMenssagem: 'Nova senha',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    FormDefault(
-                      validatorValue: (email) {
-                        if (email == null)
-                          return 'Preencha e-mail ou senha corretamente !';
-                      },
-                      iconTitipo: Icon(Icons.lock_outline),
-                      isSecret: true,
-                      inputMenssagem: 'Confirmar senha',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 45,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FormDefault(
+                        keyboardType: TextInputType.text,
+                        readOnly: false,
+                        type: TextInputType.none,
+                        iconTitipo: const Icon(Icons.email),
+                        inputMenssagem: 'Senha Atual',
+                        isSecret: true,
+                        validatorValue: passwordValidator,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FormDefault(
+                        readOnly: false,
+                        keyboardType: TextInputType.text,
+                        type: TextInputType.text,
+                        validatorValue: passwordValidator,
+                        iconTitipo: Icon(Icons.lock_outline),
+                        controller: newPasswordControlller,
+                        isSecret: true,
+                        inputMenssagem: 'Nova senha',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FormDefault(
+                        readOnly: false,
+                        keyboardType: TextInputType.text,
+                        type: TextInputType.text,
+                        iconTitipo: Icon(Icons.lock_outline),
+                        isSecret: true,
+                        inputMenssagem: 'Confirmar nova senha',
+                        validatorValue: (newPassword) {
+                          final result = passwordValidator(newPassword);
+                          if (result != null) {
+                            return result;
+                          }
+                          if (newPassword == newPasswordControlller.text) {
+                            return null;
+                          } else {
+                            return 'As senhas não são equivalentes ';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _formKey.currentState!.validate();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
-                        ),
-                        child: const Text(
-                          'atualizar',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                          child: const Text(
+                            'atualizar',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Positioned(
