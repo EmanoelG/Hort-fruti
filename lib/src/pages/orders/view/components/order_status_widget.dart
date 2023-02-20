@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
@@ -73,6 +72,7 @@ class _CustomDivider extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class StatusDot extends StatelessWidget {
   final bool isActive;
   final String title;

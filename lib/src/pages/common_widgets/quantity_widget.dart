@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class QuantityWidget extends StatelessWidget {
@@ -38,7 +37,7 @@ class QuantityWidget extends StatelessWidget {
                   ? Icons.remove
                   : Icons.delete_forever,
               onPressed: () {
-                if (value == 1 && isRemovable ) return;
+                if (value == 1 && isRemovable) return;
                 int resultCount = value - 1;
                 result(resultCount);
               },
@@ -47,7 +46,8 @@ class QuantityWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: Text(
                 '$value$suffxText',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
             _QuantityButton(
@@ -67,7 +67,7 @@ class _QuantityButton extends StatelessWidget {
   final Color color;
   final IconData icon;
   final VoidCallback onPressed;
-  _QuantityButton({
+  const _QuantityButton({
     Key? key,
     required this.color,
     required this.icon,

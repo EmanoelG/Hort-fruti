@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sacolao_de_frutas/src/config/app_data.dart' as appadata;
 import 'package:sacolao_de_frutas/src/pages/orders/controller/all_orders_controller.dart';
 
 import 'view/components/order_title.dart';
@@ -18,8 +17,8 @@ class OrdersTab extends StatelessWidget {
         builder: (controller) {
           return RefreshIndicator(
             child: ListView.separated(
-              padding: EdgeInsets.all(10),
-              physics: BouncingScrollPhysics(),
+              padding: const EdgeInsets.all(10),
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (_, index) {
                 return Card(
                   shape: RoundedRectangleBorder(

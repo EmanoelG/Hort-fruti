@@ -1,6 +1,5 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 

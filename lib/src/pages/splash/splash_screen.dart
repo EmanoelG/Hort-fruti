@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
-import 'package:get/get.dart';
 import '../../config/custom_color.dart';
-import '../../service/form_services.dart';
-import '../../service/provider_manager.dart';
-import '../pages_routes/app_pages.dart';
-import '../auth/controller/auth_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -26,8 +21,8 @@ class SplashScreen extends StatelessWidget {
             end: Alignment.bottomLeft,
             colors: [
               CustomColors.colorButtonMain,
-              Color.fromARGB(255, 90, 207, 94),
-              Color.fromARGB(255, 215, 240, 188),
+              const Color.fromARGB(255, 90, 207, 94),
+              const Color.fromARGB(255, 215, 240, 188),
             ]),
       ),
       child: Column(

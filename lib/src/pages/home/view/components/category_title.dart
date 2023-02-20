@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 
 class CategoryTitle extends StatefulWidget {
   const CategoryTitle({

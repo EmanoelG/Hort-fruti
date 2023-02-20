@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/const/endpoint.dart';
-import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/service/provider_manager.dart';
 

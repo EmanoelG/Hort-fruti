@@ -64,11 +64,11 @@ class ForgotPasswordDialog extends StatelessWidget {
                   iconTitipo: const Icon(Icons.email),
                   inputMenssagem: 'Email',
                   isSecret: false,
-                  validatorValue: (email_validator) {
-                    if (email_validator == null || email_validator.isEmpty) {
+                  validatorValue: (emailValidator) {
+                    if (emailValidator == null || emailValidator.isEmpty) {
                       return 'Preencha o campo de Email corretamente !';
                     }
-                    if (!email_validator.isEmail) {
+                    if (!emailValidator.isEmail) {
                       return 'Digite um e-mail valido !';
                     }
                     return null;

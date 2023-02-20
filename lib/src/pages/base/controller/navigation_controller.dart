@@ -14,7 +14,7 @@ class NavigationController extends GetxController {
   late RxInt _currentIndex;
 
   PageController get pageController => _pageController;
-  int get CurrentIndex => _currentIndex.value;
+  int get currentIndex => _currentIndex.value;
 
   @override
   void onInit() {
@@ -36,7 +36,7 @@ class NavigationController extends GetxController {
     if (_currentIndex.value == page) return;
     // _pageController.jumpToPage(page);
     _pageController.animateToPage(page,
-        duration: Duration(seconds: 1), curve: Curves.easeInOut);
+        duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     _currentIndex.value = page;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 import 'package:sacolao_de_frutas/src/service/provider_manager.dart';
 import '../../../const/endpoint.dart';
 import '../../../models/user_model.dart';
@@ -31,14 +30,14 @@ class AuthRepository {
   }
 
   Future<AuthResult> validateToken(String token) async {
-    Map<String, String> token_header = {
+    Map<String, String> tokenHeader = {
       'X-Parse-Session-Token': token,
     };
     try {
       final result = await _httpManager.restRequest(
           url: EndPoints.validateToken,
           metod: HttpMetod.post,
-          headers: token_header);
+          headers: tokenHeader);
       return handleuserOrError(result);
     } catch (e) {
       return AuthResult.error('{"error": "Internal error ${e.toString()}"  }');
@@ -60,7 +59,6 @@ class AuthRepository {
   }
 
   Future<AuthResult?> singUp(UserModel user) async {
-    print(user.toJson());
     var result = await _httpManager.restRequest(
       url: EndPoints.signUpW,
       metod: HttpMetod.post,
@@ -77,19 +75,17 @@ class AuthRepository {
   }
 
   Future<void> resetPassword(String email) async {
-    final result = await _httpManager.restRequest(
+    await _httpManager.restRequest(
       url: EndPoints.resetPassword,
       metod: HttpMetod.post,
       body: {
         "email": email,
       },
     );
-    print(result);
     // return handleuserOrError(result);
   }
 
   handleuserOrError(Map<dynamic, dynamic> result) {
-    print('result: ' + result.toString());
     if (result['result'] != null) {
       UserModel _user = UserModel();
       _user = UserModel.fromMap(result['result']);

@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/pages/cart/controller/cart_controller.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
-import '../../../config/app_data.dart' as app_data;
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
-import '../../../config/app_data.dart';
 import '../../../models/cart_item_model.dart';
-import '../../common_widgets/payment_dialog.dart';
-import '../cart_result/cart_result.dart';
 import 'components/card_item.dart';
 
 class CartTab extends StatefulWidget {
-  CartTab({Key? key}) : super(key: key);
+  const CartTab({Key? key}) : super(key: key);
 
   @override
   State<CartTab> createState() => _CartTabState();

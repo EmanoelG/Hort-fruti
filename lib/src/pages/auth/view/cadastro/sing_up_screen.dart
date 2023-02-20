@@ -1,24 +1,17 @@
-
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
-import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
-
-import 'package:sacolao_de_frutas/src/util/push_function.dart';
 
 import '../../../../config/custom_color.dart';
 import '../../../../util/compentes/custom_textField.dart';
-import '../../../base/base_screen.dart';
 import '../../../common_widgets/title_app.dart';
-import '../cadastro/sing_up_screen.dart';
 import '../../controller/auth_controller.dart';
 
-class SingUpScreen extends StatelessWidget {
-  SingUpScreen({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class SingUpscreen extends StatelessWidget {
+  SingUpscreen({Key? key}) : super(key: key);
   final _formKeys = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -41,7 +34,7 @@ class SingUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 215, 240, 188),
+      backgroundColor: const Color.fromARGB(255, 215, 240, 188),
       body: _telalogin(context),
     );
   }
@@ -67,8 +60,8 @@ class SingUpScreen extends StatelessWidget {
                       end: Alignment.bottomLeft,
                       colors: [
                         CustomColors.colorButtonMain,
-                        Color.fromARGB(255, 90, 207, 94),
-                        Color.fromARGB(255, 215, 240, 188),
+                        const Color.fromARGB(255, 90, 207, 94),
+                        const Color.fromARGB(255, 215, 240, 188),
                       ]),
                 ),
                 child: _titleLogin(),
@@ -124,13 +117,14 @@ class SingUpScreen extends StatelessWidget {
             iconTitipo: const Icon(Icons.email),
             inputMenssagem: 'e-mail',
             isSecret: false,
-            validatorValue: (email_validator) {
-              if (email_validator == null || email_validator.isEmpty) {
+            validatorValue: (emailValidator) {
+              if (emailValidator == null || emailValidator.isEmpty) {
                 return 'Preencha o campo de e-mail corretamente !';
               }
-              if (!email_validator.isEmail) {
+              if (!emailValidator.isEmail) {
                 return 'Digite um e-mail valido !';
               }
+              return null;
             },
           ),
           SizedBox(

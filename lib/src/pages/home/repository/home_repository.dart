@@ -28,7 +28,6 @@ class HomeRespository {
             'Ocorreu um erro inesperado ao recuperar categorias !');
       }
     } catch (e) {
-      print('Error: $e');
       return HomeResult<CategoryModel>.error(
           'Ocorreu um erro inesperado ao recuperar categorias ! $e');
     }
@@ -53,7 +52,6 @@ class HomeRespository {
         return HomeResult.error('Erro ao solicitar produtos ao servidor !');
       }
     } catch (e) {
-      print('!!! Error ao solicitar produtos ao servidor: $e');
       return HomeResult.error('Erro ao solicitar produtos ao servidor !');
     }
   }

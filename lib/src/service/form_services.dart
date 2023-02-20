@@ -21,7 +21,7 @@ class UtilsService {
   Future<String?> loadLocalData(String keyRead) async {
     try {
       var teste = await _storage.read(key: keyRead);
-      print('TESTE $teste');
+
       return teste;
     } catch (e) {
       return null;
@@ -47,6 +47,7 @@ class UtilsService {
     return numberFormat.format(price);
   }
 
+  // ignore: non_constant_identifier_names
   String FormatDateTime(DateTime dateTime) {
     initializeDateFormatting();
     DateFormat dateFormat = DateFormat.yMd('pt_BR').add_Hm();

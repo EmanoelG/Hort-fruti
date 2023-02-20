@@ -1,9 +1,7 @@
-import 'package:analyzer/dart/ast/token.dart';
 import 'package:sacolao_de_frutas/src/const/endpoint.dart';
 import 'package:sacolao_de_frutas/src/models/cart_item_model.dart';
 import 'package:sacolao_de_frutas/src/models/order_model.dart';
 import 'package:sacolao_de_frutas/src/pages/cart/cart_result/cart_result.dart';
-import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../../service/provider_manager.dart';
 
@@ -21,7 +19,6 @@ class CartRepository {
         body: {
           'user': userId,
         });
-    List<CartResult> lista = [];
     if (result['result'] != null) {
       List<CartItemModel> data =
           List<Map<String, dynamic>>.from(result['result'])

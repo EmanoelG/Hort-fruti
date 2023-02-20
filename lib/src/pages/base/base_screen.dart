@@ -34,22 +34,22 @@ class _BaseScreenState extends State<BaseScreen> {
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: navigationController.pageController,
-      children: [
-        const HomeTab(),
-        const OrdersTab(),
+      children: const [
+        HomeTab(),
+        OrdersTab(),
         CartTab(),
-        const ProfileTab(),
+        ProfileTab(),
       ],
     );
   }
 
   Widget _bottonNavBar() {
     return Obx(() => BottomNavigationBar(
-          selectedLabelStyle: TextStyle(color: Colors.white),
+          selectedLabelStyle: const TextStyle(color: Colors.white),
           selectedItemColor: Colors.white,
           backgroundColor: Colors.green,
           type: BottomNavigationBarType.fixed,
-          currentIndex: navigationController.CurrentIndex,
+          currentIndex: navigationController.currentIndex,
           onTap: (indexTap) {
             navigationController.navigationPageView(indexTap);
           },

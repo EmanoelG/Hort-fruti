@@ -46,7 +46,7 @@ class _HomeTabState extends State<HomeTab> {
                     badgeColor: CustomColors.colorDestac,
                     badgeContent: Text(
                       controller.cartItems.length.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     child: Icon(
                       Icons.shopping_cart_outlined,
@@ -64,12 +64,10 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   _body(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [_searchproduto(), _categoria(), _griditens(context)],
-        ),
+    return  Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [_searchproduto(), _categoria(), _griditens(context)],
       ),
     );
   }
@@ -93,6 +91,7 @@ class _HomeTabState extends State<HomeTab> {
                     ),
                     findChildIndexCallback: (key) {
                       controllerItens.seilaUe();
+                      return null;
                     },
                     scrollDirection: Axis.vertical,
                     itemCount: controllerItens.allProducts.length,
@@ -102,7 +101,7 @@ class _HomeTabState extends State<HomeTab> {
                         controllerItens.seilaUe();
                       }
                       return ItemTitle(
-                          Item: controllerItens.allProducts[index],
+                          item: controllerItens.allProducts[index],
                           runAddToCardAnimationMethod:
                               itemSelectedCartAnimation);
                     },
@@ -151,7 +150,7 @@ class _HomeTabState extends State<HomeTab> {
       color: Colors.transparent,
       child: GetBuilder<HomeController>(
         builder: (controller) {
-          return Container(
+          return SizedBox(
             height: 25,
             child: ListView.separated(
                 scrollDirection: Axis.horizontal,
@@ -178,7 +177,7 @@ class _HomeTabState extends State<HomeTab> {
 
   _searchproduto() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: GetBuilder<HomeController>(
         builder: (controller) {
           return TextFormField(

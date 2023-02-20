@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -40,7 +42,7 @@ class FormDefault extends StatefulWidget {
     this.textInputAction,
     this.focus,
     this.nextFocus,
-    this.initiValue = null,
+    this.initiValue,
     this.readOnly = false,
     this.keyboardType = TextInputType.none,
     this.keyFomr,

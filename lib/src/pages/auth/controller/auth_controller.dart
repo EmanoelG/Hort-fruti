@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
@@ -61,10 +60,10 @@ class AuthController extends GetxController {
     _user.when(
       sucess: (UserModel user) async {
         userModel = user;
-        Map<String, String> token_user = {
+        Map<String, String> tokenUser = {
           KeysApp.userToken: userModel.token.toString(),
         };
-        _utils.saveLocalData(token_user);
+        _utils.saveLocalData(tokenUser);
         Get.offAllNamed(PagesRoutes.baseRoute);
       },
       error: (msg) {
@@ -84,11 +83,11 @@ class AuthController extends GetxController {
     authResult!.when(
       sucess: (user) {
         isLoading.value = false;
-        this.userModel = user;
-        Map<String, String> token_user = {
+        userModel = user;
+        Map<String, String> tokenUser = {
           KeysApp.userToken: user.token.toString(),
         };
-        _utils.saveLocalData(token_user);
+        _utils.saveLocalData(tokenUser);
         Get.offAllNamed(PagesRoutes.baseRoute);
       },
       error: (message) {
@@ -107,7 +106,7 @@ class AuthController extends GetxController {
   Future<void> validateToken() async {
     String userToken = await _utils.loadLocalData(KeysApp.userToken) ?? '';
     AuthResult _user;
-    if (userToken == null) {
+    if (userToken.isEmpty) {
       Get.offAllNamed(PagesRoutes.singInRoute);
     } else {
       AuthRepository loginApp = AuthRepository();

@@ -27,12 +27,13 @@ class CustomShimmer extends StatelessWidget {
       child: Shimmer.fromColors(
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 36, 35, 35).withAlpha(50),
+            color: const Color.fromARGB(255, 36, 35, 35).withAlpha(50),
             borderRadius: borderRadius ?? BorderRadius.circular(20),
           ),
         ),
         baseColor: baseColor ?? Colors.grey.shade800,
-        highlightColor: highlightColor ?? Color.fromARGB(255, 247, 12, 12),
+        highlightColor:
+            highlightColor ?? const Color.fromARGB(255, 247, 12, 12),
       ),
     );
   }

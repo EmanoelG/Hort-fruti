@@ -8,7 +8,7 @@ class ItemModel {
   // @JsonKey(name: "title")
   // Se o title fosse itemName mas no json fosse title, daria para utilizar o
   @JsonKey(name: "title")
-  late String ItemName;
+  late String itemName;
   @JsonKey(name: "picture")
   late String img;
   late String unit;
@@ -17,7 +17,7 @@ class ItemModel {
 
   ItemModel({
     this.id = '',
-    required this.ItemName,
+    required this.itemName,
     required this.img,
     required this.unit,
     required this.price,
@@ -31,6 +31,6 @@ class ItemModel {
 
   @override
   String toString() {
-    return 'ItemModel(id: $id, ItemName: $ItemName, img: $img, unit: $unit, precie: $price, description: $description)';
+    return 'ItemModel(id: $id, ItemName: $itemName, img: $img, unit: $unit, precie: $price, description: $description)';
   }
 }

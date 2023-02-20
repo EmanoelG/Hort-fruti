@@ -8,6 +8,7 @@ import '../../../../util/font_app.dart';
 import '../../../common_widgets/payment_dialog.dart';
 import 'order_status_widget.dart';
 
+// ignore: must_be_immutable
 class OrderTitle extends StatelessWidget {
   final OrderModel order;
   OrderTitle({
@@ -23,14 +24,12 @@ class OrderTitle extends StatelessWidget {
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: Container(
-          child: GetBuilder<OrderController>(
-            init: OrderController(order: order),
-            global: false,
-            builder: (controller) {
-              return expantionTitle(context: context, controller: controller);
-            },
-          ),
+        child: GetBuilder<OrderController>(
+          init: OrderController(order: order),
+          global: false,
+          builder: (controller) {
+            return expantionTitle(context: context, controller: controller);
+          },
         ),
       ),
     );
@@ -45,7 +44,7 @@ class OrderTitle extends StatelessWidget {
         }
       },
       //  initiallyExpanded: order.status == 'pending_payment',
-      childrenPadding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+      childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       children: controller.isLoading
           ? [
@@ -161,7 +160,7 @@ class OrderTitle extends StatelessWidget {
           ),
           Expanded(
             child: TextApp(
-              texto: order.item.ItemName.toString(),
+              texto: order.item.itemName.toString(),
             ),
           ),
           TextApp(

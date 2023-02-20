@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
 
@@ -30,6 +29,7 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   ListView profile_info() {
     return ListView(
       physics: const BouncingScrollPhysics(),
@@ -38,10 +38,11 @@ class _ProfileTabState extends State<ProfileTab> {
         FormDefault(
           validatorValue: (email) {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
+            return null;
           },
           readOnly: true,
           initiValue: authController.userModel.email,
-          iconTitipo: Icon(Icons.email),
+          iconTitipo: const Icon(Icons.email),
           isSecret: false,
           inputMenssagem: 'Usuario',
         ),
@@ -51,10 +52,11 @@ class _ProfileTabState extends State<ProfileTab> {
         FormDefault(
           validatorValue: (email) {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
+            return null;
           },
           readOnly: true,
           initiValue: authController.userModel.name,
-          iconTitipo: Icon(Icons.person),
+          iconTitipo: const Icon(Icons.person),
           isSecret: false,
           inputMenssagem: 'Nome',
         ),
@@ -64,10 +66,11 @@ class _ProfileTabState extends State<ProfileTab> {
         FormDefault(
           validatorValue: (email) {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
+            return null;
           },
           readOnly: true,
           initiValue: authController.userModel.celular,
-          iconTitipo: Icon(Icons.phone),
+          iconTitipo: const Icon(Icons.phone),
           isSecret: false,
           inputMenssagem: 'Phone',
         ),
@@ -77,10 +80,11 @@ class _ProfileTabState extends State<ProfileTab> {
         FormDefault(
           validatorValue: (email) {
             if (email == null) return 'Preencha e-mail ou senha corretamente !';
+            return null;
           },
           readOnly: true,
           initiValue: authController.userModel.cpf,
-          iconTitipo: Icon(Icons.file_copy),
+          iconTitipo: const Icon(Icons.file_copy),
           isSecret: true,
           inputMenssagem: 'CPF',
         ),
@@ -111,6 +115,7 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   logout_user() {
     AuthController auth = AuthController();
     return IconButton(
@@ -176,7 +181,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         keyboardType: TextInputType.text,
                         type: TextInputType.text,
                         validatorValue: passwordValidator,
-                        iconTitipo: Icon(Icons.lock_outline),
+                        iconTitipo: const Icon(Icons.lock_outline),
                         controller: newPasswordControlller,
                         isSecret: true,
                         inputMenssagem: 'Nova senha',
@@ -188,7 +193,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         readOnly: false,
                         keyboardType: TextInputType.text,
                         type: TextInputType.text,
-                        iconTitipo: Icon(Icons.lock_outline),
+                        iconTitipo: const Icon(Icons.lock_outline),
                         isSecret: true,
                         inputMenssagem: 'Confirmar nova senha',
                         validatorValue: (newPassword) {
@@ -226,7 +231,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                 ),
                               ),
                               child: authController.isLoading.value
-                                  ? CircularProgressIndicator()
+                                  ? const CircularProgressIndicator()
                                   : const Text(
                                       'atualizar',
                                       style: TextStyle(

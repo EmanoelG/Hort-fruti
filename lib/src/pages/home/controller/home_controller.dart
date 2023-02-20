@@ -63,11 +63,10 @@ class HomeController extends GetxController {
 
   Future<void> seilaUe() async {
     currentCategory!.pagination++;
-    print('Buscando mais produtos ${currentCategory!.pagination}');
     getAllProducts(canLoading: false);
   }
 
-  void FilterByTitle() {
+  void filterByTitle() {
     for (var category in allCategories) {
       category.items.clear();
       category.pagination = 0;
@@ -124,7 +123,6 @@ class HomeController extends GetxController {
         //  currentCategory!.items = data;
       },
       error: (er) {
-        print('Deu error $er');
         _utils.showToats(message: er);
       },
     );
@@ -133,7 +131,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    debounce(searchTitle, (_) => FilterByTitle(),
+    debounce(searchTitle, (_) => filterByTitle(),
         time: const Duration(seconds: 1));
     getAllCategories();
   }

@@ -8,7 +8,7 @@ import 'package:sacolao_de_frutas/src/service/form_services.dart';
 import '../common_widgets/quantity_widget.dart';
 
 class ProdutctScreen extends StatefulWidget {
-  ProdutctScreen({Key? key}) : super(key: key);
+  const ProdutctScreen({Key? key}) : super(key: key);
 
   @override
   State<ProdutctScreen> createState() => _ProdutctScreenState();
@@ -55,7 +55,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            item.ItemName,
+                            item.itemName,
                             style: const TextStyle(
                               fontSize: 27,
                               fontWeight: FontWeight.bold,

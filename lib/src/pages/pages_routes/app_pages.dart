@@ -15,15 +15,15 @@ abstract class AppPages {
   static final page = <GetPage>[
     GetPage(
       name: '/${PagesRoutes.productRoute}',
-      page: () => ProdutctScreen(),
+      page: () => const ProdutctScreen(),
     ),
     GetPage(
       name: '/splashscreen',
-      page: () => SplashScreen(),
+      page: () => const SplashScreen(),
     ),
     GetPage(
       name: '/signin',
-      page: () => SingUpScreen(),
+      page: () => SingUpscreen(),
     ),
     GetPage(
       name: '/signup',
@@ -31,11 +31,11 @@ abstract class AppPages {
     ),
     GetPage(
       name: '/hometab',
-      page: () => HomeTab(),
+      page: () => const HomeTab(),
     ),
     GetPage(
       name: '/',
-      page: () => BaseScreen(),
+      page: () => const BaseScreen(),
       bindings: [
         NavigationBinding(),
         HomeBinding(),
