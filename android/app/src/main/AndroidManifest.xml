@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sacolao_de_frutas">
+    <uses-permission android:name="android.permission.INTERNET" />xc
    <application
         android:label="sacolao_de_frutas"
         android:name="${applicationName}"

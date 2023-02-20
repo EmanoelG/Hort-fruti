@@ -5,7 +5,6 @@ import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import 'package:sacolao_de_frutas/src/config/custom_color.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
-import '../../../models/cart_item_model.dart';
 import 'components/card_item.dart';
 
 class CartTab extends StatefulWidget {
@@ -17,22 +16,6 @@ class CartTab extends StatefulWidget {
 
 class _CartTabState extends State<CartTab> {
   final UtilsService utilsService = UtilsService();
-  double total = 0;
-  void removeItemFromCart(CartItemModel cartitem) {
-    // setState(() {
-    //   cartItems.remove(cartitem);
-    //   utilsService.showToats(
-    //       message: '${cartitem.item.ItemName} removido do carinho !');
-    // });
-  }
-
-  double cartTotalPrice() {
-    // cartItems.forEach((element) {
-    //   total = total + (element.item.price) * element.quantity;
-    // });
-    // return total;
-    return 0;
-  }
 
   final controllerCart = Get.find<CartController>();
 
@@ -120,7 +103,8 @@ class _CartTabState extends State<CartTab> {
                                 borderRadius: BorderRadius.circular(18),
                               ),
                             ),
-                            onPressed: controller.isCheckoutLoad
+                            onPressed: (controller.isCheckoutLoad ||
+                                    controller.cartItems.isEmpty)
                                 ? null
                                 : () async {
                                     bool? result =
