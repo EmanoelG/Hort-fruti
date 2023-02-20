@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
+import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
@@ -64,10 +65,15 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   _body(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        children: [_searchproduto(), _categoria(), _griditens(context)],
+        children: [
+          TitleApp(fontTitle: 35),
+          _searchproduto(),
+          _categoria(),
+          _griditens(context)
+        ],
       ),
     );
   }
@@ -184,7 +190,6 @@ class _HomeTabState extends State<HomeTab> {
             controller: searchController,
             onChanged: ((value) {
               controllerGlob.searchTitle.value = value;
-              //  FilterByTitle();
             }),
             decoration: InputDecoration(
               filled: true,

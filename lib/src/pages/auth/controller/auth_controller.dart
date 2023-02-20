@@ -63,7 +63,7 @@ class AuthController extends GetxController {
         Map<String, String> tokenUser = {
           KeysApp.userToken: userModel.token.toString(),
         };
-        _utils.saveLocalData(tokenUser);
+        saveTokenAndProceedToBase();
         Get.offAllNamed(PagesRoutes.baseRoute);
       },
       error: (msg) {
@@ -72,22 +72,22 @@ class AuthController extends GetxController {
     );
   }
 
-  Future<void> restPass(String email) async {
+  Future<void> restPass(remail) async {
     AuthRepository loginApp = AuthRepository();
-    loginApp.resetPassword(email);
+    loginApp.resetPassword(remail);
   }
 
   Future<void> singUp(UserModel user) async {
     isLoading.value = true;
-    AuthResult? authResult = await authRepository.singUp(user);
+    AuthResult? authResult = await authRepository.singUp(userModel);
     authResult!.when(
       sucess: (user) {
         isLoading.value = false;
         userModel = user;
         Map<String, String> tokenUser = {
-          KeysApp.userToken: user.token.toString(),
+          KeysApp.userToken: userModel.token!,
         };
-        _utils.saveLocalData(tokenUser);
+        saveTokenAndProceedToBase();
         Get.offAllNamed(PagesRoutes.baseRoute);
       },
       error: (message) {
@@ -98,27 +98,37 @@ class AuthController extends GetxController {
   }
 
   Future<void> signOut() async {
-    userModel = UserModel();
-    _utils.deleteLocalData(userModel.token ?? '');
+    // final authController = Get.find<AuthController>();
+    // userModel = UserModel();
+    await _utils.deleteLocalData(KeysApp.userToken);
     Get.offAllNamed(PagesRoutes.singInRoute);
+  }
+
+  void saveTokenAndProceedToBase() {
+    // Salvar o token
+    Map<String, dynamic> doToken = {KeysApp.userToken: userModel.token!};
+    _utils.saveLocalData(doToken);
+
+    // Ir para a base
+    Get.offAllNamed(PagesRoutes.baseRoute);
   }
 
   Future<void> validateToken() async {
     String userToken = await _utils.loadLocalData(KeysApp.userToken) ?? '';
     AuthResult _user;
-    if (userToken.isEmpty) {
+    if (userToken == null) {
       Get.offAllNamed(PagesRoutes.singInRoute);
+      return;
     } else {
       AuthRepository loginApp = AuthRepository();
       _user = await loginApp.validateToken(userToken);
       _user.when(
         sucess: (user) {
           userModel = user;
-          Get.offAllNamed(PagesRoutes.baseRoute);
+          saveTokenAndProceedToBase();
         },
         error: (error) {
           signOut();
-          Get.offAllNamed(PagesRoutes.singInRoute);
         },
       );
 

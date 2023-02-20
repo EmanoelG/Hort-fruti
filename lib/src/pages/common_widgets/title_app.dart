@@ -15,7 +15,7 @@ class TitleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        service.showToats(message: 'Olá, mundo !');
+        // service.showToats(message: 'Olá, mundo !');
       },
       child: Text.rich(
         TextSpan(

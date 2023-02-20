@@ -120,7 +120,7 @@ class _ProfileTabState extends State<ProfileTab> {
     AuthController auth = AuthController();
     return IconButton(
       onPressed: () async {
-        await auth.signOut();
+        auth.signOut();
         Get.offNamed(PagesRoutes.singInRoute);
       },
       icon: const Icon(Icons.logout),
@@ -250,7 +250,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 right: 5,
                 child: IconButton(
                   onPressed: (() {
-                    Navigator.of(context).pop();
+                    authController.signOut();
                   }),
                   icon: const Icon(Icons.close),
                 ),
