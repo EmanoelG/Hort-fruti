@@ -127,57 +127,42 @@ class _ItemTitleState extends State<ItemTitle> {
           ),
         ),
         //CART ICON
-        Positioned(
-          top: 4,
-          right: 4,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-            child: Material(
-              child: InkWell(
-                onTap: (() {
-                  // try {
-                  //   switchIcon();
-                  //   // ignore: empty_catches
-                  // } catch (e) {
-                  //   print('Error ' + e.toString());
-                  // }
-                }),
-                child: Ink(
-                  height: 30,
-                  width: 30,
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
-                  ),
-                  child: GetX<ViewController>(
-                     init: ViewController(),
-                    // dispose: (state) {
-                    //   state.controller?.setIsAddToCart(values: false);
-                    // },
-                    global: false,
-                    builder: (controller) {
-                      return IconButton(
-                        icon: Icon(
-                          //_addedToCart
-                          controller.isAddToCart.value
-                              ? Icons.check
-                              : Icons.shopping_cart,
-                        ),
-                        color: Colors.white,
-                        onPressed: () {
-                          cartController.addItemToCart(item: widget.item);
-
-                          switchIcon(controller);
-                        },
-                      );
-                    },
+        GetBuilder<ViewController>(
+          init: ViewController(),
+          global: false,
+          builder: (controller) {
+            return Positioned(
+              top: 4,
+              right: 4,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                child: Material(
+                  child: InkWell(
+                    onTap: (() {
+                      cartController.addItemToCart(item: widget.item);
+                      switchIcon(controller);
+                    }),
+                    child: Ink(
+                      height: 30,
+                      width: 30,
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
+                      ),
+                      child: Icon(
+                        controller.isAddToCart.value
+                            ? Icons.check
+                            : Icons.shopping_cart,
+                        color: const Color.fromARGB(255, 231, 231, 231),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         )
       ],
     );

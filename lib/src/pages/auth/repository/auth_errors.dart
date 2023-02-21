@@ -16,6 +16,6 @@ String authErrorString(String? code) {
     case 'INVALID_DATA':
       return 'Ocorreu um erro ao cadastrar usuário: Informacôes inválidas !';
     default:
-      return 'Um erro infinito';
+      return 'Um erro ';
   }
 }
