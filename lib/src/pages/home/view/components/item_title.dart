@@ -3,21 +3,20 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../config/custom_color.dart';
 import '../../../../models/item_model.dart';
 import '../../../../service/form_services.dart';
 import '../../../cart/controller/cart_controller.dart';
 import '../../../pages_routes/app_pages.dart';
+import '../controller/view_controller.dart';
 
 // ignore: must_be_immutable
 class ItemTitle extends StatefulWidget {
   final ItemModel item;
-
-  late void Function(GlobalKey) runAddToCardAnimationMethod;
-  ItemTitle({
+  const ItemTitle({
     Key? key,
     required this.item,
-    required this.runAddToCardAnimationMethod,
   }) : super(key: key);
 
   @override
@@ -28,32 +27,28 @@ class _ItemTitleState extends State<ItemTitle> {
   final UtilsService utilsService = UtilsService();
   final cartController = Get.find<CartController>();
   IconData titleIcon = Icons.add_shopping_cart_outlined;
-  late Timer _timer;
-  bool _addedToCart = false;
-  // Future<void> switchIcon() async {
-  //   setState(() => titleIcon = Icons.check);
-
-  //   await Future.delayed(const Duration(milliseconds: 1500));
-
-  //   setState(() => titleIcon = Icons.add_shopping_cart_outlined);
-  // }
+  Timer? _timer;
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
-  void switchIcon() {
-    setState(() {
-      _addedToCart = true;
-      _timer = Timer(Duration(seconds: 3), () {
-        setState(() {
-          _addedToCart = false;
-          cartController.addItemToCart(item: widget.item);
-        });
-      });
-    });
+  void switchIcon(ViewController controller) async {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+
+    controller.setIsAddToCart(values: true);
+    _timer = Timer(
+      const Duration(milliseconds: 1000),
+      () {
+        if (mounted) {
+          controller.setIsAddToCart(values: false);
+        }
+      },
+    );
   }
 
   @override
@@ -156,11 +151,28 @@ class _ItemTitleState extends State<ItemTitle> {
                   decoration: const BoxDecoration(
                     color: Colors.green,
                   ),
-                  child: IconButton(
-                    icon:
-                        Icon(_addedToCart ? Icons.check : Icons.shopping_cart),
-                    color: Colors.white,
-                    onPressed: switchIcon,
+                  child: GetX<ViewController>(
+                     init: ViewController(),
+                    // dispose: (state) {
+                    //   state.controller?.setIsAddToCart(values: false);
+                    // },
+                    global: false,
+                    builder: (controller) {
+                      return IconButton(
+                        icon: Icon(
+                          //_addedToCart
+                          controller.isAddToCart.value
+                              ? Icons.check
+                              : Icons.shopping_cart,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {
+                          cartController.addItemToCart(item: widget.item);
+
+                          switchIcon(controller);
+                        },
+                      );
+                    },
                   ),
                 ),
               ),
@@ -171,3 +183,18 @@ class _ItemTitleState extends State<ItemTitle> {
     );
   }
 }
+
+/*
+
+  onPressed: controller.isAddToCart.value
+                            ? null
+                            : () {
+                                print('Ok !!');
+                                cartController.addItemToCart(item: widget.item);
+
+                                switchIcon(controller);
+                              },
+                      );
+
+
+*/

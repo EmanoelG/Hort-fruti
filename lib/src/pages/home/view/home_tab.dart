@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +24,7 @@ class _HomeTabState extends State<HomeTab> {
   final UtilsService service = UtilsService();
   final searchController = TextEditingController();
   late Function(GlobalKey) runAddToCardAnimation;
-  void itemSelectedCartAnimation(GlobalKey gkImage) {
-    runAddToCardAnimation(gkImage);
-  }
+  final GlobalKey<_HomeTabState> mainAppKey = GlobalKey<_HomeTabState>();
 
   final controllerGlob = Get.find<HomeController>();
 
@@ -80,6 +80,7 @@ class _HomeTabState extends State<HomeTab> {
 
   _griditens(context) {
     return GetBuilder<HomeController>(
+      autoRemove: true,
       builder: (controllerItens) {
         return !controllerItens.isProductLoading
             ? Expanded(
@@ -101,15 +102,14 @@ class _HomeTabState extends State<HomeTab> {
                     },
                     scrollDirection: Axis.vertical,
                     itemCount: controllerItens.allProducts.length,
-                    itemBuilder: (_, index) {
+                    itemBuilder: (context, index) {
                       if (((index + 1) == controllerItens.allProducts.length) &&
                           !controllerItens.isLastPage) {
                         controllerItens.seilaUe();
                       }
                       return ItemTitle(
-                          item: controllerItens.allProducts[index],
-                          runAddToCardAnimationMethod:
-                              itemSelectedCartAnimation);
+                        item: controllerItens.allProducts[index],
+                      );
                     },
                   ),
                   replacement: Column(
@@ -159,22 +159,26 @@ class _HomeTabState extends State<HomeTab> {
           return SizedBox(
             height: 25,
             child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) {
-                  return CategoryTitle(
-                    category: controller.allCategories[index].title,
-                    isSelect: controller.allCategories[index] ==
-                        controller.currentCategory,
-                    onPresseds: () {
-                      controller
-                          .selectCategory(controller.allCategories[index]);
-                    },
-                  );
-                },
-                separatorBuilder: (_, index) => const SizedBox(
-                      width: 10,
-                    ),
-                itemCount: controller.allCategories.length),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                return CategoryTitle(
+                  category: controller.allCategories[index].title,
+                  isSelect: controller.allCategories[index] ==
+                      controller.currentCategory,
+                  onPresseds: () async {
+                    if (controller.allCategories[index] !=
+                        controller.currentCategory) {}
+                    Future.delayed(const Duration(milliseconds: 500)).then(
+                        (value) => controller
+                            .selectCategory(controller.allCategories[index]));
+                  },
+                );
+              },
+              separatorBuilder: (_, index) => const SizedBox(
+                width: 10,
+              ),
+              itemCount: controller.allCategories.length,
+            ),
           );
         },
       ),
