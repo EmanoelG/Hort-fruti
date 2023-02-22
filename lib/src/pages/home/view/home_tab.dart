@@ -35,7 +35,6 @@ class _HomeTabState extends State<HomeTab> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        //title: TitleApp(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
@@ -66,7 +65,7 @@ class _HomeTabState extends State<HomeTab> {
 
   _body(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           TitleApp(fontTitle: 35),

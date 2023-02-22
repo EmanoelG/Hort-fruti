@@ -20,10 +20,11 @@ class OrderTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.0),
       ),
       child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        data: Theme.of(context)
+            .copyWith(dividerColor: const Color.fromARGB(0, 226, 7, 7)),
         child: GetBuilder<OrderController>(
           init: OrderController(order: order),
           global: false,
@@ -35,16 +36,20 @@ class OrderTitle extends StatelessWidget {
     );
   }
 
+  // elevation: 1,
+  // shape: RoundedRectangleBorder(
+  //   borderRadius: BorderRadius.circular(20.0),
+  // ),
   ExpansionTile expantionTitle(
       {required BuildContext context, required OrderController controller}) {
     return ExpansionTile(
+      childrenPadding: const EdgeInsets.all(16),
       onExpansionChanged: (value) {
         if (value = true && order.items.isEmpty) {
           controller.getOrderItems();
         }
       },
-      //  initiallyExpanded: order.status == 'pending_payment',
-      childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      //  childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       children: controller.isLoading
           ? [
