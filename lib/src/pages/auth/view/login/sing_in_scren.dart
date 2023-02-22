@@ -214,7 +214,7 @@ class SingInScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Get.offNamed(PagesRoutes.singUpRoute);
+                  Get.offAllNamed(PagesRoutes.singUpRoute);
                 },
                 child: const Text(
                   'Criar Conta',

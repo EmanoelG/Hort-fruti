@@ -35,11 +35,11 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.all(32),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(50),
+                      top: Radius.circular(20),
                     ),
                     boxShadow: [
                       BoxShadow(

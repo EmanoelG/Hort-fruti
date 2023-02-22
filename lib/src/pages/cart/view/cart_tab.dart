@@ -61,19 +61,39 @@ class _CartTabState extends State<CartTab> {
           ),
 
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
+            // decoration: const BoxDecoration(
+            //  border: ,
+            //   color: Colors.white,
+            //   borderRadius: BorderRadius.vertical(
+            //     top: Radius.circular(30),
+            //   ),
+            //   // boxShadow: [
+            //   //   BoxShadow(
+            //   //     color: Color.fromARGB(103, 3, 3, 3),
+            //   //     blurRadius: 3,
+            //   //     spreadRadius: 2,
+            //   //   )
+            //   // ],
+            // ),
+
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(30),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+              border: Border.all(
+                color: Color.fromARGB(255, 95, 95, 95),
+                width: 1.0,
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  blurRadius: 5.0,
+                  spreadRadius: 1.0,
+                  offset: Offset(3.0, 3.0),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade600,
-                    blurRadius: 3,
-                    spreadRadius: 2,
-                  )
-                ]),
+              ],
+            ),
             child: GetBuilder<CartController>(
               builder: (controller) {
                 return Column(
@@ -100,7 +120,7 @@ class _CartTabState extends State<CartTab> {
                           return ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
                             onPressed: (controller.isCheckoutLoad ||

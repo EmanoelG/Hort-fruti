@@ -7,6 +7,7 @@ import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../../config/custom_color.dart';
 import '../../../../util/compentes/custom_textField.dart';
 import '../../../common_widgets/title_app.dart';
+import '../../../pages_routes/app_pages.dart';
 import '../../controller/auth_controller.dart';
 
 // ignore: must_be_immutable
@@ -46,39 +47,58 @@ class SingUpscreen extends StatelessWidget {
       child: SizedBox(
         height: size.height,
         width: size.width,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        CustomColors.colorButtonMain,
-                        const Color.fromARGB(255, 90, 207, 94),
-                        const Color.fromARGB(255, 215, 240, 188),
-                      ]),
-                ),
-                child: _titleLogin(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            CustomColors.colorButtonMain,
+                            const Color.fromARGB(255, 90, 207, 94),
+                            const Color.fromARGB(255, 215, 240, 188),
+                          ]),
+                    ),
+                    child: _titleLogin(),
                   ),
                 ),
-                child: _formLogin(context),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: _formLogin(context),
+                  ),
+                ),
+              ],
             ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: SafeArea(
+                child: IconButton(
+                  onPressed: () {
+                    Get.offNamed(PagesRoutes.singInRoute);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
