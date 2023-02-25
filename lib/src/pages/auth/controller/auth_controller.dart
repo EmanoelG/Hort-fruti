@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
+import '../../../service/connectivitywidget.dart';
 import '../../../service/provider_manager.dart';
 import '../../pages_routes/app_pages.dart';
 import '../repository/auth_repository.dart';
@@ -9,14 +11,35 @@ import '../result/auth_result.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool hasUsed = false.obs;
   RxBool isLoadingChangePassword = false.obs;
   UserModel userModel = UserModel();
   final UtilsService _utils = UtilsService();
   final authRepository = AuthRepository();
+  final ConnectionService connectionController = Get.find<ConnectionService>();
+  
   @override
   void onInit() {
     super.onInit();
+
     validateToken();
+
+    // Adiciona o ever para monitorar a conexão
+    ever(
+      connectionController.connectionStatus,
+      (isConnected) {
+       
+        if (hasUsed.value == false && isConnected != 0) {
+          validateToken();
+        }
+      },
+    );
+  }
+
+  @override
+  void onClose() {
+    print('Fechando !!');
+    super.onClose();
   }
 
   setValueChangePassword(value) {
@@ -106,26 +129,34 @@ class AuthController extends GetxController {
   }
 
   Future<void> validateToken() async {
-    String userToken = await _utils.loadLocalData(KeysApp.userToken) ?? '';
-    AuthResult _user;
-    // ignore: unnecessary_null_comparison
-    if (userToken == null) {
-      Get.offAllNamed(PagesRoutes.singInRoute);
-      return;
+    if (connectionController.connectionStatus.value == 0) {
+      //_utils.showToats(message: 'Sem conexão com a internet !');
+      if (connectionController.connectionStatus.value == 0) {
+        return;
+      }
     } else {
-      AuthRepository loginApp = AuthRepository();
-      _user = await loginApp.validateToken(userToken);
-      _user.when(
-        sucess: (user) {
-          userModel = user;
-          saveTokenAndProceedToBase();
-        },
-        error: (error) {
-          signOut();
-        },
-      );
+      String userToken = await _utils.loadLocalData(KeysApp.userToken) ?? '';
+      AuthResult _user;
+      // ignore: unnecessary_null_comparison
+      if (userToken.isEmpty) {
+        Get.offAllNamed(PagesRoutes.singInRoute);
+        return;
+      } else {
+        AuthRepository loginApp = AuthRepository();
+        _user = await loginApp.validateToken(userToken);
+        _user.when(
+          sucess: (user) {
+            userModel = user;
+            hasUsed.value = true;
+            saveTokenAndProceedToBase();
+          },
+          error: (error) {
+            signOut();
+          },
+        );
 
-      _user.printInfo();
+        _user.printInfo();
+      }
     }
   }
 }

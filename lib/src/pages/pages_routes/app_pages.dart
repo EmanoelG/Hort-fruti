@@ -19,7 +19,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: '/splashscreen',
-      page: () => const SplashScreen(),
+      page: () =>  SplashScreen(),
       bindings: [
         ViewBinding(),
       ],
@@ -35,6 +35,7 @@ abstract class AppPages {
     GetPage(
       name: '/hometab',
       page: () => const HomeTab(),
+       
     ),
     GetPage(
       name: '/',

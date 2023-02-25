@@ -1,13 +1,13 @@
 import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
-
 import '../../../const/endpoint.dart';
+import '../../../service/form_services.dart';
 import '../../../service/provider_manager.dart';
 import '../result/home_result.dart';
 
 class HomeRespository {
   final HttpManager _httpManager = HttpManager();
-
+  final UtilsService _utils = UtilsService();
   Future<HomeResult<CategoryModel>> getAllCategories() async {
     try {
       final result = await _httpManager.restRequest(

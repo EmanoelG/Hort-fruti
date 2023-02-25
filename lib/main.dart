@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sacolao_de_frutas/src/pages/home/view/controller/view_controller.dart';
-import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
 import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
+import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
+
+import 'src/service/connectivitywidget.dart';
 
 void main() {
-  Get.put(AuthController());
-  Get.put(ViewController());
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((_) {
-    runApp(const MyApp());
+    runApp(MyApp());
   });
 }
+
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -21,11 +25,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      scaffoldMessengerKey: scaffoldMessengerKey,
       title: 'Green Grocer',
       debugShowCheckedModeBanner: false,
+      initialBinding: BindingsBuilder(
+        () {
+          Get.put(ConnectionService());
+          Get.put(AuthController());
+        },
+      ),
+      onDispose: () {
+        Get.delete<AuthController>();
+      },
       theme: ThemeData(
-          primarySwatch: Colors.green,
-          scaffoldBackgroundColor: Colors.white.withAlpha(190)),
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.white.withAlpha(190),
+      ),
       initialRoute: PagesRoutes.splashScreen,
       getPages: AppPages.page,
     );
