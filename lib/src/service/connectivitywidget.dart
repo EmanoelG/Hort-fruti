@@ -75,9 +75,16 @@ class ConnectionService extends GetxService {
     }
   }
 
-  Future<void> _statusInternetAt(
-      {required int iconenctionStatus,
-      required bool binternetController}) async {
+  Future<void> _statusInternetAt({
+    required int iconenctionStatus,
+    required bool binternetController,
+  }) async {
+    //Queria verificar a conexao com internet mesmo conectado no wi-fi
+    //Exemplo:
+    /*
+    Estou no wi-fi e derrepente ele fica sem internet
+    queria notificar o usuario se ele esta sem internte.
+    */
     internetController.value = binternetController;
 
     if (iconenctionStatus == 1) {
