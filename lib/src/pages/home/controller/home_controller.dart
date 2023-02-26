@@ -2,17 +2,14 @@ import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import 'package:sacolao_de_frutas/src/pages/home/result/home_result.dart';
-import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../../service/connectivitywidget.dart';
-import '../../auth/controller/auth_controller.dart';
 import '../repository/home_repository.dart';
 
 const int itemsPerPage = 6;
 
 class HomeController extends GetxController {
   final homeRespository = HomeRespository();
-  final UtilsService _utils = UtilsService();
   bool isCategoryLoading = false;
   bool isProductLoading = true;
   List<CategoryModel> allCategories = [];
@@ -46,9 +43,7 @@ class HomeController extends GetxController {
 
   Future<void> getAllCategories() async {
     // setLoading(true, isProduct: true);
-    if (_connectionService.connectionStatus.value == 0) {
-      _utils.showToats(message: 'Sem conexão com a internet !');
-    }
+
     HomeResult<CategoryModel> homeResult =
         await homeRespository.getAllCategories();
     //setLoading(false, isProduct: true);
@@ -61,7 +56,7 @@ class HomeController extends GetxController {
         selectCategory(data.first);
       },
       error: (er) {
-        _utils.showToats(message: er);
+        //  _utils.showToats(message: er);
       },
     );
   }
@@ -72,9 +67,6 @@ class HomeController extends GetxController {
   }
 
   void filterByTitle() {
-    if (_connectionService.connectionStatus.value == 0) {
-      _utils.showToats(message: 'Sem conexão com a internet !');
-    }
     for (var category in allCategories) {
       category.items.clear();
       category.pagination = 0;
@@ -103,10 +95,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> getAllProducts({bool canLoading = true}) async {
-    if (_connectionService.connectionStatus.value == 0) {
-      _utils.showToats(message: 'Sem conexão com a internet !');
-    }
-
     if (canLoading == true) {
       setLoading(true, isProduct: true);
     }
@@ -135,7 +123,7 @@ class HomeController extends GetxController {
         //  currentCategory!.items = data;
       },
       error: (er) {
-        _utils.showToats(message: er);
+        // _utils.showToats(message: er);
       },
     );
   }
@@ -143,7 +131,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-   // Get.delete<AuthController>();
+
     debounce(searchTitle, (_) => filterByTitle(),
         time: const Duration(seconds: 1));
     getAllCategories();

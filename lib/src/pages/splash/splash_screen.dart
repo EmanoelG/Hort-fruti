@@ -34,7 +34,7 @@ class SplashScreen extends StatelessWidget {
           children: [
             TitleApp(fontTitle: 40),
             connectionController.connectionStatus.value == 0
-                ? const NoInternetCard()
+                ? NoInternetCard()
                 : const CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation(Colors.white),
                   )

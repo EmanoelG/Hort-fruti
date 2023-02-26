@@ -159,6 +159,7 @@ class AuthController extends GetxController {
               signOut();
             } else if (error == ErrorAppType.notAcessInternet) {
               print('Sem conexao com internet!!');
+              connectionController.connectionStatus.value = 0;
             }
           },
         );

@@ -1,10 +1,11 @@
+import 'package:get/get_connect/connect.dart';
 import 'package:sacolao_de_frutas/src/service/provider_manager.dart';
 import '../../../const/endpoint.dart';
 import '../../../models/user_model.dart';
 import '../result/auth_result.dart';
 import 'auth_errors.dart';
 
-class AuthRepository {
+class AuthRepository extends GetConnect {
   final HttpManager _httpManager = HttpManager();
 
   Future<bool> changePassword({
@@ -35,9 +36,10 @@ class AuthRepository {
     };
     try {
       final result = await _httpManager.restRequest(
-          url: EndPoints.validateToken,
-          metod: HttpMetod.post,
-          headers: tokenHeader);
+        url: EndPoints.validateToken,
+        metod: HttpMetod.post,
+        headers: tokenHeader,
+      );
       return handleuserOrError(result);
     } catch (e) {
       return AuthResult.error('{"error": "Internal error ${e.toString()}"  }');

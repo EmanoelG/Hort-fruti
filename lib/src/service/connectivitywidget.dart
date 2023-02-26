@@ -10,11 +10,12 @@ class ConnectionService extends GetxService {
   RxBool hasInitialConnection = false.obs;
   RxInt timeDoConnection = 0.obs;
   RxBool internetController = false.obs;
-
+    
   @override
   void onInit() {
     super.onInit();
     timeDoConnection.value = 10;
+
     checkInitialConnection();
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       updateConnectionStatus(result);
@@ -22,7 +23,7 @@ class ConnectionService extends GetxService {
   }
 
   Future<void> checkInitialConnection() async {
-    final connectivityResult = await Connectivity().checkConnectivity();
+    final connectivityResult = Connectivity().checkConnectivity();
     updateConnectionStatus(connectivityResult);
     hasInitialConnection.value = true;
   }

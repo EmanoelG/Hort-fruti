@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 
 abstract class HttpMetod {
@@ -31,6 +30,7 @@ class HttpManager {
     Dio dio = Dio();
     try {
       dio.options.connectTimeout = 15000;
+      dio.options.receiveTimeout = 15000;
       Response response = await dio.request(
         url,
         options: Options(
@@ -47,17 +47,21 @@ class HttpManager {
         // Lida com a exceção SocketException aqui
         print('Erro de conexão de rede: ${error.error}');
         return {'error': 'sem conexao de internet'};
-      } else  {
+      } else {
         // Lida com outras exceções aqui
-        if ( error.error is TimeoutException){
-           return {'error': 'sem conexao de internet'};
+        if (error.error is TimeoutException) {
+          return {'error': 'sem conexao de internet'};
+        } else if (error.type == DioErrorType.connectTimeout ||
+            error.type == DioErrorType.receiveTimeout) {
+          // lidar com o erro de timeout
+          print('A requisição excedeu o tempo limite.');
+          return {'error': 'sem conexao de internet'};
+        } else {
+          print('Erro inesperado: ${error.message}');
+          return error.response?.data ?? {};
         }
-        print('Erro inesperado: ${error.message}');
-        return error.response?.data ?? {};
       }
     } catch (error) {
-
-   
       return {'error': error.toString()};
     }
   }
