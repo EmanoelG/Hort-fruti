@@ -10,7 +10,7 @@ class ConnectionService extends GetxService {
   RxBool hasInitialConnection = false.obs;
   RxInt timeDoConnection = 0.obs;
   RxBool internetController = false.obs;
-    
+
   @override
   void onInit() {
     super.onInit();
@@ -28,23 +28,49 @@ class ConnectionService extends GetxService {
     hasInitialConnection.value = true;
   }
 
-  final snackBarOff = const SnackBar(
+  final snackBarOff = SnackBar(
+    action: SnackBarAction(
+      label: 'Fechar',
+      onPressed: () {
+        scaffoldMessengerKey.currentState!
+            .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
+      },
+    ),
     behavior: SnackBarBehavior.fixed,
-    content: Text('Sem conexão'),
+    content: const Text('Sem conexão'),
     backgroundColor: Colors.red,
-    duration: Duration(
+    duration: const Duration(
       days: 1,
     ),
   );
 
-  final snackBarOn = const SnackBar(
+  final snackBarOn = SnackBar(
+    action: SnackBarAction(
+      label: 'Fechar',
+      onPressed: () {
+        scaffoldMessengerKey.currentState!
+            .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
+      },
+    ),
     behavior: SnackBarBehavior.fixed,
-    content: Text('Conectado novamente'),
+    content: const Text('Conectado novamente'),
     backgroundColor: Colors.green,
-    duration: Duration(
+    duration: const Duration(
       seconds: 2,
     ),
   );
+
+  showSnackBar({required bool internet}) {
+    if (internetController.value == true) {
+      return;
+    } else {
+      scaffoldMessengerKey.currentState!
+          .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
+      internet == true
+          ? scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn)
+          : scaffoldMessengerKey.currentState!.showSnackBar(snackBarOff);
+    }
+  }
 
   void updateConnectionStatus(result) async {
     switch (result) {
@@ -98,12 +124,16 @@ class ConnectionService extends GetxService {
         connectionStatus.value == 0
             ? scaffoldMessengerKey.currentState!.showSnackBar(snackBarOff)
             : null;
+
+        internetController.value = true;
       } catch (e) {
         connectionStatus.value = 0;
+        internetController.value = false;
       }
     } else {
       scaffoldMessengerKey.currentState!.showSnackBar(snackBarOff);
       connectionStatus.value = 0;
+      internetController.value = false;
     }
   }
 }

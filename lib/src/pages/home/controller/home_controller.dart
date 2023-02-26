@@ -4,8 +4,8 @@ import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import 'package:sacolao_de_frutas/src/pages/home/result/home_result.dart';
 
 import '../../../service/connectivitywidget.dart';
+import '../../../service/error_type.dart';
 import '../../auth/controller/auth_controller.dart';
-import '../../auth/repository/auth_errors.dart';
 import '../repository/home_repository.dart';
 
 const int itemsPerPage = 6;
@@ -16,7 +16,7 @@ class HomeController extends GetxController {
   bool isProductLoading = true;
   List<CategoryModel> allCategories = [];
   List<ItemModel> get allProducts => currentCategory?.items ?? [];
-  final ConnectionService _connectionService = Get.find();
+  final ConnectionService _connectionController = Get.find();
 
   RxString searchTitle = ''.obs;
 
@@ -54,6 +54,9 @@ class HomeController extends GetxController {
         allCategories.assignAll(data);
         if (allCategories.isEmpty) return;
         selectCategory(data.first);
+        _connectionController.connectionStatus.value = 1;
+        _connectionController.showSnackBar(internet: true);
+        _connectionController.internetController.value = true;
       },
       error: (error) {
         AuthController auth = AuthController();
@@ -64,7 +67,7 @@ class HomeController extends GetxController {
         } else if (error == ErrorAppType.invalidTokenSession) {
           auth.signOut();
         } else if (error == ErrorAppType.notAcessInternet) {
-          _connectionService.connectionStatus.value = 0;
+          _connectionController.connectionStatus.value = 0;
         }
       },
     );
@@ -129,10 +132,23 @@ class HomeController extends GetxController {
     homeResult.when(
       sucess: (data) async {
         currentCategory!.items.addAll(data);
-        //  currentCategory!.items = data;
+        _connectionController.connectionStatus.value = 1;
+        _connectionController.showSnackBar(internet: true);
+        _connectionController.internetController.value = true;
       },
-      error: (er) {
-        // _utils.showToats(message: er);
+      error: (error) {
+        AuthController auth = AuthController();
+        if (error == ErrorAppType.invalidCredentials) {
+          auth.signOut();
+        } else if (error == ErrorAppType.invalidToken) {
+          auth.signOut();
+        } else if (error == ErrorAppType.invalidTokenSession) {
+          auth.signOut();
+        } else if (error == ErrorAppType.notAcessInternet) {
+          _connectionController.connectionStatus.value = 0;
+          _connectionController.internetController.value = false;
+          _connectionController.showSnackBar(internet: false);
+        }
       },
     );
   }

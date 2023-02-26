@@ -3,9 +3,9 @@ import 'package:sacolao_de_frutas/src/models/user_model.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
 
 import '../../../service/connectivitywidget.dart';
+import '../../../service/error_type.dart';
 import '../../../service/provider_manager.dart';
 import '../../pages_routes/app_pages.dart';
-import '../repository/auth_errors.dart';
 import '../repository/auth_repository.dart';
 import '../result/auth_result.dart';
 
@@ -34,7 +34,6 @@ class AuthController extends GetxController {
       },
     );
   }
-
 
   setValueChangePassword(value) {
     isLoadingChangePassword.value = value;

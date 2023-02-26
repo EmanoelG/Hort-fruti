@@ -2,6 +2,7 @@ import 'package:sacolao_de_frutas/src/models/categoria_model.dart';
 import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import '../../../const/endpoint.dart';
 import '../../../service/provider_manager.dart';
+import '../../auth/repository/auth_errors.dart';
 import '../result/home_result.dart';
 
 class HomeRespository {
@@ -12,6 +13,7 @@ class HomeRespository {
         url: EndPoints.getAllCategoria,
         metod: HttpMetod.post,
       );
+
       if (result['result'] != null) {
         List<CategoryModel> data =
             (List<Map<String, dynamic>>.from(result['result']))
@@ -21,13 +23,17 @@ class HomeRespository {
         return HomeResult<CategoryModel>.sucess(data);
         // return HomeResult<CategoryModel>.
       } else {
-        //Algo de errado nao esta certo !
-        return HomeResult<CategoryModel>.error(
-            'Ocorreu um erro inesperado ao recuperar categorias !');
+        if (result['error'] != null) {
+          return HomeResult.error(authErrorString(result['error']));
+        } else {
+          return HomeResult<CategoryModel>.error(
+              'Ocorreu um erro inesperado ao recuperar categorias !');
+        }
       }
     } catch (e) {
       return HomeResult<CategoryModel>.error(
-          'Ocorreu um erro inesperado ao recuperar categorias ! $e');
+        'Ocorreu um erro inesperado ao recuperar categorias ! $e',
+      );
     }
   }
 
@@ -47,7 +53,18 @@ class HomeRespository {
         // List<Map<String, dynamic>>.from(result['result'])
         return HomeResult.sucess(data);
       } else {
-        return HomeResult.error('Erro ao solicitar produtos ao servidor !');
+
+        if (result['error'] != null) {
+          return HomeResult.error(authErrorString(result['error']));
+        } else {
+        if (result['error'] != null) {
+          return HomeResult.error(authErrorString(result['error']));
+        } else {
+          return HomeResult<ItemModel>.error(
+              'Ocorreu um erro inesperado ao recuperar categorias !');
+        }
+      }
+      
       }
     } catch (e) {
       return HomeResult.error('Erro ao solicitar produtos ao servidor !');
