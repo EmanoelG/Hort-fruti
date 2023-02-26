@@ -6,6 +6,7 @@ import 'package:sacolao_de_frutas/src/service/form_services.dart';
 import '../../../service/connectivitywidget.dart';
 import '../../../service/provider_manager.dart';
 import '../../pages_routes/app_pages.dart';
+import '../repository/auth_errors.dart';
 import '../repository/auth_repository.dart';
 import '../result/auth_result.dart';
 
@@ -17,7 +18,7 @@ class AuthController extends GetxController {
   final UtilsService _utils = UtilsService();
   final authRepository = AuthRepository();
   final ConnectionService connectionController = Get.find<ConnectionService>();
-  
+
   @override
   void onInit() {
     super.onInit();
@@ -28,7 +29,6 @@ class AuthController extends GetxController {
     ever(
       connectionController.connectionStatus,
       (isConnected) {
-       
         if (hasUsed.value == false && isConnected != 0) {
           validateToken();
         }
@@ -151,7 +151,15 @@ class AuthController extends GetxController {
             saveTokenAndProceedToBase();
           },
           error: (error) {
-            signOut();
+            if (error == ErrorAppType.invalidCredentials) {
+              signOut();
+            } else if (error == ErrorAppType.invalidToken) {
+              signOut();
+            } else if (error == ErrorAppType.invalidTokenSession) {
+              signOut();
+            } else if (error == ErrorAppType.notAcessInternet) {
+              print('Sem conexao com internet!!');
+            }
           },
         );
 

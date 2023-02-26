@@ -14,19 +14,43 @@ class NoInternetCard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text(
-                  'Sem conexão com internet',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  'Verifique sua conexão com a internet e tente novamente',
-                  textAlign: TextAlign.center,
-                ),
+              children: [
+                RetryCard(
+                    errorMessage: 'Sem conexão com internet',
+                    onRetryPressed: () {}),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class RetryCard extends StatelessWidget {
+  final String errorMessage;
+  final Function onRetryPressed;
+
+  RetryCard({required this.errorMessage, required this.onRetryPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              errorMessage,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              child: Text('Tente Novamente'),
+              onPressed: () {},
+            ),
+          ],
         ),
       ),
     );

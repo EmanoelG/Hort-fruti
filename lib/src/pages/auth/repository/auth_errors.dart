@@ -1,11 +1,11 @@
 String authErrorString(String? code) {
   switch (code) {
     case 'INVALID_CREDENTIALS':
-      return 'Email ou senha inválidos';
+      return ErrorAppType.invalidCredentials;
     case 'Invalid session token':
-      return 'Token expirado ou invalido !';
+      return ErrorAppType.invalidTokenSession;
     case 'INVALID_TOKEN':
-      return 'é necessário informar um token';
+      return ErrorAppType.invalidToken;
 
     case 'INVALID_PHONE':
       return 'Ocorreu um erro ao cadastrar usuário: Celular inválido !';
@@ -15,7 +15,17 @@ String authErrorString(String? code) {
       return 'Ocorreu um erro ao cadastrar usuário: nOME inválido !';
     case 'INVALID_DATA':
       return 'Ocorreu um erro ao cadastrar usuário: Informacôes inválidas !';
+    case 'sem conexao de internet':
+      return ErrorAppType.notAcessInternet;
     default:
       return 'Um erro ';
   }
+}
+
+abstract class ErrorAppType {
+  static const String invalidCredentials = 'Email ou senha inválidos';
+  static const String invalidTokenSession = 'Token expirado ou invalido !';
+  static const String invalidToken = 'é necessário informar um token';
+  static const String notAcessInternet =
+      'sem conexao de internet, verifique a conexão e tente novamente';
 }

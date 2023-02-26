@@ -44,34 +44,36 @@ class _BaseScreenState extends State<BaseScreen> {
   }
 
   Widget _bottonNavBar() {
-    return Obx(() => BottomNavigationBar(
-          selectedLabelStyle: const TextStyle(color: Colors.white),
-          selectedItemColor: Colors.white,
-          backgroundColor: Colors.green,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: navigationController.currentIndex,
-          onTap: (indexTap) {
-            navigationController.navigationPageView(indexTap);
-          },
-          items: const [
-            BottomNavigationBarItem(
-              label: 'Home',
-              backgroundColor: Colors.white,
-              icon: Icon(Icons.home, color: Colors.white),
-            ),
-            BottomNavigationBarItem(
-              label: 'Pedidos',
-              icon: Icon(Icons.list, color: Colors.white),
-            ),
-            BottomNavigationBarItem(
-              label: 'Carinho',
-              icon: Icon(Icons.shopping_cart_outlined, color: Colors.white),
-            ),
-            BottomNavigationBarItem(
-              label: 'Usuário',
-              icon: Icon(Icons.person, color: Colors.white),
-            ),
-          ],
-        ));
+    return Obx(
+      () => BottomNavigationBar(
+        selectedLabelStyle: const TextStyle(color: Colors.white),
+        selectedItemColor: Colors.white,
+        backgroundColor: Colors.green,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: navigationController.currentIndex,
+        onTap: (indexTap) {
+          navigationController.navigationPageView(indexTap);
+        },
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Home',
+            backgroundColor: Colors.white,
+            icon: Icon(Icons.home, color: Colors.white),
+          ),
+          BottomNavigationBarItem(
+            label: 'Pedidos',
+            icon: Icon(Icons.list, color: Colors.white),
+          ),
+          BottomNavigationBarItem(
+            label: 'Carinho',
+            icon: Icon(Icons.shopping_cart_outlined, color: Colors.white),
+          ),
+          BottomNavigationBarItem(
+            label: 'Usuário',
+            icon: Icon(Icons.person, color: Colors.white),
+          ),
+        ],
+      ),
+    );
   }
 }
