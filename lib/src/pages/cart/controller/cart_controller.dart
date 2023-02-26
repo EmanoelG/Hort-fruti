@@ -80,6 +80,7 @@ class CartController extends GetxController {
     }, error: (error) {
       utilServices.showToats(
         message: error,
+        isError: true,
       );
     });
     return result;
@@ -112,8 +113,9 @@ class CartController extends GetxController {
       update();
     } else {
       utilServices.showToats(
-          message: 'Ocorreu um erro ao alterar a quantidade de produtos',
-          isError: true);
+        message: 'Ocorreu um erro ao alterar a quantidade de produtos',
+        isError: true,
+      );
     }
 
     return result;

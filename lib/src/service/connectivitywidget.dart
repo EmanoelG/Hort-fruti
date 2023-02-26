@@ -15,7 +15,7 @@ class ConnectionService extends GetxService {
   void onInit() {
     super.onInit();
     timeDoConnection.value = 10;
-
+    internetController.value = true;
     checkInitialConnection();
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       updateConnectionStatus(result);
