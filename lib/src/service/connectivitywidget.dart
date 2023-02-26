@@ -31,6 +31,7 @@ class ConnectionService extends GetxService {
   final snackBarOff = SnackBar(
     action: SnackBarAction(
       label: 'Fechar',
+      textColor: Colors.white,
       onPressed: () {
         scaffoldMessengerKey.currentState!
             .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
@@ -38,7 +39,7 @@ class ConnectionService extends GetxService {
     ),
     behavior: SnackBarBehavior.fixed,
     content: const Text('Sem conexão'),
-    backgroundColor: Colors.red,
+    backgroundColor: Colors.black,
     duration: const Duration(
       days: 1,
     ),
@@ -75,23 +76,38 @@ class ConnectionService extends GetxService {
   void updateConnectionStatus(result) async {
     switch (result) {
       case ConnectivityResult.wifi:
-        scaffoldMessengerKey.currentState!
-            .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
+        try {
+          scaffoldMessengerKey.currentState!
+              .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
 
-        internetController.value == true
-            ? scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn)
-            : null;
-        _statusInternetAt(binternetController: false, iconenctionStatus: 1);
+          if (internetController.value == false) {
+            if (scaffoldMessengerKey != null) {
+              scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn);
+            }
+          }
+
+          _statusInternetAt(binternetController: false, iconenctionStatus: 1);
+        } catch (error) {
+          print('Errorss  ' + error.toString());
+        }
+
         break;
       case ConnectivityResult.mobile:
-        scaffoldMessengerKey.currentState!
-            .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
+        try {
+          scaffoldMessengerKey.currentState!
+              .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
 
-        internetController.value == true
-            ? scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn)
-            : null;
+          if (internetController.value == false) {
+            if (scaffoldMessengerKey != null) {
+              scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn);
+            }
+          }
 
-        _statusInternetAt(binternetController: false, iconenctionStatus: 1);
+          _statusInternetAt(binternetController: false, iconenctionStatus: 1);
+        } catch (error) {
+          print('Errorss  ' + error.toString());
+        }
+
         break;
       case ConnectivityResult.none:
         _statusInternetAt(binternetController: true, iconenctionStatus: 0);
