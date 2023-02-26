@@ -62,27 +62,12 @@ class _CartTabState extends State<CartTab> {
 
           Container(
             padding: const EdgeInsets.all(20),
-            // decoration: const BoxDecoration(
-            //  border: ,
-            //   color: Colors.white,
-            //   borderRadius: BorderRadius.vertical(
-            //     top: Radius.circular(30),
-            //   ),
-            //   // boxShadow: [
-            //   //   BoxShadow(
-            //   //     color: Color.fromARGB(103, 3, 3, 3),
-            //   //     blurRadius: 3,
-            //   //     spreadRadius: 2,
-            //   //   )
-            //   // ],
-            // ),
-
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
               border: Border.all(
-                color: Color.fromARGB(255, 95, 95, 95),
+                color: const Color.fromARGB(255, 95, 95, 95),
                 width: 1.0,
               ),
               boxShadow: const [

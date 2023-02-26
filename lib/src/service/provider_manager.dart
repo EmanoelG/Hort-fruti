@@ -40,12 +40,11 @@ class HttpManager {
         data: body,
       );
       return response.data;
-    } on SocketException catch (e) {
+    } on SocketException {
       return {'error': 'sem conexão com internet'};
     } on DioError catch (error) {
       if (error.error is SocketException) {
         // Lida com a exceção SocketException aqui
-        print('Erro de conexão de rede: ${error.error}');
         return {'error': 'sem conexao de internet'};
       } else {
         // Lida com outras exceções aqui
@@ -54,10 +53,8 @@ class HttpManager {
         } else if (error.type == DioErrorType.connectTimeout ||
             error.type == DioErrorType.receiveTimeout) {
           // lidar com o erro de timeout
-          print('A requisição excedeu o tempo limite.');
           return {'error': 'sem conexao de internet'};
         } else {
-          print('Erro inesperado: ${error.message}');
           return error.response?.data ?? {};
         }
       }

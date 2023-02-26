@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/models/user_model.dart';
 import 'package:sacolao_de_frutas/src/service/form_services.dart';
@@ -17,7 +16,7 @@ class AuthController extends GetxController {
   UserModel userModel = UserModel();
   final UtilsService _utils = UtilsService();
   final authRepository = AuthRepository();
-  final ConnectionService connectionController = Get.find<ConnectionService>();
+  final ConnectionService _connectionController = Get.find<ConnectionService>();
 
   @override
   void onInit() {
@@ -27,7 +26,7 @@ class AuthController extends GetxController {
 
     // Adiciona o ever para monitorar a conexão
     ever(
-      connectionController.connectionStatus,
+      _connectionController.connectionStatus,
       (isConnected) {
         if (hasUsed.value == false && isConnected != 0) {
           validateToken();
@@ -36,11 +35,6 @@ class AuthController extends GetxController {
     );
   }
 
-  @override
-  void onClose() {
-    print('Fechando !!');
-    super.onClose();
-  }
 
   setValueChangePassword(value) {
     isLoadingChangePassword.value = value;
@@ -129,9 +123,9 @@ class AuthController extends GetxController {
   }
 
   Future<void> validateToken() async {
-    if (connectionController.connectionStatus.value == 0) {
+    if (_connectionController.connectionStatus.value == 0) {
       //_utils.showToats(message: 'Sem conexão com a internet !');
-      if (connectionController.connectionStatus.value == 0) {
+      if (_connectionController.connectionStatus.value == 0) {
         return;
       }
     } else {
@@ -158,8 +152,7 @@ class AuthController extends GetxController {
             } else if (error == ErrorAppType.invalidTokenSession) {
               signOut();
             } else if (error == ErrorAppType.notAcessInternet) {
-              print('Sem conexao com internet!!');
-              connectionController.connectionStatus.value = 0;
+              _connectionController.connectionStatus.value = 0;
             }
           },
         );

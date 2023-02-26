@@ -4,6 +4,8 @@ import 'package:sacolao_de_frutas/src/models/item_model.dart';
 import 'package:sacolao_de_frutas/src/pages/home/result/home_result.dart';
 
 import '../../../service/connectivitywidget.dart';
+import '../../auth/controller/auth_controller.dart';
+import '../../auth/repository/auth_errors.dart';
 import '../repository/home_repository.dart';
 
 const int itemsPerPage = 6;
@@ -50,13 +52,20 @@ class HomeController extends GetxController {
     homeResult.when(
       sucess: (data) async {
         allCategories.assignAll(data);
-
         if (allCategories.isEmpty) return;
-
         selectCategory(data.first);
       },
-      error: (er) {
-        //  _utils.showToats(message: er);
+      error: (error) {
+        AuthController auth = AuthController();
+        if (error == ErrorAppType.invalidCredentials) {
+          auth.signOut();
+        } else if (error == ErrorAppType.invalidToken) {
+          auth.signOut();
+        } else if (error == ErrorAppType.invalidTokenSession) {
+          auth.signOut();
+        } else if (error == ErrorAppType.notAcessInternet) {
+          _connectionService.connectionStatus.value = 0;
+        }
       },
     );
   }

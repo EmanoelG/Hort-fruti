@@ -19,13 +19,13 @@ class NoInternetCard extends StatelessWidget {
             children: [
               Card(
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Text(
                         'Sem internet',
-                        style: const TextStyle(fontSize: 16.0),
+                        style: TextStyle(fontSize: 16.0),
                       ),
                       const SizedBox(height: 16.0),
                       ElevatedButton(
