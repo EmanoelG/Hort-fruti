@@ -92,7 +92,7 @@ class AuthController extends GetxController {
 
   Future<void> singUp(UserModel user) async {
     isLoading.value = true;
-    AuthResult? authResult = await authRepository.singUp(userModel);
+    AuthResult? authResult = await authRepository.singUp(user);
     authResult!.when(
       sucess: (user) {
         isLoading.value = false;

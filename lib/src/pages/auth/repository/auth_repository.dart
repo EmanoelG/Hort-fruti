@@ -66,7 +66,7 @@ class AuthRepository extends GetConnect {
       metod: HttpMetod.post,
       body: {
         "email": user.email,
-        "password": user.senha,
+        "password": user.password,
         "fullname": user.name,
         "phone": user.celular,
         "cpf": user.cpf

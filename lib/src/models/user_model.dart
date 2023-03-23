@@ -6,7 +6,7 @@ class UserModel {
   String? email;
   String? celular;
   String? cpf;
-  String? senha;
+  String? password;
   String? token;
   UserModel({
     this.id,
@@ -14,7 +14,7 @@ class UserModel {
     this.email,
     this.celular,
     this.cpf,
-    this.senha,
+    this.password,
     this.token,
   });
 
@@ -24,7 +24,7 @@ class UserModel {
       'email': email,
       'phone': celular,
       'cpf': cpf,
-      'password': senha,
+      'password': password,
     };
   }
 
@@ -46,6 +46,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, celular: $celular, cpf: $cpf, senha: $senha, token: $token)';
+    return 'UserModel(id: $id, name: $name, email: $email, celular: $celular, cpf: $cpf, senha: $password, token: $token)';
   }
 }

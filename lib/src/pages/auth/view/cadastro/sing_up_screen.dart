@@ -258,7 +258,7 @@ class SingUpscreen extends StatelessWidget {
                             usuerUp.email = _email;
                             usuerUp.name = name;
                             usuerUp.cpf = _cpf;
-                            usuerUp.senha = _password;
+                            usuerUp.password = _password;
                             usuerUp.celular = _phone;
                             await controllerAuth.singUp(usuerUp);
                           }
