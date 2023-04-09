@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
+import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';
+import '../../base/controller/navigation_controller.dart';
 import '../../cart/controller/cart_controller.dart';
 import 'components/category_title.dart';
 import 'components/item_title.dart';
@@ -27,7 +29,7 @@ class _HomeTabState extends State<HomeTab> {
   final GlobalKey<_HomeTabState> mainAppKey = GlobalKey<_HomeTabState>();
 
   final controllerGlob = Get.find<HomeController>();
-
+  final navigationController = Get.find<NavigationController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,9 @@ class _HomeTabState extends State<HomeTab> {
             child: GetBuilder<CartController>(
               builder: (controller) {
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    navigationController.navigationPageView(1);
+                  },
                   child: Badge(
                     badgeColor: CustomColors.colorDestac,
                     badgeContent: Text(

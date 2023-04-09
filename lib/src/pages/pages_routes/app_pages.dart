@@ -8,6 +8,7 @@ import '../home/binding/home_binding.dart';
 import '../home/view/binding/view_binding.dart';
 import '../home/view/home_tab.dart';
 import '../orders/binding/orders_binding.dart';
+import '../orders/order_tab.dart';
 import '../product/product_screen.dart';
 import '../splash/splash_screen.dart';
 
@@ -19,7 +20,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: '/splashscreen',
-      page: () =>  SplashScreen(),
+      page: () => SplashScreen(),
       bindings: [
         ViewBinding(),
       ],
@@ -35,7 +36,10 @@ abstract class AppPages {
     GetPage(
       name: '/hometab',
       page: () => const HomeTab(),
-       
+    ),
+    GetPage(
+      name: '/orders',
+      page: () => OrdersTab(),
     ),
     GetPage(
       name: '/',
@@ -57,4 +61,5 @@ abstract class PagesRoutes {
   static const String splashScreen = 'splashscreen';
   static const String homeTab = 'hometab';
   static const String baseRoute = '/';
+  static const String orders = 'orders';
 }
