@@ -20,6 +20,7 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
   int cartItemQuantity = 1;
   final ItemModel item = Get.arguments;
   final cartController = Get.find<CartController>();
+  final UtilsService _utils = UtilsService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,14 +110,16 @@ class _ProdutctScreenState extends State<ProdutctScreen> {
                           ),
                           onPressed: () {
                             //Fechar
-                            Get.back();
+                            // Get.back();
                             //Abrir o carrinho
                             cartController.addItemToCart(
                               item: item,
                               quantity: cartItemQuantity,
                             );
-                            navigationController
-                                .navigationPageView(NavigationTabs.cart);
+                            _utils.showToats(message: 'Adicionado !');
+
+                            // navigationController
+                            //     .navigationPageView(NavigationTabs.cart);
                           },
                           label: const Text(
                             'Adicionar',
