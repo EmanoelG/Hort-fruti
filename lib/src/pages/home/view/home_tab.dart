@@ -44,7 +44,7 @@ class _HomeTabState extends State<HomeTab> {
               builder: (controller) {
                 return GestureDetector(
                   onTap: () {
-                    navigationController.navigationPageView(1);
+                    navigationController.navigationPageView(2);
                   },
                   child: Badge(
                     badgeColor: CustomColors.colorDestac,
@@ -70,13 +70,22 @@ class _HomeTabState extends State<HomeTab> {
   _body(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          TitleApp(fontTitle: 35),
-          _searchproduto(),
-          _categoria(),
-          _griditens(context)
-        ],
+      child: GestureDetector(
+        onHorizontalDragEnd: (details) {
+          if (details.velocity.pixelsPerSecond.dx > 0) {
+            controllerGlob.previousPage(ladoDireito: false);
+          } else if (details.velocity.pixelsPerSecond.dx < 0) {
+            controllerGlob.previousPage();
+          }
+        },
+        child: Column(
+          children: [
+            TitleApp(fontTitle: 35),
+            _searchproduto(),
+            _categoria(),
+            _griditens(context)
+          ],
+        ),
       ),
     );
   }
@@ -170,10 +179,12 @@ class _HomeTabState extends State<HomeTab> {
                       controller.currentCategory,
                   onPresseds: () async {
                     if (controller.allCategories[index] !=
-                        controller.currentCategory) {}
-                    Future.delayed(const Duration(milliseconds: 500)).then(
-                        (value) => controller
-                            .selectCategory(controller.allCategories[index]));
+                        controller.currentCategory) {
+                      controller.pageNow = index;
+                      Future.delayed(const Duration(milliseconds: 500)).then(
+                          (value) => controller
+                              .selectCategory(controller.allCategories[index]));
+                    }
                   },
                 );
               },

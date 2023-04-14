@@ -17,7 +17,7 @@ class HomeController extends GetxController {
   List<CategoryModel> allCategories = [];
   List<ItemModel> get allProducts => currentCategory?.items ?? [];
   final ConnectionService _connectionController = Get.find();
-
+  var pageNow = 0;
   RxString searchTitle = ''.obs;
 
   CategoryModel? currentCategory;
@@ -34,6 +34,28 @@ class HomeController extends GetxController {
     }
 
     update();
+  }
+
+  previousPage({bool ladoDireito = true}) {
+    if (ladoDireito == true) {
+      if (pageNow < allCategories.length - 1) {
+        pageNow = pageNow + 1;
+      } else if (pageNow >= allCategories.length - 1) {
+        pageNow = 0;
+      }
+    } else {
+      if (pageNow <= allCategories.length - 1) {
+        if (pageNow != 0) {
+          pageNow = pageNow - 1;
+        } else {
+          pageNow = allCategories.length - 1;
+        }
+      } else if (pageNow >= allCategories.length - 1) {
+        pageNow = 0;
+      }
+    }
+
+    selectCategory(allCategories[pageNow]);
   }
 
   selectCategory(CategoryModel category) {
