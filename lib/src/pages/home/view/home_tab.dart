@@ -12,6 +12,7 @@ import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';
 import '../../base/controller/navigation_controller.dart';
 import '../../cart/controller/cart_controller.dart';
+import '../../orders/controller/all_orders_controller.dart';
 import 'components/category_title.dart';
 import 'components/item_title.dart';
 
@@ -44,6 +45,7 @@ class _HomeTabState extends State<HomeTab> {
               builder: (controller) {
                 return GestureDetector(
                   onTap: () {
+                    //Vai para o carrinho
                     navigationController.navigationPageView(2);
                   },
                   child: Badge(
@@ -81,13 +83,22 @@ class _HomeTabState extends State<HomeTab> {
         child: Column(
           children: [
             TitleApp(fontTitle: 35),
+            //Pesquisar por produto
             _searchproduto(),
+            //categoria
             _categoria(),
+            // Items de cada categoria
             _griditens(context)
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _refreshProduct() async {
+    final controller = Get.find<HomeController>();
+    controller.currentCategory?.items.clear();
+    controller.getAllProducts(canLoading: true);
   }
 
   _griditens(context) {
@@ -99,30 +110,34 @@ class _HomeTabState extends State<HomeTab> {
                 child: Visibility(
                   visible:
                       (controllerItens.currentCategory?.items ?? []).isNotEmpty,
-                  child: GridView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      childAspectRatio: 9 / 11.5,
-                      maxCrossAxisExtent: 200,
-                    ),
-                    findChildIndexCallback: (key) {
-                      controllerItens.seilaUe();
-                      return null;
-                    },
-                    scrollDirection: Axis.vertical,
-                    itemCount: controllerItens.allProducts.length,
-                    itemBuilder: (context, index) {
-                      if (((index + 1) == controllerItens.allProducts.length) &&
-                          !controllerItens.isLastPage) {
+                  child: RefreshIndicator(
+                    onRefresh: _refreshProduct,
+                    child: GridView.builder(
+                      //  physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 9 / 11.5,
+                        maxCrossAxisExtent: 200,
+                      ),
+                      findChildIndexCallback: (key) {
                         controllerItens.seilaUe();
-                      }
-                      return ItemTitle(
-                        item: controllerItens.allProducts[index],
-                      );
-                    },
+                        return null;
+                      },
+                      scrollDirection: Axis.vertical,
+                      itemCount: controllerItens.allProducts.length,
+                      itemBuilder: (context, index) {
+                        if (((index + 1) ==
+                                controllerItens.allProducts.length) &&
+                            !controllerItens.isLastPage) {
+                          controllerItens.seilaUe();
+                        }
+                        return ItemTitle(
+                          item: controllerItens.allProducts[index],
+                        );
+                      },
+                    ),
                   ),
                   replacement: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
