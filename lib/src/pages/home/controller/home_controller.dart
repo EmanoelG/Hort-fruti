@@ -37,6 +37,7 @@ class HomeController extends GetxController {
   }
 
   previousPage({bool ladoDireito = true}) {
+    if (isCategoryLoading == true || isProductLoading == true) return;
     if (ladoDireito == true) {
       if (pageNow < allCategories.length - 1) {
         pageNow = pageNow + 1;
@@ -62,6 +63,7 @@ class HomeController extends GetxController {
     currentCategory = category;
     update();
     if (currentCategory!.items.isNotEmpty) return;
+
     getAllProducts();
   }
 

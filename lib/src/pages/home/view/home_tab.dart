@@ -6,13 +6,11 @@ import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/title_app.dart';
 import 'package:sacolao_de_frutas/src/pages/home/controller/home_controller.dart';
-import 'package:sacolao_de_frutas/src/pages/pages_routes/app_pages.dart';
 import 'package:sacolao_de_frutas/src/util/font_app.dart';
 import '../../../config/custom_color.dart';
 import '../../../service/form_services.dart';
 import '../../base/controller/navigation_controller.dart';
 import '../../cart/controller/cart_controller.dart';
-import '../../orders/controller/all_orders_controller.dart';
 import 'components/category_title.dart';
 import 'components/item_title.dart';
 
@@ -98,6 +96,7 @@ class _HomeTabState extends State<HomeTab> {
   Future<void> _refreshProduct() async {
     final controller = Get.find<HomeController>();
     controller.currentCategory?.items.clear();
+    controller.currentCategory?.pagination = 0;
     controller.getAllProducts(canLoading: true);
   }
 
@@ -193,12 +192,15 @@ class _HomeTabState extends State<HomeTab> {
                   isSelect: controller.allCategories[index] ==
                       controller.currentCategory,
                   onPresseds: () async {
-                    if (controller.allCategories[index] !=
-                        controller.currentCategory) {
-                      controller.pageNow = index;
-                      Future.delayed(const Duration(milliseconds: 500)).then(
-                          (value) => controller
-                              .selectCategory(controller.allCategories[index]));
+                    if (controller.isProductLoading == false &&
+                        controller.isCategoryLoading == false) {
+                      if (controller.allCategories[index] !=
+                          controller.currentCategory) {
+                        controller.pageNow = index;
+                        Future.delayed(const Duration(milliseconds: 500)).then(
+                            (value) => controller.selectCategory(
+                                controller.allCategories[index]));
+                      }
                     }
                   },
                 );
