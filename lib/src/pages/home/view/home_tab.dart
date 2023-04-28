@@ -69,7 +69,7 @@ class _HomeTabState extends State<HomeTab> {
 
   _body(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
         onHorizontalDragEnd: (details) {
           if (details.velocity.pixelsPerSecond.dx > 0) {
@@ -132,8 +132,11 @@ class _HomeTabState extends State<HomeTab> {
                             !controllerItens.isLastPage) {
                           controllerItens.seilaUe();
                         }
-                        return ItemTitle(
-                          item: controllerItens.allProducts[index],
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: ItemTitle(
+                            item: controllerItens.allProducts[index],
+                          ),
                         );
                       },
                     ),
@@ -182,33 +185,36 @@ class _HomeTabState extends State<HomeTab> {
       color: Colors.transparent,
       child: GetBuilder<HomeController>(
         builder: (controller) {
-          return SizedBox(
-            height: 25,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, index) {
-                return CategoryTitle(
-                  category: controller.allCategories[index].title,
-                  isSelect: controller.allCategories[index] ==
-                      controller.currentCategory,
-                  onPresseds: () async {
-                    if (controller.isProductLoading == false &&
-                        controller.isCategoryLoading == false) {
-                      if (controller.allCategories[index] !=
-                          controller.currentCategory) {
-                        controller.pageNow = index;
-                        Future.delayed(const Duration(milliseconds: 500)).then(
-                            (value) => controller.selectCategory(
-                                controller.allCategories[index]));
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 25,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index) {
+                  return CategoryTitle(
+                    category: controller.allCategories[index].title,
+                    isSelect: controller.allCategories[index] ==
+                        controller.currentCategory,
+                    onPresseds: () async {
+                      if (controller.isProductLoading == false &&
+                          controller.isCategoryLoading == false) {
+                        if (controller.allCategories[index] !=
+                            controller.currentCategory) {
+                          controller.pageNow = index;
+                          Future.delayed(const Duration(milliseconds: 500))
+                              .then((value) => controller.selectCategory(
+                                  controller.allCategories[index]));
+                        }
                       }
-                    }
-                  },
-                );
-              },
-              separatorBuilder: (_, index) => const SizedBox(
-                width: 10,
+                    },
+                  );
+                },
+                separatorBuilder: (_, index) => const SizedBox(
+                  width: 10,
+                ),
+                itemCount: controller.allCategories.length,
               ),
-              itemCount: controller.allCategories.length,
             ),
           );
         },

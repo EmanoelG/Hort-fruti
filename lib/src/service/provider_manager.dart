@@ -29,8 +29,8 @@ class HttpManager {
 
     Dio dio = Dio();
     try {
-      dio.options.connectTimeout = 15000;
-      dio.options.receiveTimeout = 15000;
+      dio.options.connectTimeout = const Duration(seconds: 15000);
+      dio.options.receiveTimeout = const Duration(seconds: 15000);
       Response response = await dio.request(
         url,
         options: Options(
@@ -50,7 +50,7 @@ class HttpManager {
         // Lida com outras exceções aqui
         if (error.error is TimeoutException) {
           return {'error': 'sem conexao de internet'};
-        } else if (error.type == DioErrorType.connectTimeout ||
+        } else if (error.type == DioErrorType.connectionTimeout ||
             error.type == DioErrorType.receiveTimeout) {
           // lidar com o erro de timeout
           return {'error': 'sem conexao de internet'};

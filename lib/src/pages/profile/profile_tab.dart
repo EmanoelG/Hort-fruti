@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/auth/controller/auth_controller.dart';
 import 'package:sacolao_de_frutas/src/util/compentes/custom_textField.dart';
-
+import 'package:sacolao_de_frutas/src/util/push_function.dart';
 import '../../service/validators.dart';
-import '../pages_routes/app_pages.dart';
+import 'package:animation_wrappers/animation_wrappers.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -29,11 +29,73 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
+  topProfilePicAndName(width, height) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const CircleAvatar(
+          radius: 50,
+          backgroundImage: NetworkImage(
+              "https://avatars.githubusercontent.com/u/91388754?v=4"),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              authController.userModel.name.toString().substring(0, 15),
+              maxLines: 1,
+            ),
+            const Text(
+              "Flutter Developer",
+              style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey),
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.edit_outlined,
+            color: Colors.grey,
+          ),
+        )
+      ],
+    );
+  }
+
   // ignore: non_constant_identifier_names
-  ListView profile_info() {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
+  profile_info() {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return FadeAnimation(
+      duration: const Duration(seconds: 2),
+      curve: Curves.easeIn,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
+        width: width,
+        height: height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            topProfilePicAndName(width, height),
+            _infoProfile(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _infoProfile() {
+    return Column(
+      //  padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
       children: <Widget>[
         FormDefault(
           validatorValue: (email) {
@@ -121,7 +183,7 @@ class _ProfileTabState extends State<ProfileTab> {
     return IconButton(
       onPressed: () async {
         auth.signOut();
-        Get.offNamed(PagesRoutes.singInRoute);
+        // Get.offNamed(PagesRoutes.singInRoute);
       },
       icon: const Icon(Icons.logout),
     );
@@ -250,7 +312,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 right: 5,
                 child: IconButton(
                   onPressed: (() {
-                    authController.signOut();
+                    pop(context);
                   }),
                   icon: const Icon(Icons.close),
                 ),
