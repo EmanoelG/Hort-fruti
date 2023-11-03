@@ -75,18 +75,20 @@ class _$AuthResultCopyWithImpl<$Res, $Val extends AuthResult>
 }
 
 /// @nodoc
-abstract class _$$SucessCopyWith<$Res> {
-  factory _$$SucessCopyWith(_$Sucess value, $Res Function(_$Sucess) then) =
-      __$$SucessCopyWithImpl<$Res>;
+abstract class _$$SucessImplCopyWith<$Res> {
+  factory _$$SucessImplCopyWith(
+          _$SucessImpl value, $Res Function(_$SucessImpl) then) =
+      __$$SucessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({UserModel user});
 }
 
 /// @nodoc
-class __$$SucessCopyWithImpl<$Res>
-    extends _$AuthResultCopyWithImpl<$Res, _$Sucess>
-    implements _$$SucessCopyWith<$Res> {
-  __$$SucessCopyWithImpl(_$Sucess _value, $Res Function(_$Sucess) _then)
+class __$$SucessImplCopyWithImpl<$Res>
+    extends _$AuthResultCopyWithImpl<$Res, _$SucessImpl>
+    implements _$$SucessImplCopyWith<$Res> {
+  __$$SucessImplCopyWithImpl(
+      _$SucessImpl _value, $Res Function(_$SucessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +96,7 @@ class __$$SucessCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$Sucess(
+    return _then(_$SucessImpl(
       null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -105,8 +107,8 @@ class __$$SucessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Sucess implements Sucess {
-  _$Sucess(this.user);
+class _$SucessImpl implements Sucess {
+  _$SucessImpl(this.user);
 
   @override
   final UserModel user;
@@ -120,7 +122,7 @@ class _$Sucess implements Sucess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Sucess &&
+            other is _$SucessImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -130,8 +132,8 @@ class _$Sucess implements Sucess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SucessCopyWith<_$Sucess> get copyWith =>
-      __$$SucessCopyWithImpl<_$Sucess>(this, _$identity);
+  _$$SucessImplCopyWith<_$SucessImpl> get copyWith =>
+      __$$SucessImplCopyWithImpl<_$SucessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -197,27 +199,29 @@ class _$Sucess implements Sucess {
 }
 
 abstract class Sucess implements AuthResult {
-  factory Sucess(final UserModel user) = _$Sucess;
+  factory Sucess(final UserModel user) = _$SucessImpl;
 
   UserModel get user;
   @JsonKey(ignore: true)
-  _$$SucessCopyWith<_$Sucess> get copyWith =>
+  _$$SucessImplCopyWith<_$SucessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$AuthResultCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$AuthResultCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -225,7 +229,7 @@ class __$$ErrorCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$Error(
+    return _then(_$ErrorImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -236,8 +240,8 @@ class __$$ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Error implements Error {
-  _$Error(this.message);
+class _$ErrorImpl implements Error {
+  _$ErrorImpl(this.message);
 
   @override
   final String message;
@@ -251,7 +255,7 @@ class _$Error implements Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error &&
+            other is _$ErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -261,8 +265,8 @@ class _$Error implements Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -328,9 +332,10 @@ class _$Error implements Error {
 }
 
 abstract class Error implements AuthResult {
-  factory Error(final String message) = _$Error;
+  factory Error(final String message) = _$ErrorImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sacolao_de_frutas/src/pages/common_widgets/custom_shimmer.dart';
@@ -46,8 +46,9 @@ class _HomeTabState extends State<HomeTab> {
                     //Vai para o carrinho
                     navigationController.navigationPageView(2);
                   },
-                  child: Badge(
-                    badgeColor: CustomColors.colorDestac,
+                  child: badges.Badge(
+                    badgeStyle:
+                        badges.BadgeStyle(badgeColor: CustomColors.colorDestac),
                     badgeContent: Text(
                       controller.cartItems.length.toString(),
                       style: const TextStyle(color: Colors.white),

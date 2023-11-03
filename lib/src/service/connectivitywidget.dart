@@ -81,7 +81,7 @@ class ConnectionService extends GetxService {
               .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
 
           if (internetController.value == false) {
-            if (scaffoldMessengerKey != null) {
+            if (scaffoldMessengerKey.toString() != '') {
               scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn);
             }
           }
@@ -98,7 +98,7 @@ class ConnectionService extends GetxService {
               .hideCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
 
           if (internetController.value == false) {
-            if (scaffoldMessengerKey != null) {
+            if (scaffoldMessengerKey.toString() != '') {
               scaffoldMessengerKey.currentState!.showSnackBar(snackBarOn);
             }
           }
